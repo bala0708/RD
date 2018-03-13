@@ -1,0 +1,30 @@
+.upload{
+    display: block !important;
+    color: #fff !important;
+    background: #7d3e15 !important;
+    font-size: 9px !important;
+}
+.attachList{
+  width: 100%;
+  background: #e8e8e8;
+  margin-top: -5px;
+}
+.attachList li{
+  float: left;
+  width: 100%;   
+  background: #e8e8e8;
+  list-style: none;
+}
+.formControlNew{
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #f97c2a;
+}
+.attachListImg {
+    width: 72px;
+    padding: 6px;
+}
+.dcNam{
+  padding: 0 0 5px 10px !important;
+  text-align: left !important;
+}

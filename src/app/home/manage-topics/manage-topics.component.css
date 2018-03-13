@@ -1,0 +1,50 @@
+.topbggnew {
+    background: #fff;
+    border-left: 6px solid #f97c2a;
+    padding: 8px;
+    width: 48%;
+    margin-right: 2%;
+    margin-bottom: 7px;
+}
+.trackField .list-groupD li {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.52);
+    padding: 4px 0;
+}
+.panel-heading {
+        padding: 10px 0px;
+    }
+    .panel-body{
+        padding: 15px 0!important;
+    }
+    .list-groupD{
+        border: 1px solid #ccc;
+        box-shadow: none!important;
+        min-height: 186px;
+        padding:10px;
+        height: 186px;
+        overflow-y:auto;
+        cursor: pointer;
+        li{
+            border-bottom: 1px solid rgba(204, 204, 204, 0.52);
+            padding: 4px 0;
+        }
+    }
+    .saveBut{
+        margin: -4px 15px 20px;
+    }
+    .list-groupD::-webkit-scrollbar {
+        width: 5px;
+        /* /background: #666; */
+      }
+      .list-groupD::-webkit-scrollbar-thumb {
+        background: #f97c2a; 
+      }
+.meetTimSec .mainTime {
+    font-size: 27px;
+    color: #f97c2a;
+    font-family: roboregular;
+}
+.alert{
+       color: red !important;
+    padding: 0 !important;
+}

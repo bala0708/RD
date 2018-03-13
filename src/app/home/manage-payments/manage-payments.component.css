@@ -1,0 +1,10 @@
+.reqBg{
+    cursor: pointer;
+}
+.activeRow{
+    background: #cacaca;
+}
+.btnPay{
+    border: none;
+    padding: 5px;
+}

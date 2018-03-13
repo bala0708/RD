@@ -1,0 +1,549 @@
+<div class="col-lg-12 managePolls">
+  <div class="leftContent">
+      <div class="roles col-md-12">
+        <p class="pull-left">Polls</p>
+        <div class="pull-right">
+            <a href="javascript:void(0);" class="confresh"><i class="fa fa-refresh"></i></a>
+           <div class="addIcon">
+              <a href="javascript:void(0);"  data-backdrop="static" data-toggle="modal" data-target="#myModalNorm"  matTooltip="Add Polls" >
+               <i class="fa fa-plus"></i></a>
+           </div>
+          <div class="menuBar"></div>
+          <div class="menuBar"></div>
+          <div class="menuBar"></div>
+        </div>
+        
+      </div>
+      <div class="dataListnew col-md-12">
+
+       <div class="col-md-12 searchPart">
+          <div class="col-md-9 padd0">
+        <div class="input-group sInputDiv">
+          <input #input class="form-control sInput" type="text"  name="searchroleName"  id="searchroleName" placeholder="Search Polls..."/>
+          <div class="input-group-addon sIcon">
+            <span class="fa fa-search form-control-feedback"></span>
+          </div>
+        </div>
+        </div>
+        <div class="col-md-3 padd0 ">
+            <div class="pull-right">
+                <p class="inIcon"><a href="javascript:void(0);" (click)="suspendAll()" matTooltip="Suspend Checked Polls"><img src="assets/images/pause.png"/> </a></p>  
+                <p class="inIcon"> <a href="javascript:void(0);" (click)="deleteAll()" matTooltip="Delete Checked Polls"><img src="assets/images/delete.png"/> </a> </p>
+                <p class="inIcon"><a matTooltip="Filter"><img src="assets/images/reqarr2.png" class="">
+                </a></p>
+            </div>
+            
+        </div>
+      </div>
+      <div class="reqDetails col-md-12 padd0">
+
+        <div class="col-md-12 padd0 reqBg green-bg"  *ngFor="let items of polls | paginate: { itemsPerPage: 10, currentPage: page }">
+          <input type="checkbox" name="checkPoll" (click)="checkPolls(items.id)">
+        <div class="col-md-12 padd0 borTopBot">
+                  
+                      <div class="col-md-3 new-pad text-center"  >
+                          <img src="{{APIURL}}{{items.poll_image_path}}{{items.poll_image}}" class="contMainimg">
+                      </div>
+                      <div class="col-md-9 new-pad ">
+                        <ul class="role-list col-md-9 padd0" >
+                          <li style="cursor: pointer;" (click)="getOnePoll(items.id)" >
+                            
+                            <p class="reqSpec ">{{items.poll_name}}</p>
+                          </li>
+                        </ul>
+                        <div class="col-md-3 ">
+                            <button  class="reqBut "*ngIf="items.active_status==1"> Active </button>
+                            <button  class="reqBut "*ngIf="items.active_status==0"> Suspend </button>
+                        </div>
+                        <div class="creatDetails">
+                          <div class="creatTit">Topics <span>Assigned :</span></div>
+                          <div class="creatDat">{{items.assignedTopics}}</div>
+                          <hr class="vertHr">
+                        </div>
+                        <div class="creatDetails">
+                            <div class="creatTit">Polls: <span>Used :</span></div>
+                            <div class="creatDat">60%</div>
+                            <hr class="vertHr">
+                          </div>
+                          <div class="creatDetails">
+                              <div class="creatTit">Upcoming  <span> Meetings:  </span></div>
+                              <div class="creatDat1">  67 </div>
+                          </div>
+                      </div>
+                     
+        </div>
+            </div>
+    </div>
+    <div class="col-lg-12 customPage"  *ngIf="pollsDetails.length!=0">
+      <pagination-controls class="pull-right" (pageChange)="page = $event"></pagination-controls>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="rightContent" *ngIf="pollsDetails.length!=0" >
+          <div class="roles col-md-12 "> 
+                  <p class="baseColor pull-left">
+                    
+                    <b class="baseColor" *ngIf="pollsDetails">{{pollsDetails.poll_name}}</b> 
+                    <b   class="alert"></b>           
+                  </p>
+                  <div class="controlBut pull-right" *ngIf="pollsDetails">
+                      <p class="pauseIcon"><a matTooltip="Edit Polls" href="javascript:void(0);" ><img src="assets/images/cont-edit.png"/> </a></p> 
+                      <p class="pauseIcon"  *ngIf="pollsDetails.active_status==1"><a matTooltip="Suspend Polls" class="" (click)="suspendOne(pollsDetails.id)"><img src="assets/images/pause.png"/> </a></p>  
+                      <p class="pauseIcon"  *ngIf="pollsDetails.active_status==0" ><a matTooltip="Active Polls" class="" (click)="ActiveOne(pollsDetails.id)"><img src="assets/images/pause.png"/> </a></p>  
+                      
+                      <p class="delIcon">
+                          <a matTooltip="Delete Polls" class="" (click)="deleteOne(pollsDetails.id)" >
+                              <img src="assets/images/delete.png"/> 
+                          </a>
+                        </p>
+                  </div>
+                </div>
+      <div class="roles-view col-md-12 ">
+      <mat-tab-group md-align-tabs="bottom" id="ink-top-fix">
+          <mat-tab label="Details">
+              
+              <div class="col-md-12 condet" *ngIf="pollsDetails">
+                  <div class="col-md-12 padd0">
+                      <div  class="col-md-12 detTable" >
+                          <form>
+                              <div class="col-md-3 padd0">
+                                <div class="polImg"> <img src="assets/images/pol.png" class="img-responsive"></div>
+                              </div>
+                              <div class="col-md-4">
+                                <table width="100%" class="leftTabl"> 
+                                  <tr>
+                                    <td class="c1Td"><label>Topics Assigned:</label></td>
+                                    <td class="c2Td">
+                                      <mat-form-field class="example-full-width">
+                                          <input matInput placeholder=""  value="{{pollsDetails.assignedTopics}}">
+                                        </mat-form-field>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="c1Td"><label># of Questions:</label></td>
+                                      <td class="c2Td"><mat-form-field class="example-full-width">
+                                            <input matInput placeholder=""  value="{{pollsDetails.totalQuestion}}" >
+                                          </mat-form-field>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1Td"><label>% of Usage:</label></td>
+                                        <td class="c2Td">
+                                          <mat-form-field class="example-full-width">
+                                              <input matInput placeholder=""  value="0">
+                                            </mat-form-field>
+                                        </td>
+                                      </tr>
+                                </table>
+                              </div>
+                              <div class="col-md-4 padd0">
+                                  <table width="100%">
+                                      <tr>
+                                        <td class="c1Td"><label>Selected for Meeting:</label></td>
+                                        <td class="c2Td"><mat-form-field  class="example-full-width">
+                                              <input matInput placeholder=""  value="{{pollsDetails.selectedMeeting}}" >
+                                            </mat-form-field>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                          <td class="c1Td"><label># of Responses:</label></td>
+                                          <td class="c2Td"><mat-form-field class="example-full-width">
+                                                <input matInput placeholder=""  value="0" >
+                                              </mat-form-field>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="c1Td"><label>Updated on:</label></td>
+                                            <td class="c2Td"><mat-form-field class="example-full-width">
+                                                  <input matInput placeholder=""  value="{{pollsDetails.updated_by}}">
+                                                </mat-form-field>
+                                            </td>
+                                          </tr>
+                                        
+                                    </table>
+                              </div>
+                              </form>
+                  </div>
+                  <div class="col-md-12 padd0">
+                      <div class="parTitle"><h4>Preview</h4>
+                 
+                      </div>
+
+                  </div>
+              </div>
+              </div>
+          </mat-tab>
+          <mat-tab label="Questions">
+            <div class="col-md-12  qusSection">
+              <h4 class="sumText">Summary</h4>
+              <table class="quesTabl">
+                <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <div class="qustCount actNew"> <p class="ContNum">{{questionsCount}}</p>
+                      <p class="qustp">Total Questions</p>
+                      </div>
+                    </td>
+                    <td><div class="qustCount"><p class="ContNum">{{closeCount}}</p>
+                      <p class="qustp">Closed ended questions</p>
+                    </div>
+                    </td>
+                    <td><div class="qustCount"><p class="ContNum">{{ratingCount}}</p>
+                      <p class="qustp">Rating scale questions</p>
+                    </div>
+                    </td>
+                    <td><div class="qustCount"><p class="ContNum">{{likertCount}}</p>
+                      <p class="qustp">Likert -type scales</p>
+                    </div>
+                    </td>
+                    <td><div class="qustCount"><p class="ContNum">{{multipleCount}} </p><p class="qustp">Multiple choice questions</p>  </div>
+                    </td>
+                    <td><div class="qustCount"><p class="ContNum">{{openCount}} </p><p class="qustp">Open ended  questions </p>  </div></td>
+                    <td><button class="updBut">Update</button>
+                      <button class="previewBut">Preview</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+              <div class="col-lg-12 padd0 hciCont" >
+                  <form (ngSubmit)="allQuestions.form.valid && assignAllQuestion(allQuestions)" #allQuestions="ngForm" novalidate >
+                  <div class="col-lg-6">
+
+                      <div class="panel-heading">
+                          <span class="availTopic"> Available Questions</span> 
+                      </div>
+                      <div class="col-lg-12 padd0">  
+                          <div class="col-lg-8 padd0">
+                            <div class="input-group sInputDiv">
+                                <input #input class="form-control sInput" type="text" name="searchroleName"  id="searchroleName" placeholder="Search User..."/>
+                                <div class="input-group-addon sIcon">
+                                  <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 iconSec kpad">
+                              <a  matTooltip="Add " class="plusIcn"><i class="fa fa-plus"></i></a>
+                              <a href=""><img src="assets/images/icons.png"/></a>
+                              <a href=""><img src="assets/images/icon2.png"/></a>
+                          </div>
+                      </div>
+          <br>
+          <div class="panel-body col-md-12">
+              <ul class="list-groupD" [dragula]='"one-bag"' [dragulaModel]='questions'>
+              <li *ngFor="let items of questions | filter: queryString">
+                  {{items.question}}
+                 <input type="hidden" name="content_list[item.id]">
+              </li>
+              </ul>
+           </div>
+          <!-- <div class="col-lg-12 padd0">
+                        <div class="panel-body hciPanel">
+                          <ul class="list-group hciDrag"  >
+                          <li >
+                            <div class="col-lg-12 detPart">
+                              <div class="detpartContent">
+                                <div class="partDetails">
+                                   
+                                  <div class="partProfile">
+                                      <p class="partName"></p>
+                                     <div class="partAddress">
+                                        <p class="colorWeight"> </p>
+                                        <p class="colorWeight"></p>
+                                    </div>
+                                    <button class="rmButton">Remove</button>
+                                  </div>
+                                </div>                               
+                              </div>
+                            </div>
+                            </li>
+                          </ul>
+                        </div>
+          </div> -->
+                    </div>
+                    
+                    <div class="col-lg-6">
+                       <div class="panel-heading">
+                        <span class="availTopic">Assigned Questions</span>
+                       </div>
+                       <div class="iconSec">
+                          <a href="" class="plusIcn"><i  class="fa fa-plus"></i></a>
+                          <a href=""><img src="assets/images/icons.png"/></a>
+                            <a href=""> <img src="assets/images/i4.png"/></a>
+                              <a href=""> <img src="assets/images/pause1.png"/></a>
+                          
+                                <a href=""><img src="assets/images/i3.png"/></a>
+                                  <a href="" class="minusIcn"><i  class="fa fa-minus"></i></a>
+                                    <a href=""><img src="assets/images/i2.png"/></a>
+                       </div>
+                       <div class="panel-body col-md-12">
+                        <ul class="list-groupD" [dragula]='"one-bag"' [dragulaModel]='assignedQuestions'>
+                        <li *ngFor="let item of assignedQuestions | filter: queryStrings">{{item.question}}
+                           <input type="hidden"
+                           [value]="1" 
+                           [(ngModel)]=assignedQuestions.question #topic_title=ngModel
+                           name="question[{{item.id}}]">
+                        </li>
+                        </ul>
+                     </div>
+                      <!-- <div class="panel-body hciPanel">
+                      <ul class="list-group hciDrag" >
+                      <li >
+                        
+                        <div class="col-lg-12 detPart">
+                            <div class="detpartContent">
+                              <div class="partDetails">
+                                <div class="partProfile">
+                                    <p class="partName">ncn</p>
+                                    <div class="partAddress">
+                                        <p class="colorWeight"> bbff</p>
+                                        <p class="colorWeight">bfff</p>
+                                      </div>
+                                      <button class="rmButton">Remove</button>
+                                    </div>
+                                  </div>
+                                
+                                <div class="partImage">
+                                    <p><img src="" class=" detimg1">                        
+                                  </p>
+                                  <button class=" details">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                      </li>
+                      </ul>
+                      </div> -->
+
+                   <div style="clear:both"></div>
+                   </div>  
+                   <div class="col-lg-12 editSec">
+                      <div class="col-lg-2 pull-right text-right">
+                    <button  class="baseButton" color="mycolor" type="submit" md-button>Update</button>
+                      </div>
+                    </div>
+                  <div style="clear:both"></div>
+                </form> 
+              </div>
+          </mat-tab>
+          <mat-tab label="HCP">
+
+          </mat-tab>
+          <mat-tab label="Topics">
+            <!-- <div class="hciBrand col-md-12 padd0">
+              <div class="brandTit">
+                 <h4>Topics <span class="trackTest">( Drag & Drop Topics )</span></h4>
+                 <span></span>
+              </div>
+           </div> -->
+           <div class="subBrand1 col-md-12">
+              <div class="col-md-12 padd0">
+                 <div class="col-md-6 padd0">
+                    <div class="panel-heading">
+                       <span class="availTopic"> Available Topics</span>
+                    </div>
+                    <div class="col-md-12 searchDiv">
+                       <div class="input-group ">
+                          <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Available Topic"/>
+                          <div class="input-group-addon sIcon">
+                             <span class="fa fa-search form-control-feedback"></span>
+                          </div>
+                       </div>
+                    </div>                    
+                    <div class="panel-body col-md-12">
+                       <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='availableTopics'>
+                       <li *ngFor="let item of availableTopics | filter: queryString">
+                          {{item.topic_title}}
+                          <input type="hidden" name="content_list[item.id]">
+                       </li>
+                       </ul>
+                    </div>
+                 </div>
+                 <div class="col-md-6 padd0">
+                    <div class="panel-heading">
+                       <span class="availTopic">  Assigned Topics</span>
+                    </div>
+                    <div class="col-md-12 tracksch" >
+                       <div class="col-md-12 searchDiv">
+                          <div class="input-group ">
+                             <input #input class="form-control sInput" type="text" [(ngModel)]="queryStrings" name="searchroleName"  id="searchroleName" placeholder="Search Assigned Topic"/>
+                             <div class="input-group-addon sIcon">
+                                <span class="fa fa-search form-control-feedback"></span>
+                             </div>
+                          </div>
+                       </div>                      
+                    </div>
+                    <form (ngSubmit)="contentTopic.form.valid && assignUserTopics(contentTopic)" #contentTopic="ngForm" novalidate>
+                    <div class="panel-body col-md-12">
+                       <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='assignedTopics'>
+                       <li *ngFor="let item of assignedTopics | filter: queryStrings">{{item.topic_title}}
+                          <input type="hidden"
+                          [value]="1" 
+                          [(ngModel)]=assignedTopics.topic_title #topic_title=ngModel
+                          name="topic_title[{{item.id}}]">
+                       </li>
+                       </ul>
+                    </div>
+                    <div class=" savDiv">
+                       <div class=" pull-right ">  
+                          <button type="submit" md-button class="saveBut"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                       </div>
+                    </div>
+                    </form>  
+                 </div>
+              </div>
+           </div>
+          </mat-tab>
+        </mat-tab-group>
+        </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div class="modal fade myModalNorm" id="myModalNorm" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" [hidden]="loading">
+ <div class="modal-content">
+     <!-- Modal Header -->
+    <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i>
+    </div>
+     <div class="modal-header">
+<!--             <button type="button" class="close" 
+            data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+         </button>
+          -->
+     </div>
+     
+     <!-- Modal Body -->
+     <div class="modal-body">
+         
+         <form role="form" autocomplete="off" name="formData" 
+         (ngSubmit)="f.form.valid && createPoll(f.value)" #f="ngForm">
+            <table width="95%" class="hciPopup">                
+              <tr>
+                  <td class="newText">Polls Name:</td>
+                  <td><mat-form-field class="example-full-width">
+                    <input matInput  
+                      name="poll_name"
+                      [(ngModel)]="addPoll.poll_name"
+                      #poll_name=ngModel   
+                      minlength="4" 
+                      maxlength="10" 
+                      required>
+                    <md-error *ngIf="poll_name.hasError('minlength')">
+                      Poll Name should be minimum 4 characters
+                    </md-error>
+                    <md-error *ngIf="poll_name.hasError('maxlength')">
+                      Poll Name should be maximum 10 characters
+                    </md-error>
+                    <md-error *ngIf="poll_name.hasError('required')">
+                      Poll Name is <strong>required</strong>
+                    </md-error>
+                  </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                  <td class="newText">Polls Image:</td>
+                  <td>
+                    <image-upload class="sizeImage" [buttonCaption]="'Poll Image'" [max]="1"
+                    (onRemove)="imageRemoved($event)"
+                    (onFileUploadFinish)="fileChanged($event.file)"> </image-upload>
+                  </td>                      
+                  
+              </tr>
+                <tr>
+                  <td></td>
+                  <td><small *ngIf="error" class="alert">
+                      {{error}}
+                   </small></td>
+                </tr>
+                
+               </table>
+            <div class="SavebutDiv">
+              <button md-button class="popupSavebut" type="submit">Save</button>
+              <button md-button class="popupSavebut" (click)="reset();" >Cancel</button>
+            </div>
+         </form>
+      </div>
+</div>
+</div>
+</div>
+
+
+<!-- edit polls model contents -->
+<div class="modal fade myModalNorm" id="editmyModalNorm" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" [hidden]="loading">
+ <div class="modal-content">
+     <!-- Modal Header -->
+    <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i>
+    </div>
+     <div class="modal-header">
+<!--             <button type="button" class="close" 
+            data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+         </button>
+          -->
+     </div>
+     
+     <!-- Modal Body -->
+     <div class="modal-body">
+         
+         <form role="form" autocomplete="off" name="formData" 
+         (ngSubmit)="f.form.valid && updatePoll(f.value)" #f="ngForm">
+            <table width="95%" class="hciPopup">                
+              <tr>
+                  <td class="newText">Polls Name:</td>
+                  <td><mat-form-field class="example-full-width">
+                    <input matInput  
+                      name="poll_name"
+                      [(ngModel)]="addPoll.poll_name"
+                      #poll_name=ngModel   
+                      minlength="4" 
+                      maxlength="10" 
+                      required>
+                    <md-error *ngIf="poll_name.hasError('minlength')">
+                      Poll Name should be minimum 4 characters
+                    </md-error>
+                    <md-error *ngIf="poll_name.hasError('maxlength')">
+                      Poll Name should be maximum 10 characters
+                    </md-error>
+                    <md-error *ngIf="poll_name.hasError('required')">
+                      Poll Name is <strong>required</strong>
+                    </md-error>
+                  </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                  <td class="newText">Polls Image:</td>
+                  <td>
+                    <image-upload class="sizeImage" [buttonCaption]="'Poll Image'" [max]="1"
+                    (onRemove)="imageRemoved($event)"
+                    (onFileUploadFinish)="fileChanged($event.file)"> </image-upload>
+                  </td>                      
+                  
+              </tr>
+                <tr>
+                  <td></td>
+                  <td><small *ngIf="error" class="alert">
+                      {{error}}
+                   </small></td>
+                </tr>
+                
+               </table>
+            <div class="SavebutDiv">
+              <button md-button class="popupSavebut" type="submit">Save</button>
+              <button md-button class="popupSavebut" (click)="reset();" >Cancel</button>
+            </div>
+         </form>
+      </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^$ /rd_cadmin/dist/ [L]

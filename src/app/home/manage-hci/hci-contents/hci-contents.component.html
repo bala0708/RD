@@ -1,0 +1,2560 @@
+<div class="manageHciContent col-md-12">
+        <div class="col-md-12 roles">
+           <a [routerLink] = "['/home/hci']" class="pull-left baseColor"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+           <p class="roleSmall pull-left"> <b class="baseColor">&nbsp; Speakers</b></p>
+           <div class="pull-right controlBut">
+              <p class="delIcon"> <a href="javascript:void(0);" (click)="deleteUser(userId)" title="Delete User"><img src="assets/images/delete.png"/> </a> </p>
+           </div>
+           <div class="pull-right controlBut">
+              <p class="delIcon" *ngIf="userData.active_status==1"> <a href="javascript:void(0);" (click)="activeUser(userId,0)" title="Suspend User"><img src="assets/images/pause.png"/> </a> </p>
+              <p class="delIcon" *ngIf="userData.active_status==0"> <a href="javascript:void(0);" (click)="activeUser(userId,1)" title="Active User"><img src="assets/images/pause.png"/> </a> </p>
+           </div>
+        </div>
+        <!--<div class="col-md-12 roles-view  scrolldiv">
+                <form class="example-form" name="formData" (ngSubmit)="update.form.valid && updateUser(update.value)" #update="ngForm" >
+                        <div class="col-md-10 " style="background: #fff;">
+                           <table class="hciUsertable" *ngIf="userData.length!=0">
+                              <tr>
+                                 <td>
+                                    <label>Name:</label>  
+                                    <md-form-field class="example-full-width">
+                                       <input mdInput  
+                                       name="firstName"
+                                       [(ngModel)]="userData.firstName"
+                                       #firstName=ngModel   
+                                       minlength="4" 
+                                       maxlength="10" 
+                                       required>
+                                       <md-error *ngIf="firstName.hasError('minlength')">
+                                          First Name should be minimum 4 characters
+                                       </md-error>
+                                       <md-error *ngIf="firstName.hasError('maxlength')">
+                                          First Name should be maximum 10 characters
+                                       </md-error>
+                                       <md-error *ngIf="firstName.hasError('required')">
+                                          First Name is <strong>required</strong>
+                                       </md-error>
+                                    </md-form-field>
+                                 </td>
+                                 <td>
+                                    <label>Email Id:</label>  
+                                    <md-form-field class="example-full-width">
+                                       <input mdInput 
+                                       name="email"
+                                       #email=ngModel   
+                                       [(ngModel)]="userData.email" 
+                                       required> 
+                                       <md-error *ngIf="email.hasError('pattern')">
+                                          Please enter a valid email address
+                                       </md-error>
+                                       <md-error *ngIf="email.hasError('required')">
+                                          Email is <strong>required</strong>
+                                       </md-error>
+                                    </md-form-field>
+                                 </td>
+                                 <td>
+                                    <label>Mobile No:</label>  
+                                    <md-form-field class="example-full-width">
+                                       <input mdInput  value=""
+                                       name="home_number"
+                                       #home_number=ngModel   
+                                       minlength="10" 
+                                       maxlength="13"
+                                       required
+                                       [(ngModel)]="userData.home_number">
+                                       <md-error *ngIf="home_number.hasError('minlength')">
+                                          Mobile No. should be minimum 10 characters
+                                       </md-error>
+                                       <md-error *ngIf="home_number.hasError('maxlength')">
+                                          Mobile No. should be maximum 13 characters
+                                       </md-error>
+                                       <md-error *ngIf="home_number.hasError('required')">
+                                          Mobile No. is <strong>required</strong>
+                                       </md-error>
+                                       <md-error *ngIf="home_number.hasError('pattern')">
+                                          Mobile No should be <strong>numbers </strong>
+                                       </md-error>
+                                    </md-form-field>
+                                 </td>
+                                 <td>
+                                    <label>Availability:</label> 
+                                    <md-form-field class="example-full-width hidePicker">
+                                       <input mdInput [matDatepicker]="picker" class="">
+                                       <mat-datepicker #picker></mat-datepicker>
+                                    </md-form-field>
+                                    <a (click)="picker.open()" class="calIcon"><img src="../../../../../assets/images/cal.png"></a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </div>
+                </form>
+        </div>-->
+        <div class="roles-view col-md-12">
+           <form class="example-form" name="formData" (ngSubmit)="update.form.valid && updateUser(update.value)" #update="ngForm" >
+           <div class="col-md-10 ">
+              <table class="hciUsertable" [class.fixed]="scrollTable" *ngIf="userData.length!=0">
+                 <tr>
+                    <td>
+                       <label>Name:</label>  
+                       <md-form-field class="example-full-width">
+                          <input mdInput  
+                          name="firstName"
+                          [(ngModel)]="userData.firstName"
+                          #firstName=ngModel   
+                          minlength="4" 
+                          maxlength="10" 
+                          required>
+                          <md-error *ngIf="firstName.hasError('minlength')">
+                             First Name should be minimum 4 characters
+                          </md-error>
+                          <md-error *ngIf="firstName.hasError('maxlength')">
+                             First Name should be maximum 10 characters
+                          </md-error>
+                          <md-error *ngIf="firstName.hasError('required')">
+                             First Name is <strong>required</strong>
+                          </md-error>
+                       </md-form-field>
+                    </td>
+                    <td>
+                       <label>Email Id:</label>  
+                       <md-form-field class="example-full-width">
+                          <input mdInput 
+                          name="email"
+                          #email=ngModel   
+                          [(ngModel)]="userData.email" 
+                          required> 
+                          <md-error *ngIf="email.hasError('pattern')">
+                             Please enter a valid email address
+                          </md-error>
+                          <md-error *ngIf="email.hasError('required')">
+                             Email is <strong>required</strong>
+                          </md-error>
+                       </md-form-field>
+                    </td>
+                    <td>
+                       <label>Mobile No:</label>  
+                       <md-form-field class="example-full-width">
+                          <input mdInput  value=""
+                          name="home_number"
+                          #home_number=ngModel   
+                          minlength="10" 
+                          maxlength="13"
+                          required
+                          [(ngModel)]="userData.home_number">
+                          <md-error *ngIf="home_number.hasError('minlength')">
+                             Mobile No. should be minimum 10 characters
+                          </md-error>
+                          <md-error *ngIf="home_number.hasError('maxlength')">
+                             Mobile No. should be maximum 13 characters
+                          </md-error>
+                          <md-error *ngIf="home_number.hasError('required')">
+                             Mobile No. is <strong>required</strong>
+                          </md-error>
+                          <md-error *ngIf="home_number.hasError('pattern')">
+                             Mobile No should be <strong>numbers </strong>
+                          </md-error>
+                       </md-form-field>
+                    </td>
+                    <td>
+                       <label>Availability:</label> 
+                       <md-form-field class="example-full-width hidePicker">
+                          <input mdInput [matDatepicker]="picker" class="">
+                          <mat-datepicker #picker></mat-datepicker>
+                       </md-form-field>
+                       <a (click)="picker.open()" class="calIcon"><img src="../../../../../assets/images/cal.png"></a>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td>
+                       <label>User Type:</label>  
+                       <select disabled class="example-full-width">
+                          <option [selected]="userData.userType==0" value="1">Admin</option>
+                          <option [selected]="userData.userType==3" value="1">Speaker</option>
+                          <option [selected]="userData.userType==2" value="2">Innovator</option>
+                          <option [selected]="userData.userType==1" value="3">REP</option>
+                       </select>
+                    </td>
+                    <td>
+                       <label>Status:</label>  
+                       <md-form-field class="example-full-width">
+                          <input disabled mdInput value="Active" *ngIf="userData.active_status==1">  
+                          <input disabled mdInput value="Suspend" *ngIf="userData.active_status==0">    
+                       </md-form-field>
+                    </td>
+                    <td>
+                       <label>Tel No:</label>  
+                       <md-form-field class="example-full-width">
+                          <input mdInput value="{{userData.telephone}}">    
+                       </md-form-field>
+                    </td>
+                    <td>
+                       <label style="    vertical-align: baseline;">Docs:</label>
+                       <div class="docsImgg" *ngIf="userData.cv">
+                          <div class="" *ngIf="cvExtension=='pdf'">       
+                             <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                             <img src="assets/images/pdf.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="cvExtension=='doc'">        
+                             <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                             <img src="assets/images/word.png">
+                             </a>
+                          </div>
+                          <div class="" *ngIf="cvExtension=='docx'">        
+                             <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                             <img src="assets/images/word.png">
+                             </a>
+                          </div>
+                          <div class="" *ngIf="cvExtension=='png'">        
+                             <a  mdTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="cvExtension=='jpg'">        
+                             <a mdTooltip="CV"  target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="cvExtension=='jpeg'">        
+                             <a mdTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">        
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                       </div>
+                       <div class="docsImgg" *ngIf="userData.biography">
+                          <!-- _______________________ -->
+                          <div class="" *ngIf="bioExtension=='pdf'">       
+                             <a mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/pdf.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="bioExtension=='doc'">        
+                             <a mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/word.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="bioExtension=='docx'">       
+                             <a  mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/word.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="bioExtension=='png'">
+                             <a  mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="bioExtension=='jpg'">
+                             <a  mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                          <div class="" *ngIf="bioExtension=='jpeg'">
+                             <a  mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                             <img src="assets/images/image_icon.png" >
+                             </a>
+                          </div>
+                       </div>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                       <label  class="syncLabl" >Sync:</label>
+                       <div class="syncIcon"> <i class="fa fa-refresh" aria-hidden="true"></i></div>
+                    </td>
+                 </tr>
+              </table>
+           </div>
+           <div class="col-md-2 hciDocImg" *ngIf="userData.length!=0">
+              <div class="profDocImg">
+                 <span [hidden]="is_hide">
+                 <img *ngIf="url" src="{{APIURL}}{{userData.photo_path}}{{userData.photo}}" class="img-responsive">
+                 </span>
+                 <img [src]="url" *ngIf="url.length!='0'">
+                 <div class="hciImgfile">
+                    <label for="file-input"></label>
+                    <input type="file" id="file-input" (change)="readUrl($event)" class="img-responsive">
+                 </div>
+              </div>
+              <div class="col-md-12 pathview">
+                 <button md-button color="mycolor" class="pull-right baseButton" type="submit">Update</button>
+              </div>
+           </div>
+           <!--<div class="col-md-12 pathview">
+              <div class="col-md-5 padd0 pull-right">
+                      <table >
+                          <tbody>
+                              <tr>
+                                  <td>
+                                      <div class="">
+                                      <label class="syncLabl">Sync:</label>
+                                      <div class="syncIcon"> <i class="fa fa-refresh" aria-hidden="true"></i></div>
+                                      </div>
+                                  </td>
+                                  <td>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+               </div>
+              </div>-->
+           </form>
+           <hr>
+        </div>
+        <div class="col-md-12 padd0 hciContent">
+           <div class="col-md-2 roles-view leftCon">
+              <!-- required for floating -->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs tabs-left hciTab ">
+                 <li class="active"><a href="#ManageBrands" data-toggle="tab">Manage Products</a></li>
+                 <li><a href="#ManageTopics" data-toggle="tab" (click)="listTopics()"> Manage Topics</a></li>
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Contracts</a></li>
+                 <!--<li><a href="#ManageContracts" data-toggle="tab">Manage Contracts</a></li>-->
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Training</a></li>
+                 <!--<li><a href="#ManageTraining" data-toggle="tab">Manage Training</a></li>-->
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab"> Manage W9</a></li>
+                 <!--<li><a href="#ManageW9" data-toggle="tab"> Manage W9</a></li>-->
+                 <li><a href="#ManageRequests" data-toggle="tab" (click)="listRequest()">Manage Requests</a></li>
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Webinar-Attendee</a></li>
+                 <!-- <li><a href="#ManageWebinar" data-toggle="tab">Manage Webinar-Attendee</a></li>-->
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab" >Manage Payments</a></li>
+                <!--<li><a href="#ManagePayments" data-toggle="tab" (click)="listPayments()">Manage Payments</a></li>-->
+                 <li  mdTooltip="Disabled for this User"><a href="#" data-toggle="tab"> Manage Sample</a></li>
+                 <!-- <li><a href="#ManageSample" data-toggle="tab"> Manage Sample</a></li>-->
+                 <li><a href="#ManageEvents" data-toggle="tab" (click)="listEventsData()"> Manage Events</a></li>
+                 <li><a href="#ViewUser" data-toggle="tab"> View User Stats</a></li>
+                 <li><a href="#MoneyEarn" data-toggle="tab" (click)="listUserDurationData()"> HCI Duration</a></li>
+              </ul>
+           </div>
+           <div class="col-md-10 roles-view rightCon">
+              <!-- Tab panes -->
+              <div class="tab-content">
+                 <div class="tab-pane active" id="ManageBrands">
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4 class="w100">Company</h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="subBrand1 col-md-12">
+                       <!--<div class="col-md-10 col-md-push-1">
+                          <div class="owl-carousel owl-theme myOwlcarosel">
+                                <div *ngFor="let items of brandList;let i = index">
+                             <div class="col-md-2 item" >
+                                
+                                <div class="caroDiv">
+                                   <img src="{{APIURL}}{{items.upload_path}}{{items.brand_image}}" class="img-responsive brandTag">
+                                </div>
+                                <input type="checkbox" 
+                                [checked]="selectedBrand.indexOf(items.id) >= 0"
+                                (change)="getProduct(items.id)" id="c{{items.id}}">
+                                <label for="c{{items.id}}"></label>
+                             </div>
+                            </div>
+
+                          </div>
+                       </div>-->
+                       <div class="col-md-10 col-md-push-1 padd0">
+                       <owl-carousel
+                       [options]="{items: 6, dots: false, nav: true}"
+                       [items]="brandList"
+                       
+                       [carouselClasses]="['owl-theme','myOwlcarosel','borone' ,'row', 'sliding']">
+                       <div *ngFor="let img of brandList;let i = index" class="caroDiv">
+                            <img src="{{APIURL}}{{img.upload_path}}{{img.brand_image}}" class="img-responsive brandTag"/>
+                            <input type="checkbox" 
+                            [checked]="selectedBrand.indexOf(img.id) >= 0"
+                            (change)="getProduct(img.id)" id="c{{img.id}}">
+                            <label for="c{{img.id}}"></label>
+                          </div>
+                   </owl-carousel>
+                       </div>
+                    </div>
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Products</h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="col-md-10 subBrand1 col-md-push-1">
+                      <!-- <div class="owl-carousel owl-theme myOwlcarosel">
+                          <div class="col-md-12" *ngIf="productList.length==0"> No Brand Choosed</div>
+                          <div class="col-md-2 item" *ngFor="let data of productList;let i = index">
+                             <div class="caroDiv">  
+                                <img src="{{APIURL}}{{data.product_image[0].upload_path}}{{data.product_image[0].product_image}}" class="img-responsive proTag">
+                             </div>
+                             <input type="checkbox"
+                             (change)="proUps(data.id)"
+                             [checked]="selectedProduct.indexOf(data.id) >= 0"
+                             id="p{{data.id}}"><label for="p{{data.id}}"></label>
+                          </div>
+                       </div>-->
+                       <owl-carousel
+                       [options]="{items: 6, dots: false, nav: true}"
+                       [items]="productList"
+                       
+                       [carouselClasses]="['owl-theme','myOwlcarosel', 'row', 'sliding']">
+                      
+                       <div *ngFor="let data of productList;let i = index" >
+                        <div class="caroDiv">
+                        <img src="{{APIURL}}{{data.product_image[0].upload_path}}{{data.product_image[0].product_image}}" class="img-responsive proTag">
+                        <input type="checkbox"
+                        (change)="proUps(data.id)"
+                        [checked]="selectedProduct.indexOf(data.id) >= 0"
+                        id="p{{data.id}}"><label for="p{{data.id}}"></label>
+                        </div>
+                        <div class="" *ngIf="productList.length==0"> No Brand Choosed</div>
+                          </div>
+                   </owl-carousel>
+                    </div>
+                    <div class="col-md-2 savDiv">
+                       <div class=" pull-right ">
+                          <button md-button class="saveBut" (click)="updateBrandProduct()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane trackField" id="ManageTopics">
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Topics <span class="trackTest">( Drag & Drop Topics )</span></h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="subBrand1 col-md-12">
+                       <div class="col-md-12 padd0">
+                          <div class="col-md-5 padd0">
+                             <div class="panel-heading">
+                                <span class="availTopic"> Available Topics</span>
+                             </div>
+                             <div class="col-md-9 searchDiv">
+                                <div class="input-group ">
+                                   <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Available Topic"/>
+                                   <div class="input-group-addon sIcon">
+                                      <span class="fa fa-search form-control-feedback"></span>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-md-2 padd0 trackarrow">
+                                <p class="pull-left">
+                                   <a ><img src="assets/images/reqarr.png" class="">
+                                   </a>
+                                </p>
+                                <p class="pull-right">
+                                   <a ><img src="assets/images/reqarr2.png" class="">
+                                   </a>
+                                </p>
+                             </div>
+                             <div class="panel-body col-md-11">
+                                <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='availableTopics'>
+                                <li *ngFor="let item of availableTopics | filter: queryString">
+                                   {{item.topic_title}}
+                                   <input type="hidden" name="content_list[item.id]">
+                                </li>
+                                </ul>
+                             </div>
+                          </div>
+                          <div class="col-md-7 padd0">
+                             <div class="panel-heading">
+                                <span class="availTopic">  Assigned Topics</span>
+                             </div>
+                             <div class="col-md-9 tracksch" >
+                                <div class="col-md-9 searchDiv">
+                                   <div class="input-group ">
+                                      <input #input class="form-control sInput" type="text" [(ngModel)]="queryStrings" name="searchroleName"  id="searchroleName" placeholder="Search Assigned Topic"/>
+                                      <div class="input-group-addon sIcon">
+                                         <span class="fa fa-search form-control-feedback"></span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="col-md-2 padd0 trackarrow">
+                                   <p class="pull-left">
+                                      <a ><img src="assets/images/reqarr.png" class="">
+                                      </a>
+                                   </p>
+                                   <p class="pull-right">
+                                      <a ><img src="assets/images/reqarr2.png" class="">
+                                      </a>
+                                   </p>
+                                </div>
+                             </div>
+                             <form (ngSubmit)="contentTopic.form.valid && assignUserTopics(contentTopic)" #contentTopic="ngForm" novalidate>
+                             <div class="panel-body col-md-8">
+                                <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='assignedTopics'>
+                                <li *ngFor="let item of assignedTopics | filter: queryStrings">{{item.topic_title}}
+                                   <input type="hidden"
+                                   [value]="1" 
+                                   [(ngModel)]=assignedTopics.topic_title #topic_title=ngModel
+                                   name="topic_title[{{item.id}}]">
+                                </li>
+                                </ul>
+                             </div>
+                             <div class=" savDiv">
+                                <div class=" pull-right ">  
+                                   <button type="submit" md-button class="saveBut"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+                             </div>
+                             </form>  
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane cusCaro" id="ManageContracts">
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Products</h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="subBrand1 col-md-12">
+                       <div class="col-md-10 col-md-push-1">
+                          <div class="owl-carousel owl-theme myOwlcarosel">
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">
+                                   <img src="../../../../../assets/images/logo.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">
+                                   <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">
+                                   <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">
+                                   <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">
+                                   <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Contracts 
+                             <a class="addContIcon" data-backdrop="static" data-toggle="modal" data-target="#myModalNorm">
+                             <i class="fa fa-plus" aria-hidden="true"></i>
+                             </a>
+                          </h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="col-md-10 col-md-push-1">
+                       <div class="owl-carousel owl-theme myOwlcarosel">
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">Contract 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12 savDiv">
+                       <div class="col-md-2 pull-right padd0">
+                          <button md-button class="saveBut"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane cusCaro" id="ManageTraining">
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Products</h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="subBrand1 col-md-12">
+                       <div class="col-md-10 col-md-push-1">
+                          <div class="owl-carousel owl-theme myOwlcarosel">
+                             <div class="col-md-12 item">
+                                <div class="caroDiv"> <img src="../../../../../assets/images/logo.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv"><img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv"><img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                    <div class="caroDiv"><img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-12 item">
+                                        <div class="caroDiv"><img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                        </div>
+                                     </div>
+                                     <div class="col-md-12 item">
+                                            <div class="caroDiv"><img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                            </div>
+                                         </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12 savDiv">
+                       <div class="col-md-2 pull-right padd0">
+                          <button md-button class="saveBut"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane cusCaro" id="ManageW9">
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Products</h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="subBrand1 col-md-12">
+                       <div class="col-md-10 col-md-push-1">
+                          <div class="owl-carousel owl-theme myOwlcarosel">
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">   <img src="../../../../../assets/images/logo.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv"> <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv"> <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                             <div class="col-md-12 item">
+                                <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="hciBrand col-md-12 padd0">
+                       <div class="brandTit">
+                          <h4>Contracts 
+                             <a class="addContIcon" data-backdrop="static" data-toggle="modal" data-target="#myModalNorm">
+                             <i class="fa fa-plus" aria-hidden="true"></i>
+                             </a>
+                          </h4>
+                          <span></span>
+                       </div>
+                    </div>
+                    <div class="col-md-10 col-md-push-1">
+                       <div class="owl-carousel owl-theme myOwlcarosel">
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="col-md-12 item hciContract">
+                             <img src="../../../../../assets/images/hcidoc.png" class="ContractDocImg">
+                             <p class="contractName">W9 01</p>
+                             <p class="contactControls">
+                                <span class="pull-left">
+                                <a href="#" class="downImg">                                                
+                                </a>
+                                </span>
+                                <span class="pull-right">
+                                <a href="#" class="delImg"></a>
+                                </span>
+                             </p>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12 savDiv">
+                       <div class="col-md-2 pull-right padd0">
+                          <button md-button class="saveBut"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane ManageRequests" id="ManageRequests">
+                    <div class="col-lg-12 orange-menu padd0">
+                       <div class=""  *ngIf="!showSelected">
+                          <div class="roles">
+                             <p class="pull-left">Requests</p>
+                             <p class="pull-right"><img src="assets/images/reqmail.png" class="reqMail"></p>
+                          </div>
+                          <div class="dataListnew col-md-12">
+                             <div class="col-md-12  searchPart">
+                                <div class="col-md-12 padd0">
+                                   <div class="input-group sInputDiv">
+                                      <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Role..."/>
+                                      <div class="input-group-addon sIcon">
+                                         <span class="fa fa-search form-control-feedback"></span>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="reqDetails col-md-12 padd0" *ngFor="let items of requestData| SearchPipe:queryString | paginate: { itemsPerPage: 10, currentPage: p, id: 'firsts'}">
+                                <!--loop start-->
+                                <div class="col-md-12 padd0 reqBg" [ngClass]="{'blue-bg': items.typeOfMeeting==1, 'green-bg': items.typeOfMeeting==2, 'Darkgreen-bg': items.typeOfMeeting==3, 'activeRow':items.id==activeRow}">
+                                   <table class="col-md-12 padd0 borTopBot">
+                                      <tbody>
+                                         <tr (click)="ShowButton();getOneRecord(items.id)">
+                                            <td class="col-md-1 new-pad " (click)="getOneRecord(items.id)">
+                                               <img src="{{APIURL}}{{items.user.photo_path}}{{items.user.photo}}" class="reqMainimg">
+                                            </td>
+                                            <td class="col-md-1 new-pad ">
+                                               <p class="docName">{{items.user.firstName}}</p>
+                                            </td>
+                                            <td class="col-md-2 new-pad " (click)="getOneRecord(items.id)">
+                                               <p class="reqSpec">{{items.topic.topic_title}}</p>
+                                            </td>
+                                            <td class="col-md-3 new-pad " >
+                                               <div class="specDoc col-md-10 padd0">
+                                                  <div class="inlineDiv" *ngFor="let dataReq of items.meetingRequest;let i=index">
+                                                    <div *ngIf="i<4">
+                                                    <div *ngIf="dataReq.toUser">
+                                                     <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="specDocImg"></p>
+                                                     <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                                                     <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                                                     <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                                                    </div>
+                                                    </div>
+                                                  </div>
+                                                  <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[1]">
+                                                     <p><img src="{{APIURL}}{{items.meetingRequest[1].toUser.photo_path}}{{items.meetingRequest[1].toUser.photo}}" class="specDocImg"></p>
+                                                     <img *ngIf="items.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                                                     <img *ngIf="items.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                                                     <img *ngIf="items.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                                                  </div>
+                                                  <div class="inlineDiv" *ngIf="items.meetingRequest[2]">
+                                                     <p><img src="{{APIURL}}{{items.meetingRequest[2].toUser.photo_path}}{{items.meetingRequest[2].toUser.photo}}" class="specDocImg"></p>
+                                                     <img *ngIf="items.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                                                     <img *ngIf="items.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                                                     <img *ngIf="items.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                                                  </div>
+                                                  <div class="inlineDiv" *ngIf="items.meetingRequest[3]">
+                                                     <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[3].toUser.photo}}" class="specDocImg"></p>
+                                                     <img *ngIf="items.meetingRequest[3].status=='0'"  class="" src="assets/images/quest.png">
+                                                     <img *ngIf="items.meetingRequest[3].status=='1'" class="" src="assets/images/cusChecked.png">
+                                                     <img *ngIf="items.meetingRequest[3].status=='2'" class="" src="assets/images/cusCheck.png">
+                                                  </div> -->
+                                               </div>
+                                               <div class=" col-md-2">
+                                                  <p class="docCount"> +{{items.meetingRequest.length}}</p>
+                                               </div>
+                                            </td>
+                                            <td class="col-md-4 new-pad ">
+                                               <span class="meetId">Meeting ID:{{items.id}} </span>
+                                               <span class="specTime">
+                                               <span class="spechour" >{{items.start_time | date:'h:mm'}}</span>
+                                               <span class="newTim">{{items.start_time | date:'a'}} - {{dateZone}}   {{items.start_time | date:'dd MMMM yyyy'}}</span>
+                                               </span>
+                                            </td>
+                                            <td class="col-md-1 new-pad ">
+                                               <button md-button *ngIf="items.status==0" class="reqBut">Suspended</button> 
+                                               <button md-button *ngIf="items.status==1" class="reqBut" (click)="suspendRequest(items.id)">Suspend</button> 
+                                               <button md-button *ngIf="items.status==2" class="reqBut">Cancelled</button> 
+                                               <button md-button *ngIf="items.status==3" class="reqBut">Completed</button> 
+                                               <!--            <button md-button class="reqBut" (click)="cancelRequest(items.id)">Cancel</button>  -->  
+                                            </td>
+                                         </tr>
+                                      </tbody>
+                                   </table>
+                                </div>
+                                <!--loop end-->
+                             </div>
+                          </div>
+                          <div class="col-lg-12 customPage"  *ngIf="(requestData).length != 0">
+                             <pagination-controls class="pull-right" (pageChange)="p = $event" id="firsts"></pagination-controls>
+                          </div>
+                         
+                       </div>
+                       <!--left content end -->
+                       <!---right content start-->
+                       <div class="hideContent" *ngIf="showSelected">
+                          <div class="roles">
+                             <p class="roleSmall pull-left"> <b class="baseColor">Speaker</b></p>
+                             <div class="pull-right controlBut">
+                                <button (click)="HideButton()" class="backButton">Back to Request List</button>
+                             </div>
+                          </div>
+                          <div class="roles-view col-md-12">
+                             <md-tab-group>
+                                <md-tab label="Details">
+                                   <div *ngIf="(requestInitLen).length === 0">
+                                      No Records Found
+                                   </div>
+                                   <div class="col-md-12 detTable" *ngIf="(requestInitLen).length != 0">
+                                      <table width="70%" class="col-md-8 ">
+                                         <tr >
+                                            <td class="newText">Topic:</td>
+                                            <td>
+                                               <md-form-field class="example-full-width">
+                                                  <input mdInput [value]="requestInit.topic.topic_title">
+                                               </md-form-field>
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <td class="newText">ID:</td>
+                                            <td>
+                                               <md-form-field class="example-full-width">
+                                                  <input mdInput [value]="requestInit.id">
+                                               </md-form-field>
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <td class="newText">Description:</td>
+                                            <td>
+                                               <div class="descp">
+                                                  <p>{{requestInit.queryRelated}}</p>
+                                               </div>
+                                            </td>
+                                         </tr>
+                                      </table>
+                                      <div class="col-md-4 displayTime">
+                                         <p class="specTime">
+                                            <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                                            <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                                         </p>
+                                         <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                                         <hr>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-12 " *ngIf="(requestInit).length != 0">
+                                      <div class="parTitle">
+                                         <h4>Participants</h4>
+                                      </div>
+                                      
+                                      <div class="col-md-4 detPart"  *ngFor="let dataReq of requestInit.meetingRequest;let i=index">
+                                        <div *ngIf="i<3">
+                                        <div *ngIf="dataReq.toUser">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{dataReq.toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{dataReq.toUser.companyName}} </p>
+                                                     <p>{{dataReq.toUser.email}}  </p>
+                                                     <p>{{dataReq.toUser.telephone}} </p>
+                                                     <button type="button" class=" details" (click)=viewDetailsUsers(dataReq.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="detimg1"></p>
+                                               
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                         </div>
+                                         </div>
+                                      </div>
+                                      <!-- <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[1]">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{requestInit.meetingRequest[1].toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{requestInit.meetingRequest[1].toUser.companyName}} </p>
+                                                     <p>{{requestInit.meetingRequest[1].toUser.email}}  </p>
+                                                     <p>{{requestInit.meetingRequest[1].toUser.telephone}} </p>
+                                                     <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[1].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{requestInit.meetingRequest[1].toUser.photo_path}}{{requestInit.meetingRequest[1].toUser.photo}}" class="detimg1"></p>
+                                               <p class="removedv"><button md-button class="rmButton">Remove</button></p>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="requestInit.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="requestInit.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="requestInit.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div>
+                                      <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[2]">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{requestInit.meetingRequest[2].toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{requestInit.meetingRequest[2].toUser.companyName}} </p>
+                                                     <p>{{requestInit.meetingRequest[2].toUser.email}}  </p>
+                                                     <p>{{requestInit.meetingRequest[2].toUser.telephone}} </p>
+                                                     <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[2].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{requestInit.meetingRequest[2].toUser.photo_path}}{{requestInit.meetingRequest[2].toUser.photo}}" class="detimg1"></p>
+                                               <p class="removedv"><button md-button class="rmButton">Remove</button></p>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="requestInit.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="requestInit.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="requestInit.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div> -->
+                                   </div>
+                                </md-tab>
+                                <md-tab label="Participants">
+                                   <div class="col-md-12 tabContent" *ngIf="(requestInit).length != 0">
+                                      <div class="col-md-4 detPart">
+                                         <p class="reqSpec">{{requestInit.topic.topic_title}}</p>
+                                         <div class="partTime">
+                                            <p class="specTime">
+                                               <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                                               <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                                            </p>
+                                            <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                                         </div>
+                                      </div>
+                                      <div class="col-md-4 detPart" *ngFor="let users of requestInit.meetingRequest">
+                                            <div *ngIf="users.toUser"> 
+                                        <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{users.toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{users.toUser.companyName}} </p>
+                                                     <p>{{users.toUser.email}}  </p>
+                                                     <p>{{users.toUser.telephone}} </p>
+                                                     <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>
+                                               
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div>
+                                      </div>
+                                   </div>
+                                </md-tab>
+                             </md-tab-group>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane" id="ManageWebinar">Manage Webinar-Attendee</div>
+                 <div class="tab-pane cusCaro ManagePayments" id="ManagePayments">
+                    <div class="col-md-12">                      
+                            <br>
+                       <div class="col-md-12 padd0">
+                          <div class="hciBrand col-md-12 padd0">
+                             
+                             <div class="brandTit col-md-6 padd0 payDiv">
+                                <h4>Payments
+                                   <a class="addContIcon" data-backdrop="static" data-toggle="modal" data-target="#paymentPopup">
+                                   <i class="fa fa-plus" aria-hidden="true"></i>
+                                   </a>
+                                </h4>
+                                <span></span>
+                             </div>
+                             <div class=" col-md-6 padd0 payDiv">
+                                <div class="col-md-6 ">
+                                   <md-form-field class="example-full-width paySearch" >
+                                      <input mdInput placeholder="Search" value="">
+                                   </md-form-field>
+                                </div>
+                                <div class="col-md-6 padd0">
+                                   <md-select placeholder="Sort By"  class="paySort">
+                                      <mat-option *ngFor="let sort of paymentSort" [value]="sort.value">
+                                      {{ sort.viewValue }}
+                                      </mat-option>
+                                   </md-select>
+                                </div>
+                             </div>
+                          </div>
+                          <div class=" col-md-12 padd0">
+                          <table class="table paymentTable">
+                             <tbody>
+                                <tr *ngIf="listPay.length==0">No Records Found</tr>
+                                <tr *ngFor="let payee of listPay | paginate: { itemsPerPage: 10, currentPage: paye, id: 'payment'}">
+                                   <td>                                      
+                                      <div class="meetId">                                        
+                                        
+                                         <img src="assets/images/system.png" class="img-responsive" *ngIf="payee.payment_type==1">
+                                         <img src="assets/images/group.png" class="img-responsive" *ngIf="payee.payment_type==2">                                        
+                                      </div>
+                                   </td>
+                                   <td>
+                                        <div class="meetId">   
+                                        <span  *ngIf="payee.payment_type==1">
+                                                <p class=""  *ngIf="payee.meeting">{{payee.meeting.topic.topic_title}}</p>
+                                              </span>
+                                        <span  *ngIf="payee.payment_type==2">
+                                            <p class="">Category Type - {{payee.category_id.category_name}}</p>
+                                            <p class="">Sub Category Type - {{payee.sub_category_id.sub_category_name}}</p>
+                                        </span>
+                                    </div>
+                                   </td>
+                                   <td>
+                                        <div class="payDate">
+                                                <span>{{payee.createdAt | date:'MMMM dd'}} </span> {{payee.createdAt | date:'yyyy'}} 
+                                                <p class="payTime">  {{payee.createdAt | date:'h:mm'}}
+                                                     <small>{{payee.createdAt | date:'a'}}-{{dateZone}}</small></p>
+                                             </div>
+                                   </td>
+                                   <td>
+                                      <div class="payPrice">$ {{payee.total_amount}}</div>
+                                   </td>
+                                   <td class="payAccept" *ngIf="payee.payment_status == 1">
+                                       
+                                      <span >   <i class="fa fa-check" aria-hidden="true"></i></span>
+                                      <button class="acceptButton" (click)="paymentTop(payee.id,1)">Accept</button>
+                                   </td>
+                                   <td class="payReject" *ngIf="payee.payment_status == 1">
+                                      <div >
+                                         <a class="" data-backdrop="static"><span><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                            <button class="acceptButton" (click)="paymentTop(payee.id,2)">Reject <small class="baricn"><i class="fa fa-bars" aria-hidden="true"></i></small></button>
+                                         </a>
+                                      </div>
+                                   </td>
+                                   <!-- <td *ngIf="payee.rep_approval != 2"> -->
+                                   <td *ngIf="payee.payment_status != 1" class="butpayAccept">
+                                   
+                                            <button *ngIf="payee.payment_status==1" class="butpay ">Pending</button>
+                                            <button *ngIf="payee.payment_status==2"  class="butpay ">Rejected</button>
+                                            <button *ngIf="payee.payment_status==3" class="butpay ">Approved</button>
+                                            <button *ngIf="payee.payment_status==4"  class="butpay ">Received</button>
+                                            <button *ngIf="payee.payment_status==5"  class="butpay ">Dispute</button>
+                                    
+                                   </td>
+                                </tr>                              
+                             </tbody>
+                          </table>
+                          <div class="col-lg-12 customPage"  *ngIf="(requestData).length != 0">
+                                <pagination-controls class="pull-right" (pageChange)="paye = $event" id="payment"></pagination-controls>
+                             </div>
+                       </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane cusCaro ManageSample" id="ManageSample">
+                    <div class="col-md-12">
+                       <div class="hciBrand col-md-12 padd0">
+                          <div class="brandTit">
+                             <h4>Products</h4>
+                             <span></span>
+                          </div>
+                       </div>
+                       <div class="subBrand1 col-md-12">
+                          <div class="col-md-10 col-md-push-1">
+                             <div class="owl-carousel owl-theme myOwlcarosel">
+                                <div class="col-md-12 item">
+                                   <div class="caroDiv">  <img src="../../../../../assets/images/logo.png" class="img-responsive">
+                                   </div>
+                                </div>
+                                <div class="col-md-12 item">
+                                   <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                   </div>
+                                </div>
+                                <div class="col-md-12 item">
+                                   <div class="caroDiv"> <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                   </div>
+                                </div>
+                                <div class="col-md-12 item">
+                                   <div class="caroDiv"> <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                   </div>
+                                </div>
+                                <div class="col-md-12 item">
+                                   <div class="caroDiv">  <img src="../../../../../assets/images/logo_placeholder.png" class="img-responsive">
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="col-md-12 padd0">
+                          <div class="hciBrand col-md-12 padd0">
+                             <div class="brandTit col-md-6 padd0 payDiv">
+                                <h4>Samples
+                                   <a class="addContIcon" data-backdrop="static" data-toggle="modal" data-target="#addSamplePopup">
+                                   <i class="fa fa-plus" aria-hidden="true"></i>
+                                   </a>
+                                </h4>
+                                <span></span>
+                             </div>
+                             <div class=" col-md-6 padd0 payDiv">
+                                <div class="col-md-6 ">
+                                   <md-form-field class="example-full-width paySearch" >
+                                      <input mdInput placeholder="Search" value="">
+                                   </md-form-field>
+                                </div>
+                                <div class="col-md-6 padd0">
+                                   <md-select placeholder="Sort By"  class="paySort">
+                                      <mat-option *ngFor="let sort of paymentSort" [value]="sort.value">
+                                      {{ sort.viewValue }}
+                                      </mat-option>
+                                   </md-select>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="col-md-9">
+                          <table class="table paymentTable">
+                             <tbody>
+                                <tr>
+                                   <td>
+                                      <div class="meetId">
+                                         <div class="samCorner"></div>
+                                         <img src="../../../../../assets/images/sam.png" class="samImg">
+                                         Chronic Lymphocytic Leukemia
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <div class="payDate"><span>July 20 </span> 2017 
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <p class="samTime"> 01:00 <small>PM-EST</small></p>
+                                   </td>
+                                   <td class="payAccept">
+                                      <span >   <i class="fa fa-check" aria-hidden="true"></i></span>
+                                      <button class="acceptButton">   Accept</button>
+                                   </td>
+                                   <td class="payReject">
+                                      <div >
+                                         <a class="" data-backdrop="static" data-toggle="modal" data-target="#reasonPopup"><span><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                            <button class="acceptButton">  Reject <small class="baricn"><i class="fa fa-bars" aria-hidden="true"></i></small></button>
+                                         </a>
+                                      </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                      <div class="meetId">
+                                         <div class="samCorner"></div>
+                                         <img src="../../../../../assets/images/sam.png" class="samImg">
+                                         Chronic Lymphocytic Leukemia
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <div class="payDate"><span>July 20 </span> 2017 
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <p class="samTime"> 01:00 <small>PM-EST</small></p>
+                                   </td>
+                                   <td class="payAccept">
+                                      <span >   <i class="fa fa-check" aria-hidden="true"></i></span>
+                                      <button class="acceptButton">  Accept</button>
+                                   </td>
+                                   <td class="payReject">
+                                      <div >
+                                         <span><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                         <button class="acceptButton"> Reject <small class="baricn"><i class="fa fa-bars" aria-hidden="true"></i></small></button>
+                                      </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                      <div class="meetId">
+                                         <div class="samCorner"></div>
+                                         <img src="../../../../../assets/images/sam.png" class="samImg">
+                                         Chronic Lymphocytic Leukemia
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <div class="payDate"><span>July 20 </span> 2017 
+                                      </div>
+                                   </td>
+                                   <td>
+                                      <p class="samTime"> 01:00 <small>PM-EST</small></p>
+                                   </td>
+                                   <td class="payAccept">
+                                      <span >   <i class="fa fa-check" aria-hidden="true"></i></span>
+                                      <button class="acceptButton"> Accept</button>
+                                   </td>
+                                   <td class="payReject">
+                                      <div >
+                                         <span><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                         <button class="acceptButton">  Reject <small class="baricn"><i class="fa fa-bars" aria-hidden="true"></i></small></button>
+                                      </div>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane ManageRequests" id="ManageEvents">
+                    <div class="col-lg-12 orange-menu padd0">
+                       <div class="" *ngIf="!showSelected">
+                          <div class="roles">
+                             <p class="pull-left">Events</p>
+                             <p class="pull-right"><img src="assets/images/reqmail.png" class="reqMail"></p>
+                          </div>
+                          <div class="dataListnew col-md-12">
+                             <div class="col-md-12 searchPart">
+                                <div class="input-group sInputDiv">
+                                   <input #input class="form-control sInput" type="text" [(ngModel)]="queryStringS" name="searchroleName"  id="searchroleName" placeholder="Search Events..."/>
+                                   <div class="input-group-addon sIcon">
+                                      <span class="fa fa-search form-control-feedback"></span>
+                                   </div>
+                                </div>
+                             </div>
+                          
+                          <div class="reqDetails col-md-12 padd0" *ngFor="let items of listEvents| SearchPipe:queryStringS | paginate: { itemsPerPage: 10, currentPage: p, id: 'firstb'}">
+                             <!--loop start-->
+                             <table class="col-md-12 padd0 borTopBot reqBg" [ngClass]="{'blue-bg': items.typeOfMeeting==1, 'green-bg': items.typeOfMeeting==2, 'Darkgreen-bg': items.typeOfMeeting==3, 'activeRow':items.id==activeEvent}">
+                                    <tbody>
+                                            <tr (click)="ShowButton();getOneEvent(items.id)">
+                                <td class="col-md-1 new-pad " (click)="getOneEvent(items.id)">
+                                   <img src="{{APIURL}}{{items.user.photo_path}}{{items.user.photo}}" class="reqMainimg">
+                                </td>
+                                   <td class="col-md-1 new-pad ">
+                                   <p class="docName">{{items.user.firstName}}</p>
+                                </td>
+                                <td class="col-md-2 new-pad " (click)="getOneEvent(items.id)">
+                                   <p class="reqSpec">{{items.topic.topic_title}}</p>
+                                </td>
+                                <td class="col-md-3 new-pad " >
+                                   <div class="specDoc col-md-10 padd0">
+                                      <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[0]">
+                                         <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                                         <img *ngIf="items.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                                         <img *ngIf="items.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                                         <img *ngIf="items.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                                      </div> -->
+                                      <div class="inlineDiv" *ngFor="let dataevent of items.meetingRequest;let i=index">
+                                            <div *ngIf="i<4">
+                                            <div *ngIf="dataevent.toUser">
+                                             <p><img src="{{APIURL}}{{dataevent.toUser.photo_path}}{{dataevent.toUser.photo}}" class="specDocImg"></p>
+                                             <img *ngIf="dataevent.status=='0'"  class="" src="assets/images/quest.png">
+                                             <img *ngIf="dataevent.status=='1'" class="" src="assets/images/cusChecked.png">
+                                             <img *ngIf="dataevent.status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                            </div>
+                                      </div>
+                                      <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[1]">
+                                         <p><img src="{{APIURL}}{{items.meetingRequest[1].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                                         <img *ngIf="items.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                                         <img *ngIf="items.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                                         <img *ngIf="items.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                                      </div>
+                                      <div class="inlineDiv" *ngIf="items.meetingRequest[2]">
+                                         <p><img src="{{APIURL}}{{items.meetingRequest[2].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                                         <img *ngIf="items.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                                         <img *ngIf="items.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                                         <img *ngIf="items.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                                      </div>
+                                      <div class="inlineDiv" *ngIf="items.meetingRequest[3]">
+                                         <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[3].toUser.photo}}" class="specDocImg"></p>
+                                         <img *ngIf="items.meetingRequest[3].status=='0'"  class="" src="assets/images/quest.png">
+                                         <img *ngIf="items.meetingRequest[3].status=='1'" class="" src="assets/images/cusChecked.png">
+                                         <img *ngIf="items.meetingRequest[3].status=='2'" class="" src="assets/images/cusCheck.png">
+                                      </div> -->
+                                   </div>
+                                   <div class=" col-md-2">
+                                      <p class="docCount"> +{{items.meetingRequest.length}}</p>
+                                   </div>
+                                </td>
+                                <td class="col-md-4 new-pad ">
+                                   <span class="meetId">Meeting ID:{{items.id}} </span>
+                                   <span class="specTime">
+                                      <span class="spechour" >{{items.start_time | date:'h:mm'}}</span>
+                                      <span class="newTim">{{items.start_time | date:'a'}} - {{dateZone}}  {{items.start_time | date:'dd MMMM yyyy'}} </span>
+                                   </span>
+                                </td>
+                                   <td class="col-md-1 new-pad ">
+                                   <button md-button class="reqBut" (click)="cancelRequest(items.id)">Cancel</button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                     </table>
+                             </div>
+                             <!--loop end-->
+                            </div>
+                          <div class="col-lg-12 customPage"  *ngIf="(requestData).length != 0">
+                             <pagination-controls class="pull-right" (pageChange)="p = $event" id="firstb"></pagination-controls>
+                          </div>
+                        </div>
+                     
+                       <!--left content end -->
+                       <!---right content start-->
+                       <div class="hideContent" *ngIf="showSelected">
+                          <div class="roles">
+                             <p class="roleSmall pull-left"> <b class="baseColor">Speaker</b></p>
+                             <div class="pull-right controlBut">
+                                    <button (click)="HideButton()" class="backButton">Back to Events List</button> </div>
+                          </div>
+                          <div class="roles-view col-md-12">
+                             <md-tab-group>
+                                <md-tab label="Details">
+                                   <div *ngIf="(eventInitLen).length === 0">
+                                      No Records Found
+                                   </div>
+                                   <div class="col-md-12 detTable" *ngIf="(eventInitLen).length != 0">
+                                      <table width="70%" class="col-md-8 ">
+                                         <tr>
+                                            <td class="newText">Topic:</td>
+                                            <td>
+                                               <md-form-field class="example-full-width">
+                                                  <input mdInput [value]="eventInit.topic.topic_title">
+                                               </md-form-field>
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <td class="newText">ID:</td>
+                                            <td>
+                                               <md-form-field class="example-full-width">
+                                                  <input mdInput [value]="eventInit.id">
+                                               </md-form-field>
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <td class="newText">Description:</td>
+                                            <td>
+                                               <div class="descp">
+                                                  <p>{{eventInit.queryRelated}}</p>
+                                               </div>
+                                            </td>
+                                         </tr>
+                                      </table>
+                                      <div class="col-md-4 displayTime">
+                                         <p class="specTime">
+                                            <span class="spechour" >{{eventInit.start_time | date:'h:mm'}}</span>
+                                            <span class="spectim">{{eventInit.start_time | date:'a'}} {{dateZone}}</span>
+                                         </p>
+                                         <p class="specDate">{{eventInit.start_time | date:'dd MMMM yyyy'}}</p>
+                                         <hr>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-12 " *ngIf="(eventInit).length != 0">
+                                      <div class="parTitle">
+                                         <h4>Participants</h4>
+                                      </div>
+                                      <div class="col-md-4 detPart"  *ngFor="let dataReq of eventInit.meetingRequest;let i=index">
+                                            <div *ngIf="i<3">
+                                            <div *ngIf="dataReq.toUser">
+                                             <div class="detpartContent">
+                                                <div class="partDetails">
+                                                   <div class="partProfile">
+                                                      <h4 class="partName">{{dataReq.toUser.firstName}}</h4>
+                                                      <div class="partAddress">
+                                                         <p>{{dataReq.toUser.companyName}} </p>
+                                                         <p>{{dataReq.toUser.email}}  </p>
+                                                         <p>{{dataReq.toUser.telephone}} </p>
+                                                         <button type="button" class=" details" (click)=viewDetailsUsers(dataReq.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="partImage">
+                                                   <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="detimg1"></p>
+                                                  
+                                                </div>
+                                                <div class="notifyImg">
+                                                   <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                                                   <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                                                   <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                                                </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                          </div>
+                                      <!-- <div class="col-md-4 detPart" *ngIf="eventInit.meetingRequest[0]">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{eventInit.meetingRequest[0].toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{eventInit.meetingRequest[0].toUser.companyName}} </p>
+                                                     <p>{{eventInit.meetingRequest[0].toUser.email}}  </p>
+                                                     <p>{{eventInit.meetingRequest[0].toUser.telephone}} </p>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{eventInit.meetingRequest[0].toUser.photo_path}}{{eventInit.meetingRequest[0].toUser.photo}}" class="detimg1"></p>
+                                               <button type="button" class=" details" (click)=viewDetailsUsers(eventInit.meetingRequest[0].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="eventInit.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="eventInit.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="eventInit.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div>
+                                      <div class="col-md-4 detPart" *ngIf="eventInit.meetingRequest[1]">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{eventInit.meetingRequest[1].toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{eventInit.meetingRequest[1].toUser.companyName}} </p>
+                                                     <p>{{eventInit.meetingRequest[1].toUser.email}}  </p>
+                                                     <p>{{eventInit.meetingRequest[1].toUser.telephone}} </p>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{eventInit.meetingRequest[1].toUser.photo_path}}{{eventInit.meetingRequest[1].toUser.photo}}" class="detimg1"></p>
+                                               <button type="button" class=" details" (click)=viewDetailsUsers(eventInit.meetingRequest[1].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="eventInit.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="eventInit.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="eventInit.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div>
+                                      <div class="col-md-4 detPart" *ngIf="eventInit.meetingRequest[2]">
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{eventInit.meetingRequest[2].toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{eventInit.meetingRequest[2].toUser.companyName}} </p>
+                                                     <p>{{eventInit.meetingRequest[2].toUser.email}}  </p>
+                                                     <p>{{eventInit.meetingRequest[2].toUser.telephone}} </p>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{eventInit.meetingRequest[2].toUser.photo_path}}{{eventInit.meetingRequest[2].toUser.photo}}" class="detimg1"></p>
+                                               <button type="button" class=" details" (click)=viewDetailsUsers(eventInit.meetingRequest[2].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="eventInit.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="eventInit.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="eventInit.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                      </div> -->
+                                   </div>
+                                </md-tab>
+                                <md-tab label="Participants">
+                                   <div class="col-md-12 tabContent" *ngIf="(eventInit).length != 0">
+                                      <div class="col-md-4 detPart">
+                                         <p class="reqSpec">{{eventInit.topic.topic_title}}</p>
+                                         <div class="partTime">
+                                            <p class="specTime">
+                                               <span class="spechour" >{{eventInit.start_time | date:'h:mm'}}</span>
+                                               <span class="spectim">{{eventInit.start_time | date:'a'}} {{dateZone}}</span>
+                                            </p>
+                                            <p class="specDate">{{eventInit.start_time | date:'dd MMMM yyyy'}}</p>
+                                         </div>
+                                      </div>
+                                      <div class="col-md-4 detPart" *ngFor="let users of eventInit.meetingRequest">
+                                            <div *ngIf="users.toUser"> 
+                                         <div class="detpartContent">
+                                            <div class="partDetails">
+                                               <div class="partProfile">
+                                                  <h4 class="partName">{{users.toUser.firstName}}</h4>
+                                                  <div class="partAddress">
+                                                     <p>{{users.toUser.companyName}} </p>
+                                                     <p>{{users.toUser.email}}  </p>
+                                                     <p>{{users.toUser.telephone}} </p>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div class="partImage">
+                                               <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>
+                                               <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                            </div>
+                                            <div class="notifyImg">
+                                               <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
+                                               <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
+                                               <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                                            </div>
+                                         </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </md-tab>
+                             </md-tab-group>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane" id="ViewUser">View User</div>
+                 <div class="tab-pane" id="MoneyEarn">
+                    <div class="col-md-12">
+                         
+                         <br>
+                        <div class="col-md-12 padd0">
+                           <div class="hciBrand col-md-12 padd0">
+                              <div class="brandTit col-md-6 padd0 payDiv">
+                                 <h4>HCI Duration
+                                    <a class="addContIcon" data-backdrop="static" data-toggle="modal" data-target="#addSamplePopup">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                 </h4>
+                                 <span></span>
+                              </div>
+                              
+                           </div>
+                           <div class="col-md-12">
+                           <table class="table paymentTable">
+                              <tbody>
+                                    <tr class="customPage" *ngIf="(listDuration | filter: queryString).length === 0">
+                                            <td colspan="5">No Records Found</td>
+                                         </tr>
+                                 <tr *ngFor="let dataItems of listDuration | paginate: { itemsPerPage: 10, currentPage: page }">
+                                    <td>
+                                       <div class="meetId">                                           
+                                          <img src="assets/images/dollor.png" class="samImg">
+                                          ${{dataItems.amount}}
+                                       </div>
+                                    </td>
+                                    <td>
+                                       Time From (Mins) - {{dataItems.from_minutes}}
+                                    </td>
+                                    <td>
+                                            Time To (Mins) - {{dataItems.to_minutes}}
+                                    </td>
+                                    <td *ngIf="dataItems.active_status==0">Status - Suspend</td>
+                                    <td *ngIf="dataItems.active_status==1">Status - Active</td>
+                                    <td class="payAccept">
+                                       <span >   <i class="fa fa-check" aria-hidden="true"></i></span>
+                                       <button class="acceptButton" (click)="suspendDuration(dataItems.id,1)">   Active</button>
+                                    </td>
+                                    <td class="payReject">
+                                       <div >
+                                          <a class="" ><span><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                             <button class="acceptButton" (click)="suspendDuration(dataItems.id,0)">  Suspend </button>
+                                          </a>
+                                       </div>
+                                    </td>
+                                    <td class="payAccept">
+                                        <div >
+                                           <a class="" data-backdrop="static" data-toggle="modal" data-target="#editSamplePopup" ><span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                              <button class="acceptButton" (click)="EditDuration(dataItems.id)">  Edit </button>
+                                           </a>
+                                        </div>
+                                     </td>
+                                    <td class="payReject">
+                                        <div > 
+                                           <a class="" ><span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                              <button class="acceptButton" (click)="deleteDuration(dataItems.id)">  Delete </button>
+                                           </a>
+                                        </div>
+                                     </td>
+                                 </tr>                                
+                              </tbody>
+                           </table>
+                           <div class="col-lg-12 customPage" *ngIf="(listDuration | filter: queryString).length === 0">
+                                <pagination-controls class="pull-right" (pageChange)="page = $event"></pagination-controls>
+                            </div>
+                           </div>
+                        </div>
+                     </div>
+                 </div>
+                 
+              </div>
+           </div>
+           <div class="clearfix"></div>
+        </div>
+     </div>
+     <ngx-loading [show]="loading"></ngx-loading>
+     <!-- Modal -->
+     <div class="modal fade myModalSmall" id="myModalNorm" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="modal-header">
+                 <button type="button" class="close" 
+                    data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <form role="form">
+                    <div class="hciPopup">
+                       <div class="newText">Name:</div>
+                       <div>
+                          <md-form-field class="example-full-width">
+                             <input mdInput  value="">
+                          </md-form-field>
+                       </div>
+                       <div class="newText">
+                          Contract:
+                          <div class="hciFile">
+                             <div class="file">
+                                <label for="file-input">Browse</label>
+                                <input type="file" id="file-input">
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="SavebutDiv">
+                       <button md-button class="popupSavebut">Save</button>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="requestPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <h4 class="addpayTest">
+                    Chronic Lymphocytic Leukemia
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <div class="reqMeetdet">
+                    <p><span>Meeting ID: 45</span><span>Monday FEB 25th</span><span> 01:00 PM - EST   </span></p>
+                 </div>
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td >
+                          <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                          <p class="docfullNam"> Dr. Yuri (Hcp 01) Taylor</p>
+                          <p class="docDet"> Oncology - Hematology,Los Angles, CA</p>
+                       </td>
+                       <td>
+                          <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                          <p class="docfullNam"> John (Rep 01) Martinez</p>
+                          <p class="docDet"> Oncology - Hematology, Los Angles, CA</p>
+                       </td>
+                    </tr>
+                 </table>
+                 <div class="detailContent">
+                    <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                       unacceptable toxity
+                    </p>
+                    <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                       leukemia (CCL) in patients for whom rituximab alone would be considered
+                       appropriate theraphu due to other comorbidities
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Modal -->
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="paymentPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <h4 class="addpayTest">Add Payment</h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <form role="form">
+                    <table width="90%" class="hciPopup">
+                       <tr>
+                          <td class="newText">Price:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Venue:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Reason:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Client Name:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Time:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Date:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                          </td>
+                       </tr>
+                    </table>
+                    <div class="SavebutDiv">
+                       <button md-button class="popupSavebut">Add</button>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Modal -->
+     <div class="modal fade myModalNorm" id="reasonPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="modal-header">
+                 <button type="button" class="close" 
+                    data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <form role="form">
+                    <div class="hciPopup">
+                       <div class="newText">Reason:</div>
+                       <div>
+                          <textarea class="form-control" rows="5" id="Reason"></textarea>
+                       </div>
+                    </div>
+                    <div class="SavebutDiv">
+                       <button md-button class="popupSavebut">Submit</button>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="addSamplePopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" (click)="myNgForm.resetForm()">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <form role="form">
+                    <table width="100%" class="hciPopup">
+                       <tr>
+                          <td width="40%">
+                             <div class="text-center">
+                                <img src="assets/images/dollor.png" class="">
+                                <p class="mediName">HCI Duration</p>
+                             </div>
+                          </td>
+                          <td width="60%">
+                             <div class="mediDes">
+                                <form autocomplete="off"  (ngSubmit)="myNgForm.form.valid && createDuration();myNgForm.resetForm();" #myNgForm="ngForm">
+                                    <md-form-field class="example-full-width">
+                                        <label>Time From(Mins)</label>
+                                        <input mdInput 
+                                        name="from_minutes"
+                                        #from_minutes=ngModel  
+                                        pattern="[0-9]+" 
+                                        [(ngModel)]="addMoney.from_minutes" 
+                                        required> 
+                                        <md-error *ngIf="from_minutes.hasError('pattern')">
+                                          Please enter a valid data
+                                        </md-error>
+                                        <md-error *ngIf="from_minutes.hasError('required')">
+                                          Time From is <strong>required</strong>
+                                        </md-error>
+                                      </md-form-field>
+                                      <md-form-field class="example-full-width">
+                                       <label>Time To(Mins)</label>
+                                        <input mdInput 
+                                        name="to_minutes"
+                                        #to_minutes=ngModel  
+                                        pattern="[0-9]+" 
+                                        [(ngModel)]="addMoney.to_minutes" 
+                                        required> 
+                                        <md-error *ngIf="to_minutes.hasError('pattern')">
+                                          Please enter a valid data
+                                        </md-error>
+                                        <md-error *ngIf="to_minutes.hasError('required')">
+                                         Time To is <strong>required</strong>
+                                        </md-error>
+                                      </md-form-field>
+                                      <md-form-field class="example-full-width">
+                                            <label>Amount</label>
+                                             <input mdInput 
+                                             name="amount"
+                                             #amount=ngModel  
+                                             pattern="[0-9]+" 
+                                             [(ngModel)]="addMoney.amount" 
+                                             required> 
+                                             <md-error *ngIf="amount.hasError('pattern')">
+                                               Please enter a valid data
+                                             </md-error>
+                                             <md-error *ngIf="amount.hasError('required')">
+                                                Amount is <strong>required</strong>
+                                             </md-error>
+                                           </md-form-field>
+                                           <button type="submit" *ngIf="myNgForm.form.invalid" class="btn btn-success">Save</button>
+                                           <button type="submit" *ngIf="myNgForm.form.valid" data-dismiss="modal"  (click)="createDuration()" class="btn btn-success">Save</button>
+                                </form>
+                             </div>
+                          </td>
+                       </tr>
+                        
+                    </table>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Modal -->
+      <!--modal-->
+      <div class="modal fade myModalNorm" id="editSamplePopup" tabindex="-1" role="dialog" 
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content" [hidden]="loading">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" (click)="myNgForm1.resetForm()">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+               </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+               <form role="form">
+                  <table width="100%" class="hciPopup">
+                     <tr>
+                        <td width="40%">
+                           <div class="text-center">
+                              <img src="assets/images/dollor.png" class="">
+                              <p class="mediName">HCI Duration</p>
+                           </div>
+                        </td>
+                        <td width="60%">
+                           <div class="mediDes">
+                              <form  (ngSubmit)="myNgForm1.form.valid && updateDuration();myNgForm1.resetForm();" autocomplete="off" #myNgForm1="ngForm">
+                                  <md-form-field class="example-full-width">
+                                      <label>Time From(Mins)</label>
+                                      <input mdInput 
+                                      name="from_minutes"
+                                      #from_minutes=ngModel  
+                                      pattern="[0-9]+" 
+                                      [(ngModel)]="editDuration.from_minutes" 
+                                      required> 
+                                      <md-error *ngIf="from_minutes.hasError('pattern')">
+                                        Please enter a valid data
+                                      </md-error>
+                                      <md-error *ngIf="from_minutes.hasError('required')">
+                                        Time From is <strong>required</strong>
+                                      </md-error>
+                                    </md-form-field>
+                                    <md-form-field class="example-full-width">
+                                     <label>Time To(Mins)</label>
+                                      <input mdInput 
+                                      name="to_minutes"
+                                      #to_minutes=ngModel  
+                                      pattern="[0-9]+" 
+                                      [(ngModel)]="editDuration.to_minutes" 
+                                      required> 
+                                      <md-error *ngIf="to_minutes.hasError('pattern')">
+                                        Please enter a valid data
+                                      </md-error>
+                                      <md-error *ngIf="to_minutes.hasError('required')">
+                                       Time To is <strong>required</strong>
+                                      </md-error>
+                                    </md-form-field>
+                                    <md-form-field class="example-full-width">
+                                          <label>Amount</label>
+                                           <input mdInput 
+                                           name="amount"
+                                           #amount=ngModel  
+                                           pattern="[0-9]+" 
+                                           [(ngModel)]="editDuration.amount" 
+                                           required> 
+                                           <md-error *ngIf="amount.hasError('pattern')">
+                                             Please enter a valid data
+                                           </md-error>
+                                           <md-error *ngIf="amount.hasError('required')">
+                                              Amount is <strong>required</strong>
+                                           </md-error>
+                                         </md-form-field>
+                                         <button type="submit" *ngIf="myNgForm1.form.invalid" class="btn btn-success">Save</button>
+                                         <button type="submit" *ngIf="myNgForm1.form.valid" data-dismiss="modal"  (click)="updateDuration()" class="btn btn-success">Save</button>
+                              </form>
+                           </div>
+                        </td>
+                     </tr>
+                      
+                  </table>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="eventPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <img src="../../../../../assets/images/system.png" class="sysdoc">
+                 <h4 class="addpayTest">
+                    Chronic Lymphocytic Leukemia
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <div class="reqMeetdet">
+                    <p><span>Meeting ID: 45</span></p>
+                 </div>
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td >
+                          <div class="profDet">
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="docfullNam"> Dr. Yuri (Hcp 01) Taylor</p>
+                             <p class="docDet"> Oncology - Hematology,Los Angles, CA</p>
+                          </div>
+                          <div class="profDet">
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="docfullNam"> John (Rep 01) Martinez</p>
+                             <p class="docDet"> Oncology - Hematology, Los Angles, CA</p>
+                          </div>
+                       </td>
+                       <td class="eventpopupTim">
+                          <p>1:00 PM-EST</p>
+                          <p>Monday September 25th</p>
+                       </td>
+                    </tr>
+                 </table>
+                 <div class="detailContent">
+                    <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                       unacceptable toxity
+                    </p>
+                    <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                       leukemia (CCL) in patients for whom rituximab alone would be considered
+                       appropriate theraphu due to other comorbidities
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Modal -->
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="eventPopup2" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <img src="../../../../../assets/images/system.png" class="sysdoc">
+                 <h4 class="addpayTest">
+                    Chronic Lymphocytic Leukemia
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <div class="reqMeetdet">
+                    <p><span>Meeting ID: 45</span><span>Monday FEB 25th</span><span> 01:00 PM - EST   </span></p>
+                 </div>
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td >
+                          <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                          <p class="docfullNam"> Dr. Yuri (Hcp 01) Taylor</p>
+                          <p class="docDet"> Oncology - Hematology,Los Angles, CA</p>
+                       </td>
+                       <td>
+                          <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                          <p class="docfullNam"> John (Rep 01) Martinez</p>
+                          <p class="docDet"> Oncology - Hematology, Los Angles, CA</p>
+                       </td>
+                    </tr>
+                 </table>
+                 <div class="detailContent">
+                    <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                       unacceptable toxity
+                    </p>
+                    <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                       leukemia (CCL) in patients for whom rituximab alone would be considered
+                       appropriate theraphu due to other comorbidities
+                    </p>
+                 </div>
+                 <div class="pollData">
+                    <p><img src="../../../../../assets/images/policon.png" class="">Poll data 01</p>
+                    <p><img src="../../../../../assets/images/policon.png" class="">Poll data 02</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="editeventPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <hr class="editHr">
+                 <h4 class="addpayTest">Edit</h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <form role="form">
+                    <table width="100%" class="hciPopup">
+                       <tr>
+                          <td class="newText">Date:</td>
+                          <td>
+                             <md-form-field class="example-full-width hidePicker">
+                                <input mdInput [matDatepicker]="picker1" class="">
+                                <mat-datepicker #picker1></mat-datepicker>
+                             </md-form-field>
+                             <a (click)="picker1.open()" class="calIcon"><img src="../../../../../assets/images/cal.png"></a>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Time:</td>
+                          <td>
+                             <md-form-field class="example-full-width">
+                                <input mdInput  value="">
+                             </md-form-field>
+                             <img src="../../../../../assets/images/clock.png">
+                          </td>
+                       </tr>
+                       <tr>
+                          <td class="newText">Speaker:</td>
+                          <td>
+                             <div class="eventSpeaker">
+                                <md-form-field class="example-full-width">
+                                   <input mdInput  value="">
+                                </md-form-field>
+                                <a href=""> <i class="fa fa-refresh refr" aria-hidden="true"></i></a>
+                                <a href="">  <i class="fa  fa-trash-o delet" aria-hidden="true"></i> </a> 
+                             </div>
+                          </td>
+                       </tr>
+                    </table>
+                    <div class="SavebutDiv">
+                       <button md-button class="popupSavebut">Save</button>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="eventPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <img src="../../../../../assets/images/system.png" class="sysdoc">
+                 <h4 class="addpayTest">
+                    Chronic Lymphocytic Leukemia
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <div class="reqMeetdet">
+                    <p><span>Meeting ID: 45</span></p>
+                 </div>
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td >
+                          <div class="profDet">
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="docfullNam"> Dr. Yuri (Hcp 01) Taylor</p>
+                             <p class="docDet"> Oncology - Hematology,Los Angles, CA</p>
+                          </div>
+                          <div class="profDet">
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="docfullNam"> John (Rep 01) Martinez</p>
+                             <p class="docDet"> Oncology - Hematology, Los Angles, CA</p>
+                          </div>
+                       </td>
+                       <td class="eventpopupTim">
+                          <p>1:00 PM-EST</p>
+                          <p>Monday September 25th</p>
+                       </td>
+                    </tr>
+                 </table>
+                 <div class="detailContent">
+                    <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                       unacceptable toxity
+                    </p>
+                    <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                       leukemia (CCL) in patients for whom rituximab alone would be considered
+                       appropriate theraphu due to other comorbidities
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Modal -->
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="webniartopicPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <h4 class="addpayTest">
+                    Webniar Topic Display here
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td class="webniarDetails">
+                          <p class="webTit">Q&A:01</p>
+                          <img src="../../../../../assets/images/system.png" class="webImg">
+                          <p class="webId">Webinar ID:45</p>
+                          <p class="webTim">1:00 <small>PM-EST</small></p>
+                          <p class="webDat">Monday September 25th</p>
+                       </td>
+                       <td class="webSpeak">
+                          <div class="profDet">
+                             <p class="webTit text-center">Speaker</p>
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="webdocNam"> Dr. Yuri (Hcp 01) Taylor</p>
+                          </div>
+                          <div class="profDet">
+                             <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                             <p class="webdocNam"> John (Rep 01) Martinez</p>
+                          </div>
+                       </td>
+                    </tr>
+                 </table>
+                 <div class="detailContent">
+                    <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                       unacceptable toxity
+                    </p>
+                    <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                       leukemia (CCL) in patients for whom rituximab alone would be considered
+                       appropriate theraphu due to other comorbidities
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="eventarchivePopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <h4 class="addpayTest">
+                    Event Archive Video
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <table width="100%" class="hciPopup">
+                    <tr>
+                       <td class="webniarDetails">
+                          <img src="../../../../../assets/images/system.png" class="webImg">
+                       </td>
+                       <td class="">
+                          <p>John (Rep 01) Martinez
+                             <br>
+                             <small> Oncology - Hematology,Los Angles,CA</small>
+                          </p>
+                       </td>
+                       <td>
+                          <p>Monday FEB 25th
+                             <br><small> 01:00 PM -EST</small> 
+                          </p>
+                       </td>
+                       <td>
+                          <p>Webinar ID:45 </p>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td class="webniarDetails">
+                          <img src="../../../../../assets/images/system.png" class="webImg">
+                       </td>
+                       <td class="">
+                          <p>John (Rep 01) Martinez
+                             <br>
+                             <small> Oncology - Hematology,Los Angles,CA</small>
+                          </p>
+                       </td>
+                       <td>
+                          <p>Monday FEB 25th
+                             <br><small> 01:00 PM -EST</small> 
+                          </p>
+                       </td>
+                       <td>
+                          <p>Webinar ID:45 </p>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td class="webniarDetails">
+                          <img src="../../../../../assets/images/system.png" class="webImg">
+                       </td>
+                       <td class="">
+                          <p>John (Rep 01) Martinez
+                             <br>
+                             <small> Oncology - Hematology,Los Angles,CA</small>
+                          </p>
+                       </td>
+                       <td>
+                          <p>Monday FEB 25th
+                             <br><small> 01:00 PM -EST</small> 
+                          </p>
+                       </td>
+                       <td>
+                          <p>Webinar ID:45 </p>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td class="webniarDetails">
+                          <img src="../../../../../assets/images/system.png" class="webImg">
+                       </td>
+                       <td class="">
+                          <p>John (Rep 01) Martinez
+                             <br>
+                             <small> Oncology - Hematology,Los Angles,CA</small>
+                          </p>
+                       </td>
+                       <td>
+                          <p>Monday FEB 25th
+                             <br><small> 01:00 PM -EST</small> 
+                          </p>
+                       </td>
+                       <td>
+                          <p>Webinar ID:45 </p>
+                       </td>
+                    </tr>
+                 </table>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!--modal-->
+     <div class="modal fade myModalNorm" id="eventquestPopup" tabindex="-1" role="dialog" 
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                 <h4 class="addpayTest">
+                    Question & Answer
+                 </h4>
+                 <button type="button" class="close" data-dismiss="modal">
+                 <span aria-hidden="true">&times;</span>
+                 <span class="sr-only">Close</span>
+                 </button>
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body">
+                 <table width="100%" class="hciPopup  questSec">
+                    <tr>
+                       <td>
+                          <div class="questCount">Q1</div>
+                       </td>
+                       <td>
+                          <div class="questDetail ">
+                             <div class="quescon">A subject in a clinical trial develops a stomach infection that was treated with antibiotics,
+                                and wants to withdraw from the study. What do you do?
+                             </div>
+                             <p class="">
+                                <mat-checkbox class="">True</mat-checkbox>
+                                <mat-checkbox class="">False</mat-checkbox>
+                             </p>
+                          </div>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td>
+                          <div class="questCount">Q1</div>
+                       </td>
+                       <td>
+                          <div class="questDetail ">
+                             <div class="quescon">A subject in a clinical trial develops a stomach infection that was treated with antibiotics,
+                                and wants to withdraw from the study. What do you do?
+                             </div>
+                             <p class="">
+                                <mat-checkbox class="">Report this as a SAE</mat-checkbox>
+                             </p>
+                             <p>
+                                <mat-checkbox class="">Document and explain the withdrawal</mat-checkbox>
+                                <span class="pull-right notRele">Not Relevant</span>
+                             </p>
+                          </div>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td>
+                          <div class="questCount">Q1</div>
+                       </td>
+                       <td>
+                          <div class="questDetail ">
+                             <div class="quescon"> A subject in a clinical trial develops a stomach infection that was treated with antibiotics,
+                                and wants to withdraw from the study. What do you do?
+                             </div>
+                             <p class="">
+                                <mat-checkbox class="">Report this as a SAE</mat-checkbox>
+                                <mat-checkbox class="">Document and explain the withdrawal</mat-checkbox>
+                             </p>
+                          </div>
+                       </td>
+                    </tr>
+                 </table>
+              </div>
+           </div>
+        </div>
+     </div>
+     <div id="userModel" class="modal fade" role="dialog">
+        <div class="modal-dialog" [hidden]="loading">
+           <!-- Modal content-->
+           <div class="modal-content">
+              <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title">User Detail</h4>
+              </div>
+              <div class="modal-body">
+                 <div [hidden]=isHide class="col-lg-12">
+                    <div class="col-lg-4">
+                       <img src="{{APIURL}}{{userDetails.photo_path}}{{userDetails.photo}}" class="img-responsive">
+                    </div>
+                    <div class="col-lg-8">
+                       <table class="table">
+                          <tr>
+                             <td>Name</td>
+                             <td>{{userDetails.firstName}} {{userDetails.lastName}}</td>
+                          </tr>
+                          <tr>
+                             <td>Email</td>
+                             <td>{{userDetails.email}}</td>
+                          </tr>
+                          <tr>
+                             <td>Telephone</td>
+                             <td>{{userDetails.telephone}}</td>
+                          </tr>
+                          <tr>
+                             <td>Experience</td>
+                             <td>{{userDetails.yrsOfExperience}}</td>
+                          </tr>
+                          <tr>
+                             <td>Biography</td>
+                             <td>{{userDetails.biography}}</td>
+                          </tr>
+                       </table>
+                    </div>
+                 </div>
+              </div>
+              <div style="clear: both"></div>
+           </div>
+        </div>
+     </div>

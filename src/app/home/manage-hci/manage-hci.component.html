@@ -1,0 +1,330 @@
+<div class="manageHci col-md-12">
+    <div class="col-md-12 roles">
+        <div class="container">
+        <p class="roleSmall pull-left"> <b class="baseColor">Speakers</b></p>
+
+        <div class="pull-right controlBut">
+          <p class="pauseIcon"><a  data-backdrop="static" data-toggle="modal" data-target="#myModalNorm" ><img src="assets/images/addbut.png"/> </a></p>  
+          <p class="pauseIcon"><a ><img src="assets/images/pause.png"/> </a></p>  
+         <p class="delIcon"> <a ><img src="assets/images/delete.png"/> </a> </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 roles-view">
+        <div class="container padd0">
+            <div class="col-md-12 hciSearch">
+            <div class="col-md-11 ">
+                <div class="input-group sInputDiv">
+                    <input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName" id="searchroleName" placeholder="Search .."/>
+                    <div class="input-group-addon sIcon">
+                      <span class="fa fa-search form-control-feedback"></span>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-1">
+                  <a (click)="sort = !sort"><p class="pull-left"><img src="assets/images/reqarr.png" class=""></p></a>
+                  <p class="pull-right"><a [matMenuTriggerFor]="menu"><img src="assets/images/reqarr2.png" class=""></a></p>    
+                   <mat-menu #menu="matMenu">
+                <button (click)="filter(1)" mat-menu-item>Active</button>
+                <button (click)="filter(2)" mat-menu-item>Inactive</button>
+                <button (click)="filter(0)" mat-menu-item>Reset</button>
+              </mat-menu>          
+              </div>
+          </div>
+    
+    <div class="col-md-12">
+        <table class="table hciTable table-hover">
+            <thead>
+              <tr>
+                <!-- <th> <input type="checkbox" name="all" 
+                    [checked]="isAllChecked()" (change)="checkAll($event)"/></th> -->
+                <th>Firstname</th>
+                <th>User Type</th>
+                <th>Mobile No</th>
+                <th>Tel No</th>
+                <th>Email ID</th>
+                <th>Status</th>
+                <th>Created on<th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr class="customPage" *ngIf="(user | filter: queryString).length === 0">
+                  <td colspan="8">No Records Found</td>
+               </tr><!-- (click)="contents(items.id)" -->
+              
+              <tr *ngFor="let items of user | filter: queryString | orderby:sort | paginate: { itemsPerPage: 10, currentPage: page }" style="cursor: pointer;" (click)="contents(items.id)">
+                <!-- <td><input type="checkbox" 
+                    value="{{items.id}}" (change)="getChecked(items.id)" [(ngModel)]="items.id"/></td> -->
+                  <td>{{items.firstName}}</td>
+                  <td *ngIf="items.userType==3">HCI</td>
+                  <td *ngIf="items.userType==2">HCP</td>
+                  <td *ngIf="items.userType==1">REP</td>
+                  <td *ngIf="items.userType==null">-</td>
+                  <td *ngIf="items.home_number">{{items.home_number}}</td>
+                  <td *ngIf="items.home_number==null">-</td>
+                  <td>{{items.telephone}}</td>
+                  <td *ngIf="items.telephone==null">-</td>
+                  <td *ngIf="items.email==null">-</td>
+                  <td>{{items.email}}</td>
+                  <td *ngIf="items.active_status==0">Suspend</td>
+                  <td *ngIf="items.active_status==1">Active</td>
+                  <td>{{items.createdAt | date:'dd MMMM yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col-lg-12 customPage">
+              <pagination-controls class="pull-right" (pageChange)="page = $event"></pagination-controls>
+          </div>
+    </div> </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+<!-- Modal -->
+<div class="modal fade myModalNorm" id="myModalNorm" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" [hidden]="loading">
+   <div class="modal-content">
+       <!-- Modal Header -->
+      <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i>
+      </div>
+       <div class="modal-header">
+<!--             <button type="button" class="close" 
+              data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+           </button>
+            -->
+       </div>
+       
+       <!-- Modal Body -->
+       <div class="modal-body">
+           
+           <form role="form" autocomplete="off" name="formData" 
+           (ngSubmit)="f.form.valid && create(f.value)" #f="ngForm">
+              <table width="95%" class="hciPopup">                
+                  <tr>
+                    <td class="newText">Role type:</td>
+                    <td>
+                      <md-radio-group
+                            [(ngModel)]="addUsers.role" name="role" required #type="ngModel" 
+                            >
+                        <mat-radio-button value="3" [checked]>HCI</mat-radio-button>
+                        <mat-radio-button value="2">HCP</mat-radio-button>
+                        <mat-radio-button value="1">REP</mat-radio-button>
+                        <md-error *ngIf="f.submitted && !type.valid">
+                            Role is required
+                      </md-error>
+                      </md-radio-group>
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                      <td class="newText">First Name:</td>
+                      <td><md-form-field class="example-full-width">
+                          <input mdInput  
+                            name="firstName"
+                            [(ngModel)]="addUsers.firstName"
+                            #firstName=ngModel   
+                            minlength="4" 
+                            maxlength="10" 
+                            required>
+                          <md-error *ngIf="firstName.hasError('minlength')">
+                            First Name should be minimum 4 characters
+                          </md-error>
+                          <md-error *ngIf="firstName.hasError('maxlength')">
+                            First Name should be maximum 10 characters
+                          </md-error>
+                          <md-error *ngIf="firstName.hasError('required')">
+                            First Name is <strong>required</strong>
+                          </md-error>
+                        </md-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="newText">Last Name:</td>
+                      <td><md-form-field class="example-full-width">
+                          <input mdInput  value="" 
+                            name="lastName"
+                            [(ngModel)]="addUsers.lastName"    
+                            #lastName=ngModel   
+                            minlength="4" 
+                            maxlength="10" 
+                            required>
+                            <md-error *ngIf="lastName.hasError('minlength')">
+                              Last Name should be minimum 4 characters
+                            </md-error>
+                            <md-error *ngIf="lastName.hasError('maxlength')">
+                              Last Name should be maximum 10 characters
+                            </md-error>
+                            <md-error *ngIf="lastName.hasError('required')">
+                              Last Name is <strong>required</strong>
+                            </md-error>
+                        </md-form-field>
+                      </td>
+                  </tr>
+                   <tr>
+                      <td class="newText">Mobile No:</td>
+                      <td><md-form-field class="example-full-width">
+                          <input mdInput  value=""
+                             name="home_number"
+                             #home_number=ngModel   
+                             minlength="10" 
+                             maxlength="13"
+                             required
+                            [(ngModel)]="addUsers.home_number">
+                            <md-error *ngIf="home_number.hasError('minlength')">
+                              Mobile No. should be minimum 10 characters
+                            </md-error>
+                            <md-error *ngIf="home_number.hasError('maxlength')">
+                              Mobile No. should be maximum 13 characters
+                            </md-error>
+                            <md-error *ngIf="home_number.hasError('required')">
+                              Mobile No. is <strong>required</strong>
+                            </md-error>
+                            <md-error *ngIf="home_number.hasError('pattern')">
+                              Mobile No should be <strong>numbers </strong>
+                            </md-error>
+                            
+                        </md-form-field>
+                      </td>
+                  </tr>
+                   <tr>
+                      <td class="newText">Telephone No:</td>
+                      <td><md-form-field class="example-full-width">
+                          <input mdInput  value="" 
+                            name="telephone"
+                            [(ngModel)]="addUsers.telephone" 
+                             #telephone=ngModel   
+                             minlength="10" 
+                             maxlength="13"
+                             required>
+                            <md-error *ngIf="telephone.hasError('minlength')">
+                              Telephone No. should be minimum 10 characters
+                            </md-error>
+                            <md-error *ngIf="telephone.hasError('maxlength')">
+                              Telephone No. should be maximum 13 characters
+                            </md-error>
+                            <md-error *ngIf="telephone.hasError('required')">
+                              Telephone No. is <strong>required</strong>
+                            </md-error>
+                            <md-error *ngIf="telephone.hasError('pattern')">
+                              Telephone No should be <strong>numbers </strong>
+                            </md-error>
+                            
+                        </md-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="newText">Email </td>
+                      <td>
+                          <md-form-field class="example-full-width">
+                              <input mdInput 
+                              name="email"
+                              #email=ngModel  
+                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
+                              [(ngModel)]="addUsers.email" 
+                              required> 
+                              <md-error *ngIf="email.hasError('pattern')">
+                                Please enter a valid email address
+                              </md-error>
+                              <md-error *ngIf="email.hasError('required')">
+                                Email is <strong>required</strong>
+                              </md-error>
+                            </md-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                     <td class="newText">Default Password </td>
+                     <td>
+                          <md-form-field class="example-full-width">
+                              <input mdInput 
+                              name="email"
+                              value="password" 
+                              readonly="true" 
+                              disabled> 
+                            </md-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="newText">Profile Image:</td>
+                      <td>
+                        <image-upload class="sizeImage" [buttonCaption]="'User Image'" [max]="1"
+                        (onRemove)="imageRemoved($event)"
+                        (onFileUploadFinish)="fileChanged($event.file)"> </image-upload>
+                      </td>
+                  </tr>
+                <tr>
+                      <td class="newText">CV:</td>
+                      <td class="hciFile">
+                          <div class="file" >
+                              <label for="file-input"></label>
+                              <input type="file" id="file-input" (change)=fileCV($event.target.files)>
+                              </div>
+                              <!-- <ul class="attachList" >
+                                <li style="border-top:1px solid #fff;"></li>
+                                <li *ngFor="let items of cv">
+                                        <span>
+                                            <img src="assets/images/word.png" class="attachListImg">
+                                            <small>{{items.name}}</small>
+                                        </span>                                                            
+                                </li>
+                              </ul> -->
+                              <ul class="attachList col-md-12" *ngIf="cv.length > 0" >
+                                                <li *ngFor="let dataProds of cv">
+                                                     
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td class="newText">Biography:</td>
+                    <td class="hciFile">
+                          <div class="file">
+                              <label for="file-bio"></label>
+                              <input type="file" id="file-bio"
+                              (change)=filebio($event.target.files)>
+                              <label for="file-bio">Browse</label>
+                          </div>
+                              <!-- <ul class="attachList" >
+                                <li style="border-top:1px solid #fff;"></li>
+                                <li *ngFor="let imageProds of bio">
+                                        <span>
+                                            <img src="assets/images/word.png" class="attachListImg">
+                                            <small>{{imageProds.name}}</small>
+                                        </span>                                                            
+                                </li>
+                              </ul> -->
+                              <ul class="attachList col-md-12" *ngIf="bio.length > 0" >
+                                                <li *ngFor="let dataProds of bio">
+                                                     
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+
+                      </td>   
+                  </tr> 
+              </table>
+              <div class="SavebutDiv">
+                <button md-button class="popupSavebut" type="submit">Save</button>
+                <button md-button class="popupSavebut" (click)="reset();f.reset()" >Cancel</button>
+              </div>
+           </form>
+        </div>
+</div>
+</div>
+</div>

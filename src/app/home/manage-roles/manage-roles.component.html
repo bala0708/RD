@@ -1,0 +1,396 @@
+  <div class="col-lg-12 roleContent">
+    <div class="leftContent">
+        <div class="roles col-md-12">
+          <p class="pull-left">Roles</p>
+          <a data-toggle="modal" data-target="#myModal" data-backdrop="static" href="javascript:void(0);"><img src="assets/images/add_user.png" class="img-responsive imgUser pull-right"></a>
+        </div>
+        <div class="dataList col-md-12">
+          <div class="input-group sInputDiv">
+            <input #input class="form-control sInput " type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Role..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          <div *ngIf="(roleListView | filter: queryString).length === 0">
+              <ul class="role-list">
+                 <li> No matches found</li>
+              </ul>
+            </div>
+          <ul class="role-list" *ngIf="(roleListView | filter: queryString).length != 0">
+            <li [ngClass]="{active: item.id==roleListViewInit.id}" class="home-tit" (click)="roleView(item.id)" *ngFor="let item of roleListView | filter: queryString">
+              <p><span class="roleSmall">{{item.role_short_name}}</span>
+              {{item.role_name}}
+              <small class="pull-right positionList">Created on <br> {{item.createdAt | date:'dd MMM yyyy'}}</small>
+            </p>
+            </li>
+          </ul>
+        </div>
+    </div>
+    <div class="rightContent" *ngIf="(roleListView | filter: queryString).length != 0">
+        <div class="roles col-md-12 ">
+            <p class="baseColor pull-left">
+             <span class="roleSmall"> {{roleListViewInit.role_short_name}}</span>
+              <b class="baseColor">{{roleListViewInit.role_name}}</b>   
+              <b *ngIf="roleListViewInit.active_status==0" class="alert">- Suspend</b>           
+            </p>
+            <div class="controlBut pull-right">
+<!--             <p class="" *ngIf="roleListViewInit.active_status==0">
+                <a title="Active Role"  (click) = activeRole(roleListViewInit.id)>
+                  <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                </a>
+            </p>
+            <p class="pauseIcon" *ngIf="roleListViewInit.active_status==1">
+                <a title="Suspend Role" (click) = suspendRole(roleListViewInit.id)>
+                    <img src="assets/images/edit.png"/> 
+                </a>
+            </p> -->
+            <p class="delIcon">
+              <a title="Delete Role" class="" (click) = deleteRole(roleListViewInit.id) >
+                  <img src="assets/images/delete.png"/> 
+              </a>
+            </p>
+           </div>
+        </div>
+        <div class="roles-view col-md-12">
+        <md-tab-group md-align-tabs="bottom" id="ink-top-fix">
+            <md-tab label="Details">
+            <form  name="editRole" (ngSubmit)="eRole.form.valid && editRoles()" #eRole="ngForm" novalidate>
+                <ul class="err">
+                    <li>{{errors}}</li>
+                  </ul>
+                <table width="70%">                
+                  <tr>
+                    <td class="newText">Name:</td>
+                    <td><md-input-container>
+                        <input mdInput autocomplete="off" name="role_name" #role_name="ngModel"  [(ngModel)]="roleListViewInit.role_name" [disabled]=is_edit>
+                      </md-input-container></td>
+                  </tr>
+                  <tr>
+                      <td class="newText">Short Name:</td>
+                      <td><md-input-container>
+                          <input mdInput autocomplete="off" name="role_short_name" #role_short_name="ngModel" [(ngModel)]="roleListViewInit.role_short_name"  [disabled]=is_edit>
+                        </md-input-container></td>
+                    </tr>                
+                  <tr>
+                      <td class="newText">Type:</td>
+                      <td>
+                          <md-radio-group name="role_type" #role_type="ngModel" [(ngModel)]="roleListViewInit.role_type" name="type"  [disabled]=is_edit>
+                              <mat-radio-button class="my-radio" value="0" [checked]="roleListViewInit.role_type === 0">Admin</mat-radio-button>
+                              <mat-radio-button class="my-radio" value="1" [checked]="roleListViewInit.role_type === 0"> User </mat-radio-button>
+                          </md-radio-group>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td class="newText">Access:</td>
+                        <td>
+                            <md-radio-group name="access" #access="ngModel"  [(ngModel)]="roleListViewInit.access" name="acccess" [disabled]=is_edit>
+                                <mat-radio-button class="my-radio" value="0" [checked]="roleListViewInit.access === 0">All</mat-radio-button>
+                                <mat-radio-button class="my-radio" value="1" [checked]="roleListViewInit.access === 1"> Mobile </mat-radio-button>
+                                <mat-radio-button class="my-radio" value="2" [checked]="roleListViewInit.access === 2"> Web </mat-radio-button>
+                            </md-radio-group>
+                        </td>
+                      </tr>
+                      <tr>
+                          <td class="newText">No of Users:</td>
+                          <td><md-input-container>
+                              <input autocomplete="off" mdInput name="no_of_user" #no_of_user="ngModel"  [(ngModel)]="roleListViewInit.no_of_user" [disabled]=is_edit>
+                            </md-input-container></td>
+                        </tr>  
+
+                      <tr>
+                        <td class="newText">Feature Device access:</td>
+                        <td><md-input-container>
+                            <input autocomplete="off" mdInput name="feature_device_access" #feature_device_access="ngModel" [(ngModel)]="roleListViewInit.feature_device_access" [disabled]=is_edit>
+                          </md-input-container></td>
+                      </tr>                                                              
+                </table>
+                <div class="col-lg-12 editSec ">
+                  <div class="pull-right col-md-4">
+                    <button (click)=enable() class="baseButton"  md-button *ngIf=is_edit>Edit</button>
+                    <div class="col-lg-6">
+                      <button  [disabled]="!eRole.form.valid" class="baseButton"  md-colors="{background: '#303F9F}" type="submit" md-button *ngIf=is_hide>Update</button>
+                    </div>
+                    <div class="col-lg-6">
+                      <button (click)=disable() class="baseButton"  md-button *ngIf=is_hide>Cancel</button>
+                    </div>
+                </div>
+              </div>
+            </form> 
+            </md-tab>
+            <md-tab label="Feature Controls">
+              <div class="col-lg-12 featureControl">
+                <br>
+                <div *ngIf="features.length == 0">
+                    No Records Found
+                   </div>
+            <form (ngSubmit)="featureUpdate(featureForm)" novalidate #featureForm="ngForm">
+                <table class="table borderless">
+                <tr *ngFor="let contents of features; let i = index" width="100%" class="">
+                  <td>{{contents.menu.menu_short_name}}</td>
+                  <td>
+                    <mat-checkbox 
+                     [value] = "1"                     
+                     [checked]="contents.all_control == 1"          
+                     [(ngModel)]="contents.all_control"     
+                     ng-true-value="1" ng-false-value="0"                        
+                     name="all_control[{{contents.id}}]" class="newCheck">All </mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.add_control == 1"
+                     [(ngModel)]="contents.add_control"
+                     name="add_control[{{contents.id}}]" class="newCheck">Add</mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.edit_control == 1"
+                     [(ngModel)]="contents.edit_control"
+                     name="edit_control[{{contents.id}}]" class="newCheck">Edit</mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.delete_control == 1"
+                     [(ngModel)]="contents.delete_control"
+                     name="delete_control[{{contents.id}}]" class="newCheck">Delete</mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.view_control == 1"
+                     [(ngModel)]="contents.view_control"
+                     name="view_control[{{contents.id}}]" class="newCheck">View</mat-checkbox></td>
+                </tr>              
+              </table>
+              <div class="col-lg-12 editSec ">
+              <div class="col-lg-2 pull-right" *ngIf="features.length != 0">
+              <button md-button class="baseButton" type="submit" color="mycolor" >Update</button>
+              </div>
+              </div>
+            </form>
+              </div>
+            </md-tab>
+            <md-tab label="Users">
+              <div class="col-md-12 tabContent manageUser">
+                  <div *ngIf="RoleUserView.length == 0">
+                  No Records Found
+                  </div>
+                  <div class="col-lg-4 detPart" *ngFor="let user of RoleUserView; let i = index">
+                      <div class="detpartContent">
+                        <div class="partDetails">
+                          <div class="partProfile"> 
+                            <h4 class="partName">{{user.firstName}} {{user.lastName}} - {{roleListViewInit.role_short_name}}</h4>
+                            <div class="partAddress">
+                              <p> {{user.email}}</p>
+                              <p class="colorWeight">{{user.telephone}}</p>
+                            </div>
+                            <button class="rmButton" (click)=removeUsers(user.id)>Remove</button>
+                          </div>
+                        </div>
+                        <div class="partImage">
+                          <p class="">
+                              <img src="assets/images/user1.jpg" class="detimg1">                        
+                          </p>
+                          <button type="button" class=" details" (click)=viewDetailsUsers(user.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                         </div>
+                     </div>
+                </div>
+              </div>
+            </md-tab>
+            <md-tab label="Profile Controls">
+                            <div class="col-lg-12 featureControl">
+                <br>
+                <div *ngIf="features.length == 0">
+                    No Records Found
+                   </div>
+            <form (ngSubmit)="profileUpdate(profileForm)" novalidate #profileForm="ngForm">
+                <table class="table borderless">
+                <tr *ngFor="let contents of profileSetting; let i = index" width="100%" class="">
+                  <td>{{contents.profile_menu.profile_fields}}</td>
+                  <td>
+                    <mat-checkbox 
+                     [value] = "1"                     
+                     [checked]="contents.edit == 1"          
+                     [(ngModel)]="contents.edit"     
+                     ng-true-value="1" ng-false-value="0"                        
+                     name="edit[{{contents.id}}]" class="newCheck">Edit </mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.delete == 1"
+                     [(ngModel)]="contents.delete"
+                     name="delete[{{contents.id}}]" class="newCheck">Delete</mat-checkbox></td>
+                  <td>
+                    <mat-checkbox 
+                    [value] = "1"
+                     [checked]="contents.view == 1"
+                     [(ngModel)]="contents.view"
+                     name="view[{{contents.id}}]" class="newCheck">View</mat-checkbox></td>                  
+                </tr>              
+              </table>
+              <div class="col-lg-12 editSec ">
+              <div class="col-lg-2 pull-right" *ngIf="profileSetting.length != 0">
+              <button md-button class="baseButton" type="submit" color="mycolor" >Update</button>
+              </div>
+              </div>
+            </form>
+              </div>
+            </md-tab>
+          </md-tab-group>
+          </div>
+    </div>
+  </div>
+
+  <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog" [hidden]="loading">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Role</h4>
+          </div>
+          <form name="form" (ngSubmit)="role.form.valid && addRole()" #role="ngForm" novalidate>
+            <ul class="err">
+              <li>{{errors}}</li>
+            </ul>
+          <div class="modal-body">              
+              <table width="100%">
+                  <tr>
+                    <td class="newText">Name:</td>
+                    <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !username.valid }">
+                        <input mdInput 
+                          autocomplete="off" 
+                          autofocus
+                          name="username" 
+                          [(ngModel)]="roleUser.username" 
+                          #username="ngModel" 
+                          required>
+                      </md-input-container>
+                    <div *ngIf="username.touched && username.invalid" class="alert">Role Name is required</div>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td class="newText">Short Name:</td>
+                      <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !role_short_name.valid }">
+                          <input mdInput 
+                            autocomplete="off" 
+                            name="role_short_name" 
+                            [(ngModel)]="roleUser.role_short_name" 
+                            #role_short_name="ngModel" 
+                            required>
+                        </md-input-container>
+                      <div *ngIf="role_short_name.touched && role_short_name.invalid" class="alert">Role Short Name is required</div>
+                      </td>
+                    </tr>
+                  <tr>
+                      <td class="newText">Type:</td>
+                      <td> 
+                      <md-radio-group [(ngModel)]="roleUser.type" name="type" required #type="ngModel">
+                          <mat-radio-button class="my-radio" value="0" [checked]>Admin</mat-radio-button>
+                          <mat-radio-button class="my-radio" value="1"> User </mat-radio-button>
+                      </md-radio-group>
+                      <div *ngIf="access.touched && access.invalid" class="alert">Type is required</div>
+                      <hr>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td class="newText">Access:</td>
+                        <td>
+                            <md-radio-group [(ngModel)]="roleUser.access" name="access" required #access="ngModel" >
+                                <mat-radio-button class="my-radio" value="0" [checked]>All</mat-radio-button>
+                                <mat-radio-button class="my-radio" value="1"> Mobile </mat-radio-button>
+                                <mat-radio-button class="my-radio" value="2"> Web </mat-radio-button>
+                            </md-radio-group>
+                            <div *ngIf="access.touched && access.invalid" class="alert">Access is required</div>
+                        </td>
+                      </tr>
+                      <tr>
+                          <td class="newText">No of Users:</td>
+                          <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !no_of_users.valid }">
+                              <input mdInput 
+                                type="number"
+                                autocomplete="off" 
+                                name="no_of_users" 
+                                [(ngModel)]="roleUser.no_of_users" 
+                                #no_of_users="ngModel" 
+                                required>
+                            </md-input-container>
+                          <div *ngIf="no_of_users.touched && no_of_users.invalid" class="alert">No of Users is required</div>
+                          </td>
+                        </tr>  
+                            <tr>
+                                <td class="newText">Feature Device access:</td>
+                                <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !feature_device_access.valid }">
+                                    <input mdInput 
+                                      type="number"
+                                      autocomplete="off" 
+                                      name="feature_device_access" 
+                                      [(ngModel)]="roleUser.feature_device_access" 
+                                      #feature_device_access="ngModel" 
+                                      required>
+                                  </md-input-container>
+                                <div *ngIf="feature_device_access.touched && feature_device_access.invalid" class="alert">Feature Device access</div>
+                                </td>
+                              </tr>                                               
+                </table>              
+          </div>
+          <div class="modal-footer">
+            <div class="col-lg-3 pull-right">
+              <button md-button type="submit" [disabled]="!role.form.valid" color="mycolor">Save</button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="userModel" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">User Detail</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row" [hidden]=isShow>
+              <h3 style="text-align:center">Loading</h3>
+            </div>
+            <div [hidden]=isHide class="col-lg-12">
+              <div class="col-lg-4">
+                <img src="assets/images/noimage.jpg" class="img-responsive">
+              </div>
+              <div class="col-lg-8">
+                <table class="table">
+                  <tr>
+                    <td>Name</td>
+                    <td>{{userDetails.firstName}} {{userDetails.lastName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{userDetails.email}}</td>
+                  </tr>
+                  <tr>
+                    <td>Telephone</td>
+                    <td>{{userDetails.telephone}}</td>
+                  </tr>
+                  <tr>
+                    <td>Experience</td>
+                    <td>{{userDetails.yrsOfExperience}}</td>
+                  </tr>
+                  <tr>
+                    <td>Biography</td>
+                    <td>{{userDetails.biography}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+    
+      </div>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>

@@ -1,0 +1,32 @@
+.roleContent{
+    margin: 0 0 5%;
+    
+}
+.role-list{
+    margin:15px 0;
+}
+.home-tit{
+    border-bottom: 1px solid #ccc;
+    font-family: roboMedium;
+    padding: 20px 10px;
+    font-size: 17px;cursor: pointer;
+}
+.positionList {
+    font-size: 13px;    font-family: robomedium;
+}
+.home-tit.active{
+    background: #f5f6f9;
+    color: $primary-darker;
+}
+.manageUser{
+    .rmButton{
+        margin: 10px 0 5px;
+        
+    }
+    .details{
+        margin: 25px 0 0;
+    }
+    .partAddress{
+        min-height: 45px;
+    }
+}

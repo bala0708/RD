@@ -1,0 +1,649 @@
+<div class="col-lg-12 manageTopics">
+  <div class="leftContent">
+      <div class="roles col-md-12">
+        <p class="pull-left">Topics</p>
+        <a class="pull-right color" mdTooltip="Add Topic" (click)=addTopics() href="javascript:void(0);"><i class="fa fa-plus"></i></a>
+      </div>
+      <div class="dataList col-md-12" [hidden]="is_view">
+           
+        <div class="col-lg-10 padd0">
+          <div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Topics"/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 padd0 sarrw">
+          
+          <!--<p class="pull-right">
+            <a mdTooltip="Sort"><img src="assets/images/reqarr2.png" class="">
+            </a>
+          </p>-->
+      </div>
+          <div style="clear: both"></div>
+          <div *ngIf="(getTopics | filter: queryString).length === 0">
+            <ul class="role-list">
+             <li class="contentPad"> No matches found</li>
+            </ul>
+          </div>
+          <div class="col-md-12 topics-list padd0">
+            <table class="topicTable">
+            <tr style="cursor: pointer;" *ngFor="let items of getTopics | filter: queryString | paginate: { itemsPerPage: 5, currentPage: page, id: 'first' }" [ngClass]="{activeTopic: items.id==initialActive}">
+              <div (click)=getTopic(items.id)>
+                <td class="topicProfImg">
+                  <img src="{{APIURL}}{{items.topic_image_path}}{{items.topic_image}}" class="img-responsive">
+<!--  <img src="assets/images/lever.png" class="img-responsive"> -->
+                </td> 
+                <td class="topicTit">
+                  <p class="contentPad">{{items.topic_title}}</p>
+                </td>
+                <td class="">
+                    <img src="assets/images/stats.png" style="width: 30px;">
+                </td>
+                <td class="">
+                    <img src="assets/images/save.png" style="width: 30px;">
+                </td>
+                <td class="">
+                    <div class="colorCount">+8</div>
+                </td>
+                <td class="">                    
+                  <ul class="topic">
+                    <li>Upcoming</li>
+                    <li class="meeting">Meetings</li>
+                    <li>Done</li>
+                  </ul>
+                  
+                </td>
+                <td class="">
+                    <ul class="dataCount pull-right">
+                        <li class="listOne">{{items.upcomingMeetingCount}}</li>
+                        <li class="listTwo">{{items.completedMeetingCount}}</li>
+                      </ul>
+                    </td>
+              </div>
+            </tr>
+          </table>
+          <div class="col-lg-12 customPage"  *ngIf="(getTopics | filter: queryString).length != 0">
+              <pagination-controls class="pull-right" (pageChange)="page = $event" id="first"></pagination-controls>
+          </div>
+          </div>
+      </div>
+          <div class="dataList col-md-12" [hidden]="is_add">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form enctype="multipart/form-data" id="form1" (ngSubmit)="tRole.form.valid && addTopicsData(tRole)" #tRole="ngForm" novalidate>
+                     <table class="contTabl" width="100%">
+                      <tbody>
+                      <tr>
+                        <td width="25%"><label>Topic Name</label></td>
+                     <td>
+                      <div class="md-form input-effect">                          
+                        <input type="text"
+                         autocomplete="off"
+                          class="effect-17"
+                           required
+                           minlength="5" 
+                           maxlength="100" 
+                            id="orangeForm-name"
+                              [(ngModel)]=topics.topic_title_new
+                               #topic_title_new=ngModel 
+                               name="topic_title_new">                       
+                      </div>
+     <div *ngIf="topic_title_new.errors && (topic_title_new.dirty || topic_title_new.touched)" class="alert">
+        <small [hidden]="!topic_title_new.errors.required">
+          Topic Name is required!
+        </small>
+        <small [hidden]="!topic_title_new.errors.minlength">
+          Topic Name must be at least 5 characters long.
+        </small>
+        <small [hidden]="!topic_title_new.errors.maxlength">
+          Topic Name cannot be more than 20 characters long.
+        </small>
+      </div>                        
+                     </td>
+                      </tr>
+                      <tr>
+                     <td width="25%"><label>Topic Image</label></td>
+                     <td>
+                        <image-upload class="sizeImage" 
+                         [buttonCaption]="'Topic Image'" [max]="1"
+                         (onRemove)="imageRemoved($event)"
+                         (onFileUploadFinish)="fileChanged($event.file)">
+                                <i class="fa fa-cloud-upload"></i> 
+                        </image-upload>
+                        
+                       <small style="color:red">* Topic image is required</small>
+                        <div class="pull-right m20">
+                            <input type="button"  class="baseButton" (click)=viewTopics() value="Cancel">
+                            <button  [disabled]="!tRole.form.valid || isEmpty"  class="baseButton" type="submit">Save</button>
+                        
+                        </div>
+                     </td>
+                      </tr>
+                    </tbody>
+                   </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+  </div>
+  <div class="rightContent" *ngIf="(getTopics | filter: queryString).length != 0">
+      <div>
+        <div class="roles">
+            <p class="baseColor pull-left">
+              <b class="baseColor">{{initialRecord.topic_title}}</b>   
+              <b *ngIf="initialRecord.active_status==0" class="alert">- Suspend</b>           
+            </p>
+            <div class="pull-right captionControls cusMg" >   
+                <div class="newRole">                                                                            
+                <p *ngIf="initialRecord.active_status==0"><a title="Active Topic" (click) = activeTopicsData(initialRecord.id) >
+                  <i class="fa fa-pause-circle-o" aria-hidden="true"></i></a></p>
+                <p *ngIf="initialRecord.active_status==1"><a title="Suspend Topic" (click) = suspendTopicsData(initialRecord.id)>
+                  <i class="fa fa-pause-circle-o" aria-hidden="true"></i></a></p>
+               <p> <a title="Delete Topic" (click) = deleteTopicsData(initialRecord.id)  class="pull-right brandDel"></a></p>
+                </div>
+            </div>
+          <!--  <div class="controlBut pull-right">
+              <p class="pauseIcon" *ngIf="initialRecord.active_status==0">
+                  <a title="Active Topic"  (click) = activeTopicsData(initialRecord.id)>
+                    <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                  </a>
+              </p>
+              <p class="pauseIcon" *ngIf="initialRecord.active_status==1">
+                  <a title="Suspend Topic" (click) = suspendTopicsData(initialRecord.id)>
+                     <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                  </a>
+              </p>
+              <p class="delIcon">
+                <a title="Delete Role" class="" (click) = deleteTopicsData(initialRecord.id) >
+                    <img src="assets/images/delete.png"/> 
+                </a>
+              </p>
+           </div>-->
+          
+        </div>
+      </div>
+           
+      <div class="roles-view">
+      <md-tab-group md-align-tabs="bottom" id="ink-top-fix">
+          <md-tab label="Details">
+            <div class="topicProfileImg">
+              <img src="{{APIURL}}/{{initialRecord.topic_image_path}}/{{initialRecord.topic_image}}" class="img-responsive">
+            </div>
+            <div class="col-lg-12">               
+              <form  name="editRole" (ngSubmit)="TopicsRole.form.valid && editTopics(TopicsRole.value)" #TopicsRole="ngForm" novalidate>
+                  <table class=" topTable col-lg-9 col-lg-offset-2">                
+                    <tr>
+                      <td class="newText">Topic Name:</td>
+                      <td>
+                          <div class="input-effect">
+                          <input autocomplete="off"
+                          autocomplete="off"
+                          required
+                          placeholder="Topic Name"
+                          minlength="5" 
+                          maxlength="100" 
+                          [(ngModel)]=initialRecord.topic_title #topic_title=ngModel name="topic_title"
+                            class="effect-17 w100">
+                           <!--  <div *ngIf="topic_title.touched && topic_title.invalid" class="alert">Topic name is required</div>
+                            <span class="focus-border"></span> -->
+                          </div>
+    <div *ngIf="topic_title.errors && (topic_title.dirty || topic_title.touched)" class="alert">
+        <small [hidden]="!topic_title.errors.required">
+          Topic Name is required!
+        </small>
+        <small [hidden]="!topic_title.errors.minlength">
+          Topic Name must be at least 5 characters long.
+        </small>
+        <small [hidden]="!topic_title.errors.maxlength">
+          Topic Name cannot be more than 100 characters long.
+        </small>
+      </div>  
+                          </td>
+                    </tr>   
+                    <tr>
+                        <td class="newText" *ngIf="cart.length != 0" >Company:</td>
+                        <td>
+                            <div id="myCarousel" class="carousel fdi-Carousel slide">
+                        <!-- Carousel items -->
+<!--                         <div *ngIf="cart.length == 0">
+                                No Records Found
+                        </div> -->
+                           <div class=" customCarosel carousel fdi-Carousel slide" id="eventCarousel" data-interval="0" *ngIf="cart.length != 0">
+                               <div class="carousel-inner">
+                                   <div class="item" *ngFor="let data of cart | orderby: ASC" [ngClass]="{active: data == 1}">
+                                       <div class="col-lg-4"  *ngFor="let items of dataList[data-1]" >   
+                                          <div class="thumbnail">
+                                            <div class="brandMainImg">
+                                           <img
+                                             src="{{APIURL}}/{{items.upload_path}}/{{items.brand_image}}" 
+                                             class="img-responsive imagesMap center-block">
+                                          </div>
+                                           <div class="text-center brandNam">{{items.brand_name}}</div>
+                           <div class="checkbox_wrapper customCheckbox">
+                           <span>
+                              <input type="checkbox"
+                                name="brand[{{items.id}}]"
+                                value="{{items.id}}" 
+                                (change)=getProductForTopic(items.id)
+                                [checked]="selectedBrandData.indexOf(items.id) >= 0"
+                                value="items.id" />
+                              <label></label>
+                            </span>
+                           </div>
+                                          </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <a class="left carousel-control" [hidden]="cart.length == 0" href="#eventCarousel" data-slide="prev">
+                                    <img src="assets/images/leftarrow.png" class="slideMenuLeft">
+                                </a>
+                               <a class="right carousel-control" [hidden]="cart.length == 0" href="#eventCarousel" data-slide="next">
+                                    <img src="assets/images/leftarrow.png" class="slideMenuRight">
+                                </a>
+                           </div>
+                           <!--/carousel-inner-->
+                       </div><!--/myCarousel-->
+                          </td>
+                      </tr> 
+                                            <tr>
+                        <td class="newText" *ngIf="productList!=''">
+                          Products:
+                        </td>
+                        <td> 
+                           
+                        <div class="product">
+                          <ul class="attachProducts newAttach" *ngIf="productList != ''">
+                         
+                          <li *ngFor="let proItem of productList; let k='index'">
+                            
+                            <img height="30" width="60" 
+                           src="{{APIURL}}/{{proItem.product_image[0].upload_path}}/{{proItem.product_image[0].product_image}}" >
+                           <small class="dcNam"> {{proItem.product_name}}</small>
+                           <div class="checkbox_wrapper1 customCheckbox">
+                           <span>
+                              <input type="checkbox"
+                               [checked]="selectedProductData.indexOf(proItem.id) >= 0"
+                                name="product[{{proItem.id}}]"
+                                value="{{proItem.id}}" 
+                                (change)=proUps(proItem.id)
+                                 />
+                              <label></label>
+                            </span>
+                           </div>              
+                          </li>
+                             
+                          </ul>
+                        </div>
+                        </td>
+                      </tr> 
+                      <tr>
+                     <td width="25%"><label>Topic Image</label></td>
+                     <td>
+                        <image-upload class="sizeImage" 
+                         [buttonCaption]="'Topic Image'" [max]="1"
+                         (onRemove)="imageRemoved($event)"
+                         (onFileUploadFinish)="fileChangedUpdate($event.file)">
+                                <i class="fa fa-cloud-upload"></i> 
+                        </image-upload>
+                     </td>
+                      </tr>
+                      <tr>
+                          <td class="newText">Description:</td>
+                          <td>
+                              <textarea autofocus="" autocomplete="off" class="inputArea brandDes"
+                              autocomplete="off" required placeholder="Topic Description" [(ngModel)]=initialRecord.topic_discription #topic_discription=ngModel name="topic_discription"></textarea>
+                              <div *ngIf="topic_discription.touched && topic_discription.invalid" class="alert">Topic Discription is required</div>
+       
+                            </td>
+                      </tr>  
+                      <tr>
+                        <td class="newText">Attachments</td>
+                        <td class="brandDocdetails"> 
+                            <label for="file-upload" class="product-file-upload  pull-left">
+                                     Documents 
+                                </label>
+                                <div class="pull-right docUpload ">
+                                    <label for="file-upload"> <i class="fa fa-plus "></i></label>
+                                    <input id="file-upload"  (change)=fileChangedDocs($event.target.files) type="file"/>
+                                   </div>
+                                
+<ul class="attachList" *ngIf="product_docsA.length > 0" >
+                                                <li *ngFor="let dataProds of product_docsA">
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+                                           
+                                            <ul class="attachList col-md-12" >
+                                                  
+                                                    <li *ngFor="let imageProds of topicDocs">
+                                                            <span>
+                                                                <img src="assets/images/word.png" class="attachListImg">
+                                                                <small class="dcNam">{{imageProds.original_file_name}}</small>
+                                                            </span>                                                            
+                                                    </li>
+                                            </ul>
+                                             <ul class="attachList col-md-12" >
+                                               
+                                                   
+                                                    <li *ngFor="let imageProds of initialRecord.topic_statutory">
+                                                                               <span>
+                                                               <i class="icon-remove"><a title="Remove Docs" (click)="removeAtt(imageProds,imageProds.id)">X</a></i>
+                                                                <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'jpeg'">
+                     <!--         <img src="assets/images/invalid_format.png" class="attachListImg" 
+                             *ngIf="!((imageProds.original_file_name | extension) != 'pdf' || 'docx' || 'png' || 'jpeg' || 'xlsx')"> -->
+                                                         <img src="assets/images/excel.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'xlsx'">        
+                                                                <small class="dcNam">
+                                                                   {{imageProds.original_file_name | slice:0:6}}
+                                                                                                   </small>
+                                                            </span>                                                               
+                                                    </li>
+                                            </ul>
+                    </td>
+                      </tr>                                                  
+                  </table>
+                  <div class="col-lg-12 editSec ">
+                  <div class="pull-right col-md-2">
+                      <button  class=" baseButton" color="mycolor" type="submit" md-button>Update</button>
+                 </div>
+                </div>
+              </form> 
+            </div>
+          </md-tab>
+          <md-tab label="Content">
+              <div class="col-md-12 padd0" style="margin-top:10px;">    
+                  <form (ngSubmit)="contentTopic.form.valid && addTopicsContents(contentTopic)" #contentTopic="ngForm" novalidate>
+                      
+                  <div class="col-lg-12 trackField">
+                    <div class="col-lg-6">
+                      <div class="panel-heading">
+                                   <span class="availTopic"> Available Contents</span>
+                            </div>
+                            <div class="col-md-12 searchDiv">
+                      <div class="input-group ">
+                        <input #input class="form-control sInput" type="text" [(ngModel)]="queryContent" name="searchroleName"  id="searchroleName"  autocomplete="off" placeholder="Search Available Content"/>
+                        <div class="input-group-addon sIcon">
+                          <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                      </div></div>
+                      <div class="panel-body">
+                        <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='availableContent'>
+                        <li *ngFor="let item of availableContent | filter: queryContent">
+                          {{item.content_name}}
+                          <input type="hidden" name="content_list[item.id]">
+                        </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                      <div class="panel-heading">
+                                <span class="availTopic">  Assigned Contents</span>
+                        </div>
+                        <div class="col-md-12 searchDiv">
+                      <div class="input-group ">
+                        <input #input class="form-control sInput" type="text" [(ngModel)]="queryStringss" name="searchroleName"  id="searchroleName" autocomplete="off" placeholder="Search Assigned Content"/>
+                        <div class="input-group-addon sIcon">
+                          <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                      </div>
+                        </div>
+                      <div class="panel-body">
+                      <ul class="list-groupD" [dragula]='"evented-bag"' [dragulaModel]='assignContent'>
+                      <li *ngFor="let item of assignContent| filter: queryStringss">{{item.content_name}}
+                      <input type="hidden"
+                      [value]="1" 
+                      [(ngModel)]=availableUser.content_assigned #content_assigned=ngModel
+                       name="content_assigned[{{item.id}}]"></li>
+                      </ul>
+                      </div>
+                       <div style="clear:both"></div>
+                     </div>
+                                     <div class="col-lg-12 editSec ">
+                      <div class="col-lg-2 pull-right">
+                    <button  class=" baseButton" color="mycolor" type="submit" md-button>Update</button>
+                      </div>
+                  <br>
+
+                   </div> 
+  
+                  </div>
+                </form> 
+              </div>
+ 
+
+          </md-tab>
+          <md-tab label="Eligibility">
+           <!-- <div class="col-lg-12">
+                <form  name="assignEligibility" (ngSubmit)="assignEligibility.form.valid && assignEligibilityTopic(assignEligibility)" #assignEligibility="ngForm" novalidate>
+                    <table class="table hciCusCheck">
+                    <tr width="100%" class="" *ngFor="let items of eligibilityListView">                      
+                      <td>
+                        <mat-checkbox 
+                        (change)="onChange(items.id)"
+                        [checked]="selectedData.indexOf(items.id) >= 0"
+                         value = "{{items.id}}"
+                         name="eligibility[{{items.id}}]">{{items.eligibility_title}} </mat-checkbox>
+                       </td>                      
+                    </tr>              
+                  </table>
+                  <div class="col-lg-12 editSec">
+                    <div class="col-lg-2 pull-right">
+                        <button md-button type="submit" class="baseButton" color="mycolor">Update</button>
+                    </div>
+                  </div>
+                </form>
+            </div>-->
+          </md-tab>
+          <md-tab label="Polls">
+             <!-- <div class="col-lg-12 ">
+                  <form >
+                      <table class="table hciCusCheck">
+                      <tr width="100%" class="" >                      
+                        <td>
+                          <mat-checkbox >polls
+                           </mat-checkbox>
+                         </td>                      
+                      </tr>              
+                    </table>
+                    <div class="col-lg-12 editSec">
+                      <div class="col-lg-2 pull-right">
+                          <button md-button type="submit" class="baseButton" color="mycolor">Update</button>
+                      </div>
+                    </div>
+                  </form>
+              </div>-->
+          </md-tab>
+          <md-tab label="HCI">
+                 <div class="col-lg-12 padd0 hciCont" >
+                  <form (ngSubmit)="contentTopic.form.valid && addTopicsContent(contentTopic)" #contentTopic="ngForm" novalidate>
+                  <div class="col-lg-6">
+ <div class="panel-heading">
+                                <span class="availTopic">  Available User</span>
+                        </div>
+                        <div class="col-md-12 searchDiv">
+                      <div class="input-group ">
+                        <input #input class="form-control sInput" type="text" [(ngModel)]="queryUser" name="searchroleName"  id="searchroleName" autocomplete="off" placeholder="Search Available User"/>
+                        <div class="input-group-addon sIcon">
+                          <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                      </div>
+                        </div>
+                        <div class="panel-body hciPanel">
+                          <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='availableUser'>
+                          <li *ngFor="let item of availableUser | filter: queryUser">
+                            <div class="col-lg-12 detPart">
+                              <div class="detpartContent">
+                                <div class="partDetails">
+                                  <div class="partProfile">
+                                      <p class="partName"> {{item.firstName}}</p>
+                                     <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                    </div>
+                                    <!-- <button class="rmButton">Remove</button> -->
+                                  </div>
+                                </div>
+                                <div class="partImage">
+                                  <p>
+                                   <img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">
+                                  <!--  <img src="assets/images/user1.jpg" class=" detimg1"> -->  </p>
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="panel-heading">
+                                <span class="availTopic">  Assigned User</span>
+                        </div>
+                        <div class="col-md-12 searchDiv">
+                      <div class="input-group ">
+                        <input #input class="form-control sInput" type="text" [(ngModel)]="queryUserAssign" name="searchroleName"  id="searchroleName" autocomplete="off" placeholder="Search Assigned User"/>
+                        <div class="input-group-addon sIcon">
+                          <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                      </div>
+                        </div>
+                      <div class="panel-body hciPanel">
+                      <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='assignUser'>
+                      <li *ngFor="let item of assignUser| filter: queryUserAssign">
+                        <div *ngIf="assignUser==''">No records Found</div>
+                        <div class="col-lg-12 detPart">
+                            <div class="detpartContent">
+                              <div class="partDetails">
+                                <div class="partProfile">
+                                    <p class="partName">{{item.firstName}}</p>
+                                    <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                      </div>
+                                      <!-- <button class="rmButton">Remove</button> -->
+                                    </div>
+                                  </div>
+                                
+                                <div class="partImage">
+                                    <p><img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">                        
+                                  </p>
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                      </li>
+                      </ul>
+                      </div>
+
+                   <div style="clear:both"></div>
+                   </div>  
+                   <div class="col-lg-12 editSec">
+                      <div class="col-lg-2 pull-right">
+                    <button  class="baseButton" color="mycolor" type="submit" md-button>Update</button>
+                      </div>
+                    </div>
+                  <div style="clear:both"></div>
+                </form> 
+              </div>
+          </md-tab>
+          <md-tab label="Meetings">
+            <div class="col-lg-12">
+                <div class="availTopic">Available Meetings</div>
+                <div class="fullSec col-lg-12 padd0">
+                <div class="col-lg-6 topbggnew" *ngFor="let data of initialRecord.topic_meeting | paginate: { itemsPerPage: 6, currentPage: pageMeet, id: 'second' }">
+                        <div class="col-lg-6 padd0">
+                            <p class="meetTit"><a (click)="getMeetingData(data.id)"
+                                  data-backdrop="static" data-toggle="modal" data-target="#requestPopup"
+                              >{{initialRecord.topic_title}}</a></p>
+                            <div class="meetTimSec">
+                              <div class="mainTime">{{data.start_time | date:'h:mm'}}</div>
+                              <div>{{data.start_time | date:'a'}} - {{dateZone}}<br>
+                                {{data.start_time | date:'dd MMMM yyyy'}}</div>
+                               <!--  <div class="contIcon">
+                                    <button md-button class="pasbutton"> Paused</button>
+                               <button md-button class="cancelbutton">Cancel</button>
+                                </div> -->
+                              </div>
+                          </div>
+                          <div class="col-lg-6 topicMeet">
+                            <p class="topicMeetid">Meeting ID:{{data.id}}</p>
+                            <div class="col-lg-12 padd0 pull-left"><img src="assets/images/user1.jpg" class="topicdocImg"/><p>{{data.user.firstName}}</p></div>
+                            <div class="col-lg-12 padd0 pull-right"><img src="assets/images/user1.jpg" class="topicdocImg"/><p>{{data.toUserid.firstName}}</p></div>
+                          </div>
+                </div>
+                </div>
+          <div class="col-lg-12 customPage">
+              <pagination-controls class="pull-right" (pageChange)="pageMeet = $event"  id="second"></pagination-controls>
+          </div>
+            </div>
+          </md-tab>
+        </md-tab-group>
+        </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+
+<!--modal-->
+<div class="modal fade myModalNorm" id="requestPopup" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+   <div class="modal-content">
+       <!-- Modal Header -->
+      <div class="modal-header">
+          <h4 class="addpayTest">
+            {{initialRecord.topic_title}}</h4>
+            <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+           </button>
+        </div>
+     <!-- Modal Body -->
+
+       <div class="modal-body" *ngIf="meatingData.id">
+           <div class="reqMeetdet"> 
+               <p><span>Meeting ID: {{meatingData.id}}</span><span>{{meatingData.start_time | date:'EEEE'}} {{meatingData.start_time | date:'MMM'}} {{meatingData.start_time | date:'dd'}}th</span><span> {{meatingData.start_time | date:'h:mm'}} {{meatingData.start_time | date:'a'}} - {{dateZone}}  </span></p>
+                    
+           </div>
+              <table width="100%" class="hciPopup">                
+                  <tr>
+                      <td > <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                       <p class="docfullNam"> {{meatingData.user.firstName}}</p>
+                       <p class="docDet">{{meatingData.companyName}}</p>
+                     </td>
+                      <td> <img src="../../../../../assets/images/user1.jpg" class="reqdoc">
+                        <p class="docfullNam"> {{meatingData.toUserid.firstName}}</p>
+                        <p class="docDet"> {{meatingData.companyName}}</p>
+                     </td>
+ 
+                  </tr>
+                  
+               </table>
+             <div class="detailContent">
+                 <p>Starting dose: 150 mg PO BID, continue treatmentuntil disease progression or 
+                    unacceptable toxity</p>
+                   <p> Indicated, in the combination with rituximab, for relapsedchronic lumphocytic 
+                    leukemia (CCL) in patients for whom rituximab alone would be considered
+                    appropriate theraphu due to other comorbidities</p>
+                </div>
+               
+        </div>
+ </div>
+</div>
+</div>
+<!-- Modal -->
+<app-user-details #modalPop></app-user-details>

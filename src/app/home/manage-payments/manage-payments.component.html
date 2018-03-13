@@ -1,0 +1,313 @@
+<div class="col-lg-12 managePayment ">
+    <div class="leftContent">
+        <div class="roles  col-md-12">
+          <p class="pull-left">Payments</p>
+          <div class="pull-right">
+              <!-- <div class="addIcon"><a href="#"><i class="fa fa-plus"></i></a></div> -->
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+          </div>
+        </div>
+      
+        <div class="dataListnew col-md-12">
+            <!-- <div class="hciBrand col-md-12 ">
+                <div class="brandTit">
+                   <h4 class="w100">Clients</h4>
+                   <span></span>
+                </div>
+             </div>
+          <div class="col-md-12 brandingSec">
+              <owl-carousel
+              [options]="{items: 3, dots: false, nav: true}"
+              [items]="brandList"              
+              [carouselClasses]="['owl-theme','myOwlcarosel','borone' ,'row', 'sliding']">
+              <div *ngFor="let img of brandList;let i = index" class="caroDiv">
+                   <img src="{{APIURL}}{{img.upload_path}}{{img.brand_image}}" class="img-responsive brandTag"/>
+                   <input type="checkbox" 
+                   [checked]="selectedBrand.indexOf(img.id) >= 0"
+                   (change)="getProduct(img.id)" id="c{{img.id}}">
+                   <label for="c{{img.id}}"></label>
+                 </div>
+          </owl-carousel>
+        
+          </div> -->
+          <!-- <div class="hciBrand col-md-12 ">
+              <div class="brandTit">
+                 <h4 class="w100">Products</h4>
+                 <span></span>
+              </div>
+           </div> -->
+           <!-- <div class="col-md-12 brandingSec">
+           <owl-carousel
+                       [options]="{items: 3, dots: false, nav: true}"
+                       [items]="productList"
+                       
+                       [carouselClasses]="['owl-theme','myOwlcarosel', 'row', 'sliding']">
+                      
+                       <div *ngFor="let data of productList;let i = index" >
+                        <div class="caroDiv">
+                        <img src="{{APIURL}}{{data.product_image[0].upload_path}}{{data.product_image[0].product_image}}" class="img-responsive proTag">
+                        <input type="checkbox"
+                        (change)="proUps(data.id)"
+                        [checked]="selectedProduct.indexOf(data.id) >= 0"
+                        id="p{{data.id}}"><label for="p{{data.id}}"></label>
+                        </div>
+                        <div class="" *ngIf="productList.length==0"> No Brand Choosed</div>
+                          </div>
+                   </owl-carousel>
+                   </div> -->
+                <div class="col-md-12  searchPart">
+          <div class="col-md-10 searchField">
+            <div class="input-group sInputDiv">
+                <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Payment..."/>
+                <div class="input-group-addon sIcon">
+                  <span class="fa fa-search form-control-feedback"></span>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-2 padd0 sarrw">
+              <p class="pull-left"><a  (click)="sort = !sort"><img src="assets/images/reqarr.png" class=""></a></p>
+               
+          </div>
+        </div>
+        <div class="reqDetails col-md-12 padd0">
+           <!--loop start-->
+           <div class="col-md-12 padd0 ">
+              <div class="col-md-12  scrollingPart">
+             <table width="100%">
+               <tbody>
+                 <tr>
+                   
+                   <td>
+          <div class="col-md-12 padd0 blue-bg  reqBg" *ngFor="let items of payment | filter : queryString | orderby:'total_amount' | paginate: { itemsPerPage:10, currentPage: p }">
+                <div class="col-md-12 padd0 borTopBot"[ngClass]="{'activeRow': items.id==paymentInit.id}" (click)="getOneRecord(items.id,2)">
+          <div class="col-md-3 new-pad  pyicon text-center">
+            <img src="assets/images/system.png" class="img-responsive" *ngIf="items.payment_type==1">
+            <img src="assets/images/oops.png" class="img-responsive" *ngIf="items.payment_type==2">
+          </div>
+          <div class="col-md-6 new-pad"> 
+            <div  *ngIf="items.payment_type==1">
+              <p class="reqSpec" *ngIf="items.meeting">{{items.meeting.topic.topic_title}}</p>
+            </div>
+            <div  *ngIf="items.payment_type==2">
+                <p class="reqSpec">Category Type - {{items.category_id.category_name}}</p>
+                <p class="subCaty">Sub Category Type - {{items.sub_category_id.sub_category_name}}</p>
+            </div>
+            <div class="payDate">
+                <span>{{items.createdAt | date:'MMMM dd'}} </span> {{items.createdAt | date:'yyyy'}} 
+                <span class="payTime">  {{items.createdAt | date:'h:mm'}} <small>{{items.createdAt | date:'a'}}-{{dateZone}}</small></span>
+             </div>
+          </div>
+          <div class="col-md-3 new-pad text-center">
+            <p class="meetId" *ngIf="items.payment_type==1"> Meeting ID: {{items.id}} </p>
+            
+            <p class="meetId" *ngIf="items.payment_type==2"> Payment ID: {{items.id}} </p>
+                <div class="">
+                  <button *ngIf="items.payment_status==1" md-button class="reqBut1 ">Pending</button>
+                  <button *ngIf="items.payment_status==2" md-button class="reqBut1 ">Reject</button>
+                  <button *ngIf="items.payment_status==3" md-button class="reqBut1 ">Approved</button>
+                  <button *ngIf="items.payment_status==4" md-button class="reqBut1 ">Reject</button>
+                  <button *ngIf="items.payment_status==5" md-button class="reqBut1 ">Dispute</button>
+                </div>
+                <p class="oldamt">$ {{items.total_amount}}</p>
+           </div>
+                </div>
+        </div>
+                   </td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              
+              <div class="col-lg-12 customPage"  *ngIf="(payment).length != 0">
+                <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+              </div>    
+           </div>
+        <!--loop end-->
+    
+      </div>
+        </div>
+    </div>
+    <!--left content end -->
+    <!---right content start-->
+    <div class="rightContent" *ngIf="paymentInit.length != 0">
+        <div class="roles">
+            <p class="roleSmall pull-left"> <b class="baseColor">Payments</b></p>
+        </div>
+       
+        <div class="col-md-12 dataListnew padd0">            
+            <div class="col-md-6 new-pad">
+              <div class="col-md-12 padd0 newBorder">
+                <div class="col-md-3 new-pad  text-center ">
+                  <img src="assets/images/system.png" class="img-responsive" *ngIf="paymentInit.payment_type==1">
+                  <img src="assets/images/oops.png" class="img-responsive" *ngIf="paymentInit.payment_type==2">
+                </div>
+                <div class="col-md-6 padd0 "> 
+                    <div  *ngIf="paymentInit.payment_type==1">
+                        <p class="reqSpec"  *ngIf="paymentInit.meeting">{{paymentInit.meeting.topic.topic_title}}</p>
+                      </div>
+                      <div  *ngIf="paymentInit.payment_type==2">
+                          <p class="reqSpec">Category Type - {{paymentInit.category_id.category_name}}</p>
+                          <p class="subCaty">Sub Category Type - {{paymentInit.sub_category_id.sub_category_name}}</p>
+                      </div>     
+                      <div class="payDate">
+                          <span>{{paymentInit.createdAt | date:'MMMM dd'}}  {{paymentInit.createdAt | date:'yyyy'}} 
+                           {{paymentInit.createdAt | date:'h:mm'}} <small>{{paymentInit.createdAt | date:'a'}}-{{dateZone}}</small> </span> 
+                       </div>
+               </div>
+                <div class="col-md-3 new-pad text-center">
+                      <p class="meetId">ID:  {{paymentInit.id}}</p>
+                      <div class="">
+                        <button *ngIf="paymentInit.payment_status==1" md-button class="reqBut ">Pending</button>
+                        <button *ngIf="paymentInit.payment_status==2" md-button class="reqBut ">Rejected</button>
+                        <button *ngIf="paymentInit.payment_status==3" md-button class="reqBut ">Approved</button>
+                        <button *ngIf="paymentInit.payment_status==4" md-button class="reqBut ">Reject</button>
+                        <button *ngIf="paymentInit.payment_status==5" md-button class="reqBut ">Dispute</button>
+                      </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-4 new-pad">
+
+                       <div class="col-md-12 padd0 newBorder">
+                          <div class="paymentImgg">
+                            <p>HCI Details</p>
+                              <p><img src="{{APIURL}}{{paymentInit.hci.photo_path}}{{paymentInit.hci.photo}}" class="detimg1"></p>                              
+                          </div>                          
+                          <div class="paymentInfom">
+                              <div class="partProfile">
+                                 <table class="tableRows">
+                                   <tr>
+                                     <th>Name: </th>
+                                     <td><p>{{paymentInit.hci.firstName}} {{paymentInit.hci.lastName}}</p></td>
+                                   </tr>
+                                   <tr>
+                                     <th>Email:</th>
+                                     <td><p>{{paymentInit.hci.email}}</p></td>
+                                   </tr>
+                                   <tr>
+                                     <th>Tele:</th>
+                                     <td><p>{{paymentInit.hci.telephone}}</p></td>
+                                   </tr>
+                                   <!-- <tr>
+                                     <th>City:</th>
+                                     <td>{{paymentInit.hci.city}}</td>
+                                   </tr> -->
+                                 </table>
+                              </div>
+                          </div>
+                        </div>
+            </div>
+            <div class="col-md-2 new-pad">
+              <div class="payClass">
+                              <div class="partProfile">
+                                 <table class="tableRows statusDetail"  width="100%">
+                                    <tr>
+                                        <th><!-- Approved: --></th>
+                                        <td class="amt"><!-- $ 56.60 --></td>
+                                      </tr> 
+                                      <tr>
+                                          <th><!-- Pending: --></th>
+                                          <td class="amt"><!-- $ 567.76 --></td>
+                                        </tr> 
+                                   <tr>
+                                     <th>Total:</th>
+                                     <td class="amt">$ {{paymentInit.total_amount}}</td>
+                                   </tr>      
+                                   <tr *ngIf="paymentInit.payment_status==1">
+                                     <td><button class="btnpay"  (click)="payMode(paymentInit.id,1)">Accept</button></td>
+                                    <td><button class="btnpayRej"     (click)="payMode(paymentInit.id,2)">Reject</button></td>
+                                    </tr>                             
+                                 </table>
+                                 <!-- <p class="detailsMap"><a> Details</a></p> -->
+                              </div>
+                          </div>
+            </div>
+            
+        </div>
+        <div class="roles-view col-md-12">
+          <md-tab-group>
+              <md-tab label="Details" >
+                <div class="col-lg-12">                 
+                  <table width="100%" class="contTabl">
+                      <tr><td width=" 25%"><label>Description</label></td>
+                        <td>
+                          <div class="md-form input-effect">   
+                            <input class="effect-17" type="text" autocomplete="off" required id="orangeForm-name" [value]="paymentInit.description"> 
+                            <span class="focus-border"></span>
+                          </div>                
+                         </td>
+                      </tr>
+                      <tr>
+                          <td width=" 25%"><label> Spend Attachment</label>
+                            <td>
+                                <ul class="attachList col-md-12">
+                                    
+                                      <li *ngFor="let dataProds of paymentInit.spend_attachment">
+                                           
+                                          <a download href="{{APIURL}}{{dataProds.attachment_path}}{{dataProds.attachment_name}}"><button class="btn btn-success">Download</button></a>
+                                                      <!-- <small class="dcNam">{{dataProds.name}}</small> --><br>
+                                      </li>
+                                  </ul>
+                            </td>
+                      </tr>
+                  </table>
+                </div>
+                 
+              </md-tab>
+              <md-tab label="Notes" mdTooltip="Disabled">
+                
+               <!-- <div class="col-md-12 vdoSection padd0" *ngIf="paymentInit.meeting">
+                  <div class="col-md-6 padd0">
+                    <div class="col-md-12 padd0">
+                      <div class="col-md-3 "> 
+                        <div class="playImg"><img src="assets/images/playbutton.png"></div>
+                      </div>
+                      <div class="col-md-7"> 
+                        <a *ngIf="paymentInit.meeting.meetingVideo[0].video_url" target="_blank" href="{{paymentInit.meeting.meetingVideo[0].video_url}}">
+                          <p mdTooltip="Click here to view video in New Tab"   class="reqSpec">{{paymentInit.meeting.topic.topic_title}}</p>
+                        </a> 
+                        <p class="vdoTime"><span>{{paymentInit.createdAt | date:'h:mm'}}{{paymentInit.createdAt | date:'a'}} - {{dateZone}}</span><span class="pull-right">{{paymentInit.createdAt | date:'yyyy-M-dd'}}</span></p>
+                      </div>
+                    </div> -->
+                    <!-- <div class="col-md-12 padd0 bor2">
+                        <div class="col-md-3"> 
+                          <div class="playImg"><img src="assets/images/playbutton.png"></div>
+                        </div>
+                        <div class="col-md-7"> 
+                          <p  class="reqSpec">Benefits of Freedom Program and Guidelines</p>
+                          <p class="vdoTime"><span>01:00 PM -EST</span><span class="pull-right">2017-07-20</span></p>
+                        </div>
+                      </div> -->
+                      <!-- <div class="col-md-12 padd0 bor2">
+                          <div class="col-md-3 "> 
+                            <div class="playImg"><img src="assets/images/playbutton.png"></div>
+                          </div>
+                          <div class="col-md-7"> 
+                            <p  class="reqSpec">Benefits of Freedom Program and Guidelines</p>
+                            <p class="vdoTime"><span>01:00 PM -EST</span><span class="pull-right">2017-07-20</span></p>
+                          </div>
+                  </div>
+                  <div class="col-md-6 ">
+
+                  </div>
+                    <div class="col-lg-12">
+                    <video controls style="width:100%">
+                      <source src="{{paymentInit.meeting.meetingVideo[0].video_url}}">              
+                      Your browser does not support HTML5 video.
+                    </video>
+                  </div>
+               </div> -->
+              </md-tab>
+              <div class="vdoControlbut">
+                  <span>Approve</span>
+                  <span class="pull-right">Reject</span>
+                </div>
+          </md-tab-group>
+          
+
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

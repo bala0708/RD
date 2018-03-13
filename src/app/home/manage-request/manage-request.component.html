@@ -1,0 +1,442 @@
+<div class="col-lg-12 orange-menu">
+    <div class="leftContent">
+        <div class="roles">
+          <p class="pull-left">Requests</p>
+          <p class="pull-right"><img src="assets/images/reqmail.png" class="reqMail"></p>
+        </div>
+        <div class="dataListnew col-md-12">
+          <div class="col-md-12  searchPart">
+          <div class="col-md-10 searchField">
+            <div class="input-group sInputDiv">
+                <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"   id="searchroleName" placeholder="Search Request..."/>
+                <div class="input-group-addon sIcon">
+                  <span class="fa fa-search form-control-feedback"></span>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-2 padd0 sarrw">
+              <p class="pull-left">
+                  <a mdTooltip="Disabled"><img src="assets/images/reqarr.png" class="">
+                <!--<a (click)="sort = !sort"><img src="assets/images/reqarr.png" class="">-->
+            </a>
+              </p>
+              <p class="pull-right">
+                <a [matMenuTriggerFor]="menu"><img src="assets/images/reqarr2.png" class="">
+              <mat-menu #menu="matMenu">
+                <button (click)="filter(1)" mat-menu-item>Immetiate</button>
+                <button (click)="filter(2)" mat-menu-item>Future</button>
+                <button (click)="filter(3)" mat-menu-item>Webinar</button>
+                <button (click)="dateSort = !dateSort" mat-menu-item>Date</button>
+                <button (click)="filter(0)" mat-menu-item>Reset</button>
+              </mat-menu>
+            </a>
+              </p>
+          </div>
+        </div>
+        <!--loop start-->
+        <div style="clear: both"></div>
+                <div class="customPages" *ngIf="(listRequestData | SearchPipe: queryString).length === 0">
+                        No Records Found
+                </div> 
+                <div class="col-md-12 scrollingPart">
+        <div *ngFor="let items of listRequestData | SearchPipe : queryString | orderby:sort | paginate: { itemsPerPage: 10, currentPage: p }" class="reqDetails col-md-12 padd0" >  
+          <div class="col-md-12 padd0 reqBg" [ngClass]="{'blue-bg': items.typeOfMeeting==1, 'green-bg': items.typeOfMeeting==2, 'Darkgreen-bg': items.typeOfMeeting==3, 'activeRow':items.id==activeRow}">
+         <div class="col-md-12 padd0 borTopBot">
+            <div class="col-md-3 new-pad " (click)="getOneRecord(items.id)">
+            <img src="{{APIURL}}{{items.user.photo_path}}{{items.user.photo}}" class="reqMainimg">
+            <p class="docName">{{items.user.firstName}}</p>
+          </div>
+          <div class="col-md-6 new-pad cuscolnew" (click)="getOneRecord(items.id)"> 
+              <p class="reqSpec" *ngIf="items.topic">{{items.topic.topic_title}}</p>
+              <div class="specDoc col-md-10 padd0"> 
+                  <div class="inlineDiv" *ngFor="let dataReq of items.meetingRequest;let i=index">
+                      <div *ngIf="i<4">
+                      <div *ngIf="dataReq.toUser">
+                       <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="specDocImg"></p>
+                       <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                       <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                       <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                      </div>
+                      </div>
+                    </div>
+                  <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[0]">
+                    <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                        <img *ngIf="items.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                        <img *ngIf="items.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                        <img *ngIf="items.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                  </div>
+                  <div class="inlineDiv" *ngIf="items.meetingRequest[1]">
+                    <p><img src="{{APIURL}}{{items.meetingRequest[1].toUser.photo_path}}{{items.meetingRequest[1].toUser.photo}}" class="specDocImg"></p>
+                        <img *ngIf="items.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                        <img *ngIf="items.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                        <img *ngIf="items.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                  </div>
+                  <div class="inlineDiv" *ngIf="items.meetingRequest[2]">
+                      <p><img src="{{APIURL}}{{items.meetingRequest[2].toUser.photo_path}}{{items.meetingRequest[2].toUser.photo}}" class="specDocImg"></p>
+                        <img *ngIf="items.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                        <img *ngIf="items.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                        <img *ngIf="items.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                    </div>
+                   <div class="inlineDiv" *ngIf="items.meetingRequest[3]">
+                        <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[3].toUser.photo}}" class="specDocImg"></p>
+                        <img *ngIf="items.meetingRequest[3].status=='0'"  class="" src="assets/images/quest.png">
+                        <img *ngIf="items.meetingRequest[3].status=='1'" class="" src="assets/images/cusChecked.png">
+                        <img *ngIf="items.meetingRequest[3].status=='2'" class="" src="assets/images/cusCheck.png">
+                   </div> -->
+              </div>
+              <div class=" col-md-2">
+                <p class="docCount"> +{{items.meetingRequest.length}}</p>
+              </div>
+          </div>
+          <div class="col-md-3 new-pad cuscolnew1">
+                <p class="meetId">Meeting ID:{{items.id}} </p>
+                <p class="specTime">
+                   <span class="spechour">{{items.start_time | date:'hh:mm'}}</span>
+                   <span class="spectim">{{items.start_time | date:'a'}} {{dateZone}}</span>
+                </p>                
+                <p class="specDate" *ngIf="dateForm==1">{{items.start_time | date:'MMMM dd yyyy'}}</p>
+                <p class="specDate" *ngIf="dateForm==2">{{items.start_time | date:'dd MMMM yyyy'}}</p>
+                <!-- <button md-button class="reqBut" (click)="cancelRequest(items.id)">Cancel</button>  -->
+                <button md-button *ngIf="items.status==0" class="reqBut">Suspended</button> 
+                <button md-button *ngIf="items.status==1" class="reqBut" (click)="suspendRequest(items.id)">Suspend</button> 
+                <button md-button *ngIf="items.status==2" class="reqBut">Cancelled</button> 
+                <button md-button *ngIf="items.status==3" class="reqBut">Completed</button> 
+          </div>
+        </div>
+          </div>
+        <!--loop end-->
+      </div>
+      </div>
+      <div class="col-lg-12 customPage"  *ngIf="(listRequestData).length != 0">
+        <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+    </div>
+    <!--left content end -->
+    <!---right content start-->
+    <div class="rightContent">
+        <div class="roles" *ngIf="(requestInit).length != 0">
+            <p class="roleSmall pull-left"> <b class="baseColor">Meeting ID : {{requestInit.id}} - {{requestInit.topic.topic_title}}</b></p>
+
+            <div class="pull-right controlBut">
+              <!--<p class="cancelIcon"><button (click)="cancelRequest(requestInit.id)" md-button class="remBut">Cancel</button></p>
+              <p class="pauseIcon"><a href="javascript:void(0);" (click)="suspendRequest(requestInit.id)"><img src="assets/images/pause.png"/> </a></p>  
+              <p class="delIcon"> <a href="javascript:void(0);"><img src="assets/images/delete.png"/> </a> </p> -->
+            </div>
+           
+        </div>
+        <div class="roles-view col-md-12">
+          <md-tab-group>
+              <md-tab label="Details">
+                <div class="customPages"  *ngIf="(requestInit).length === 0">
+                        No Records Found
+                </div>
+                  <div class="col-md-12 detTable" *ngIf="(requestInit).length != 0">
+                  <table width="70%" class="col-md-8 ">                
+                      <tr>
+                        <td class="newText">Topic:</td>
+                        <td><md-form-field class="example-full-width">
+                            <input mdInput [value]="requestInit.topic.topic_title">
+                          </md-form-field></td>
+                      </tr>
+                      <tr>
+                          <td class="newText">ID:</td>
+                          <td>
+                              <md-form-field class="example-full-width">
+                                  <input mdInput [value]="requestInit.id">
+                                </md-form-field>
+                          </td>
+                        </tr>                
+                      <tr>
+                          <td class="newText">Description:</td>
+                          <td>
+                            <div class="descp">
+                              <p>{{requestInit.queryRelated}}</p>
+                            </div>
+                          </td>
+                        </tr>
+                                                                               
+                    </table>
+                    <div class="col-md-4 displayTime">
+                <p class="specTime">
+                   <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                   <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                </p>
+                <p class="specDate" *ngIf="dateForm==1">{{requestInit.start_time | date:'MMMM dd yyyy'}}</p>
+                <p class="specDate" *ngIf="dateForm==2">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                     <hr>
+                    </div>
+                  </div>
+                    <div class="col-md-12 " *ngIf="(requestInit).length != 0">
+                        <div class="parTitle"><h4>Participants</h4></div>
+                        <div class="col-md-4 detPart"  *ngFor="let dataReq of requestInit.meetingRequest;let i=index">
+                            <div *ngIf="i<3">
+                            <div *ngIf="dataReq.toUser">
+                             <div class="detpartContent">
+                                <div class="partDetails">
+                                   <div class="partProfile">
+                                      <h4 class="partName">{{dataReq.toUser.firstName}}</h4>
+                                      <div class="partAddress">
+                                         <p>{{dataReq.toUser.companyName}} </p>
+                                         <p>{{dataReq.toUser.email}}  </p>
+                                         <p>{{dataReq.toUser.telephone}} </p>
+                                         <button type="button" class=" details" (click)=viewDetailsUsers(dataReq.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="partImage">
+                                   <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="detimg1"></p>
+                                  
+                                </div>
+                                <div class="notifyImg">
+                                   <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                                   <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                                   <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                                </div>
+                             </div>
+                             </div>
+                             </div>
+                          </div>
+                        <!-- <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[0]">
+                            <div class="detpartContent">
+                            <div class="partDetails">
+                                <div class="partProfile">
+                                  <h4 class="partName">{{requestInit.meetingRequest[0].toUser.firstName}}</h4>
+                                  <div class="partAddress">
+                                   <p>{{requestInit.meetingRequest[0].toUser.companyName}} </p>
+                                      <p>{{requestInit.meetingRequest[0].toUser.email}}  </p>
+                                      <p>{{requestInit.meetingRequest[0].toUser.telephone}} </p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="partImage">
+                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[0].toUser.photo_path}}{{requestInit.meetingRequest[0].toUser.photo}}" class="detimg1"></p>  
+                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[0].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                            </div>
+                            <div class="notifyImg">
+                                <img *ngIf="requestInit.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                                <img *ngIf="requestInit.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                                <img *ngIf="requestInit.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                            </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[1]">
+                          <div class="detpartContent">
+                            <div class="partDetails">
+                                <div class="partProfile">
+                                  <h4 class="partName">{{requestInit.meetingRequest[1].toUser.firstName}}</h4>
+                                  <div class="partAddress">
+                                   <p>{{requestInit.meetingRequest[1].toUser.companyName}} </p>
+                                      <p>{{requestInit.meetingRequest[1].toUser.email}}  </p>
+                                      <p>{{requestInit.meetingRequest[1].toUser.telephone}} </p>
+                                  </div>
+                                </div>
+                            </div>
+                         
+                            <div class="partImage">
+                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[1].toUser.photo_path}}{{requestInit.meetingRequest[1].toUser.photo}}" class="detimg1"></p>                    
+                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[1].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                            </div>
+                            <div class="notifyImg">
+                              <img *ngIf="requestInit.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                              <img *ngIf="requestInit.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                              <img *ngIf="requestInit.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                            </div>
+                          </div>
+                         
+                        </div>
+                        <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[2]">
+                            <div class="detpartContent">
+                            <div class="partDetails">
+                                <div class="partProfile">
+                                  <h4 class="partName">{{requestInit.meetingRequest[2].toUser.firstName}}</h4>
+                                  <div class="partAddress">
+                                   <p>{{requestInit.meetingRequest[2].toUser.companyName}} </p>
+                                      <p>{{requestInit.meetingRequest[2].toUser.email}}  </p>
+                                      <p>{{requestInit.meetingRequest[2].toUser.telephone}} </p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="partImage">
+                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[2].toUser.photo_path}}{{requestInit.meetingRequest[2].toUser.photo}}" class="detimg1"></p>           
+                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[2].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                            </div>
+                            <div class="notifyImg">
+                              <img *ngIf="requestInit.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                              <img *ngIf="requestInit.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                              <img *ngIf="requestInit.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                            </div>
+                            </div>
+                            
+                        </div> -->
+                      </div>
+                   
+              </md-tab>
+              <md-tab label="Participants">
+                <div class="col-md-12 tabContent" *ngIf="(requestInit).length != 0">
+                  <div class="col-md-4 detPart">
+                      <p class="reqSpec">{{requestInit.topic.topic_title}}</p>
+                      <div class="partTime">
+                      <p class="specTime">
+                       <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                       <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                       </p>
+                      <p class="specDate" *ngIf="dateForm==1">{{requestInit.start_time | date:'MMMM dd yyyy'}}</p>
+                <p class="specDate" *ngIf="dateForm==2">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4 detPart" *ngFor="let users of requestInit.meetingRequest">
+                        <div *ngIf="users.toUser"> 
+                    <div class="detpartContent">
+                        <div class="partDetails">
+                           <div class="partProfile">
+                              <h4 class="partName">{{users.toUser.firstName}}</h4>
+                              <div class="partAddress">
+                                 <p>{{users.toUser.companyName}} </p>
+                                 <p>{{users.toUser.email}}  </p>
+                                 <p>{{users.toUser.telephone}} </p>
+                                 <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="partImage">
+                           <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>
+                          
+                        </div>
+                        <div class="notifyImg">
+                           <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
+                           <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
+                           <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                        </div>
+                     </div>
+                  </div>
+                  </div>
+                    <!-- <div class="col-md-4 detPart" *ngFor="let users of requestInit.meetingRequest">
+                        <div class="detpartContent">
+                          <div class="partDetails">
+                              <div class="partProfile">
+                                <h4 class="partName">{{users.toUser.firstName}}</h4>
+                                  <div class="partAddress">
+                                   <p>{{users.toUser.companyName}} </p>
+                                      <p>{{users.toUser.email}}  </p>
+                                      <p>{{users.toUser.telephone}} </p>
+                                  </div>
+                              </div>
+                          </div>
+                       
+                          <div class="partImage">
+                              <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>                      
+                              <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                          </div>
+                          <div class="notifyImg">
+                            <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
+                              <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
+                              <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                          </div>
+                        </div>
+                       
+                      </div>                       -->
+                </div>
+              </md-tab>
+              <md-tab label="Content">
+                  <div class="col-md-12 tabContent" *ngIf="(requestInit).length != 0">
+                    <div class="col-md-12 contentDetail">
+                      <div class="col-md-8 ">
+                         <p> <span class="conLabel">Topic:</span>  <span class="reqSpec">{{requestInit.topic.topic_title}}</span></p>
+                         <p> <span class="conLabel">ID: </span> <span class="conCount">{{requestInit.id}}</span></p>
+                      </div>
+                      <div class="col-md-4 displayTime">
+                          <p class="specTime">
+                             <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                             <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                          </p>
+                          <p class="specDate" *ngIf="dateForm==1">{{requestInit.start_time | date:'MMMM dd yyyy'}}</p>
+                <p class="specDate" *ngIf="dateForm==2">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                           <hr>
+                          </div>
+                    </div>
+                    <div class="col-md-12 docInfo">
+                        <div class="col-md-4 detPart" *ngFor="let content of requestInit.topic.topic_content">
+                            <div class="detpartContent">
+                                <div class="docImg">
+                                    <p><img src="assets/images/doc.png" class="detimg"></p>
+                                   
+                                </div>
+                              <div class="docDetail">
+                                 <h4 class="docDetailName">{{content.content_id.content_name}}</h4>
+                                 <div class="">
+                                   <p class="docUsed">05 <span>Used </span></p>
+                                   <p class="docPage">97 <span>Pages </span></p>
+                                   <p class="docTime">24 <span>Time</span> </p>
+                                 </div>
+                              </div>
+                              
+                              <div class="notifyImg">
+                                <img src="assets/images/cusChecked.png"
+                                  *ngIf="assigned.indexOf(content.content_id.id) >= 0"
+                                 class="">
+                                 <img src="assets/images/remove.png"
+                                  *ngIf="assigned.indexOf(content.content_id.id) < 0"
+                                 class="">
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </md-tab>
+          </md-tab-group>
+    
+
+  </div>
+</div>
+
+    <div id="userModel" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">User Detail</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row" [hidden]=isShow>
+              <h3 style="text-align:center">Loading</h3>
+            </div>
+            <div [hidden]=isHide class="col-lg-12">
+              <div class="col-lg-4">
+                <img src="{{APIURL}}{{userDetails.photo_path}}{{userDetails.photo}}" class="img-responsive">
+              </div>
+              <div class="col-lg-8">
+                <table class="table">
+                  <tr>
+                    <td>Name</td>
+                    <td>{{userDetails.firstName}} {{userDetails.lastName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{userDetails.email}}</td>
+                  </tr>
+                  <tr>
+                    <td>Telephone</td>
+                    <td>{{userDetails.telephone}}</td>
+                  </tr>
+                  <tr>
+                    <td>Experience</td>
+                    <td>{{userDetails.yrsOfExperience}}</td>
+                  </tr>
+                  <tr>
+                    <td>Biography</td>
+                    <td>{{userDetails.biography}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+    
+      </div>
+    </div>
+<ngx-loading [show]="loading"></ngx-loading>

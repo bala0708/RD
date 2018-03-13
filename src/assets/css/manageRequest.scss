@@ -1,0 +1,241 @@
+.orange-menu{
+    margin: 0 0 40px;
+
+.remBut {
+    background:$cancelBut-color;
+    color: #fff;
+    border-radius: 20px;
+    text-transform: uppercase;
+    padding: 0 10px;
+    height: 23px;
+    line-height: 23px;
+    margin: -1px 0 0;
+    width: auto;
+    min-width: auto;
+    border: none;
+}
+.reqBut {
+    border: 2px solid $cancelBut-color;
+    border-radius: 20px;
+    padding: 0 18px;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+.reqBut:hover {
+    background: $cancelBut-color;
+    color: #fff;
+}
+}
+.blue-bg{
+    border-left: 8px solid $secondary-color;
+}
+.green-bg{
+    border-left: 8px solid #00cc66;
+}
+.Darkgreen-bg{
+    border-left: 8px solid #64ac0e;
+}
+
+.reqBg{
+    background: #f8f8f8;
+    margin: 0 0 15px;    
+}
+.borTopBot{
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+}
+.sIcon{
+    padding: 16px;
+    background: $primary-color;
+    color: #fff;
+    border-radius: 0px;
+}
+
+.delIcon ,.pauseIcon{
+    img{
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+    
+   
+}
+.sInput {border-bottom: 2px solid $primary-color!important;
+    color: #000;
+    font-family: robomedium;
+}
+.docCount{
+    font-family: robomedium;    font-size: 18px;
+    line-height: 48px;
+}
+.reqDetails {
+    .specTime {
+        width: 115px;
+    }
+}
+.spectim{
+     float: right;
+    width: 30px;
+    font-family: robomedium;
+    font-size: 14.5px;
+}
+.spechour{
+    font-size: 32px;    color: $secondary-color;    line-height: 33px;
+}
+.specDate{
+    font-family: robomedium;font-size: 14.5px;
+}
+
+.contentDetail p{
+    font-family: robomedium;
+}
+.displayTime{
+    padding:0px 0px 0;
+    /* border-bottom: 1px solid #f97c2a; */
+    margin: 0px 0px 0 0px;
+    text-align: right;
+}
+.displayTime hr{
+    border-top: 1px solid $primary-color;
+    width: 120px;
+    margin: 0 auto;
+    float: right;
+}
+.docName {
+    font-family: robomedium;    text-align: center;
+    margin: 10px 0 0;
+}
+.tabContent .reqSpec{
+    font-family: roboMedium;
+    font-size: 17px;
+    border-bottom: 2px solid $primary-color;
+    color: $primary-color;
+    border-bottom: 2px solid $primary-color;
+    border-top: 2px solid ;
+    padding: 8px 0;
+}
+.mat-form-field{width: 100%;    outline: none;}
+.partTime{
+    padding: 0 50px;
+    width: 255px;
+    margin: 0px auto;
+}
+.partTime {
+    .spechour{
+        font-size: 38px;    font-family: robomedium;
+        line-height: 48px;
+    }
+    .spectim{
+        font-size: 15px;    margin: 5px 0 0;
+    }
+    .specTime {
+        width: 135px;   
+        margin: 0px auto;
+    }
+    .specDate{
+        font-size: 17px;
+        color: $primary-color;
+    }
+}
+
+.docImg {
+    width: 33%;
+    float: left;    text-align: center;
+}
+.docImg img{
+    padding: 4px;
+    margin: 12px 0 0;
+}
+.docDetail {
+    width: 67%;
+    float: right;
+    font-family: robomedium;
+}
+.docDetailName{
+    color: #335599;
+    font-family: robomedium;
+    font-size: 17px;
+    text-align: center;
+}
+.docUsed,.docPage,.docTime{
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    font-size: 26px;
+    line-height: 30px;    margin: 0;
+}
+.docUsed{
+    color: $primary-color;
+}
+.docPage{
+    color: #9f4bfb;
+}
+.docTime{
+    color: #0e81e3;
+}
+.docTime span,.docPage span,.docUsed span{
+    font-size: 16px;
+}
+.docInfo{
+    @include Onlybordertop;
+   padding:26px 0;
+    margin: 10px 0 0;
+    .detpartContent{
+        min-height: auto;
+    }
+}
+.conLabel{
+    text-align: right;
+    width: 50px;
+    display: inline-block;
+    margin: 0 20px 10px 0px;
+}
+.inlineDiv input[type=checkbox] {
+    display:none;
+}
+
+.inlineDiv input[type=checkbox] + label {
+    display:inline-block;
+    padding: 0 0 0 0px;
+    background: url(../images/cusCheck.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 31px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 95%;
+    margin: 0px 6px;
+}
+
+.inlineDiv input[type=checkbox]:checked + label {
+    height: 30px;
+    width: 31px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 95%;
+    margin: 0px 6px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+    background: url(../images/cusChecked.png);
+}
+
+@media(min-width:1900px) and (max-width:9000px){
+    .cuscolnew1{
+     width: 150px; 
+     float: right; 
+    }
+
+    .custcolnew4{
+        width: 120px; 
+        float: right; 
+    }
+   }
+@media(min-width:2000px) and (max-width:4000px){
+    .cuscolnew{
+        width:56%;
+    }
+    .custcolnew3{
+        width:56%;
+     }
+
+   }

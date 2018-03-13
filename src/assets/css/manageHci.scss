@@ -1,0 +1,1352 @@
+.manageHci{
+    padding: 10px 25px;
+    margin: 0 0 5%;
+    .remBut {
+        background: $cancelBut-color;
+        color: #fff;
+        border-radius: 20px;
+        text-transform: uppercase;
+        padding: 0 10px;
+        height: 23px;
+        line-height: 23px;
+        margin: -1px 0 0;
+        width: auto;
+        min-width: auto;
+        border: none;
+    }
+    .hciSearch{
+        padding: 20px 0px 20px 0px;
+    }
+    .hciTable{
+        background: #f8f8f8;
+        font-family: robomedium;
+        th{
+            font-weight: normal;
+            font-size: 16px;
+            @include Onlyborderbottom;
+            background: #eeebeb;font-family: robobold;
+        }
+        td{
+            @include Onlyborderbottom;
+        }
+    }
+   
+}
+.modal-dialog .x-mark .close {
+    margin: 0;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    color: #fff;
+    opacity: 1;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    padding: 0px 7px;
+    font-weight: normal;
+    z-index: 10000;
+    border: none;
+}
+.hciPopup{
+    .mat-radio-label-content{
+        margin: 3px 20px 0 0px;
+    }
+}
+.myModalNorm{
+    z-index: 10040;
+    .modal-dialog {
+       margin: 7% auto;
+    }
+   .modal-header{
+        background:none!important;
+        border: none!important
+    }
+    .newText{font-size: 17px;    float: right;}
+    .close{
+        font-size: 30px;
+    }
+    .close{
+        margin: 0;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        color: $cancelBut-color;
+        opacity: 1;
+        @include border-radius(50px);
+        border: 1px solid;
+        padding: 0px 7px;
+        font-weight: normal;    z-index: 10000;
+        &:hover{
+            color: $primary-color;
+        }
+    }
+    .modal-content{
+        border-radius: 20px;
+    }
+    .SavebutDiv{
+        text-align: center;
+        padding: 20px 0 10px;
+    }
+    .popupSavebut{
+        background: $primary-color;
+        color:#fff ;
+        @include border-radius(13px);
+        font-size: 18px;
+        font-weight: normal;
+        width: 110px;
+        &:hover{
+            background: $primary-darker;
+        }
+    }
+    .popupAddicon{
+        position: absolute;
+        top: -28px;
+        background: $primary-color;
+        width: 61px;
+        height: 61px;
+        border: 4px solid #fff;
+        @include border-radius(100%);
+        margin: 0px auto;
+        text-align: center;
+        left: 45%;
+        font-size: 25px;
+        color: #fff;
+        padding: 10px;
+    }
+
+.hciFile{
+    .file {
+        position: relative;
+        height: 36px;
+      
+      }
+      
+      .file > input[type="file"] {
+        position: absoulte;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+       
+      }
+      
+      .file > label {
+       position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background:url("../images/upload.png");
+        color: transparent;
+        @include border-radius(0px);
+        text-align: center;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: right;
+        border-bottom: 1px solid  $primary-color;
+      }
+}
+}
+.manageHciContent{
+    padding: 10px 25px;    margin-bottom: 3%;
+}
+.hciUsertable {
+    width: 100%;
+    label{
+        width: 30%;
+        font-size: 15.5px;
+        vertical-align: middle;
+        font-weight: normal;
+        font-family: robomedium;    margin: -15px 0 0;
+    }
+    .mat-form-field{
+        width:65%;
+    }
+    .mat-input-wrapper {
+        padding-bottom: 6px;
+    }
+    input.mat-input-element{
+        border: 1px solid #ccc;
+        padding: 6px 6px;    font-family: robomedium;
+    }
+    .mat-form-field-underline {
+        background-color: transparent;
+    }
+    .mat-form-field-underline.mat-disabled{
+        background-image: none;
+    }
+    .calIcon{
+        position: absolute;
+        right: -6px;
+        top: 15px;
+        img{
+            max-width: 24px;
+            margin: 5px -4px;
+            z-index: 10;
+            position: relative;
+        }
+    }
+    .syncIcon {
+        display: inline-block;
+        font-size: 27px;
+        position: absolute;
+        top: 120px;
+        color: #696dfb;
+    }
+}
+.hciDocImg{
+    padding: 10px 22px;
+    
+    img{
+        height: 100%;    width: 100%;    border: 1px solid #ccc;    object-fit: contain;
+    }
+  .profDocImg{
+    height: 100px;    width: 165px;
+    float: right;
+    position: relative;
+  }
+    .hciImgfile {
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        right: -8px;
+        bottom: -11px;
+        z-index: 1000;
+     }
+        
+    .hciImgfile > input[type="file"] {
+    position: absoulte;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    }
+    
+    .hciImgfile > label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background:url("../images/cam.png");
+    color: transparent;
+    @include border-radius(0px);
+    text-align: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: right;
+    border-bottom: none;
+    }    
+}
+.hciContent{
+    .leftCon{
+        
+          width: 16.7%;    margin-right: 6px;
+    }
+    .rightCon{
+        height: 400px;overflow-y: scroll;
+        overflow-x: hidden;
+        width: 82.74444%;    padding: 10px;
+        @media(min-width:1700px) and (max-width:1999px){
+            width: 82.965%; 
+            height: 595px;
+        }
+        @media(min-width:1400px) and (max-width:1699px){
+            height: 495px;
+        }
+        @media(min-width:2000px) and (max-width:3000px){
+            height: 1195px;
+        }
+        @media(min-width:3001px) and (max-width:9000px){
+            height: 1720px;
+            width: 83.142%;
+        }
+    }
+    .rightCon::-webkit-scrollbar {
+        width: 5px;
+    }
+     
+    .rightCon::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba($primary-darker,0.3);
+    }
+     
+    .rightCon::-webkit-scrollbar-thumb {
+      background-color: $primary-darker;
+     
+    }
+    .hciTab{
+        font-family: robomedium;
+        font-size: 16px;
+        padding: 8px 0 0;
+        min-height: 398px;
+        @media(min-width:2000px) and (max-width:3000px){
+            min-height: 1195px;
+            width: 82.96444%;
+        }
+        @media(min-width:1400px) and (max-width:1699px){
+            height: 493px;
+        }
+        @media(min-width:1700px) and (max-width:1999px){
+            height: 593px;
+        }
+        @media(min-width:3001px) and (max-width:9000px){
+            height: 1720px;
+            width: 82.96444%;
+        }
+        .active{
+            a{
+                border:none;
+                background: $primary-color!important;
+                color:#fff!important;
+                box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.37)!important;
+                @include Onlyborderbottom;
+            }
+        }
+        li{
+            width: 100%;
+            a{
+                padding: 5px 10px;
+                margin: 0;
+                color:#000;
+                border-radius: 0;
+                border: none!important;
+               @include Onlyborderbottom;
+               &:hover{
+                background: $primary-color!important;
+                color:#fff;
+                box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.37)!important;
+                border: none!important;
+                @include Onlyborderbottom;
+               }
+            }
+        }
+    }
+}
+.brandTit{
+    h4{
+        margin: 0 6px 0 0px;
+        border-bottom: 2px solid #ffd2d9;
+        padding: 6px 0;
+        font-family: robomedium;
+       
+    }
+    span{
+        width: 100px;
+        height: 2px;
+        display: block;
+        background: $primary-color;
+        margin: -2px 0 10px;
+    }
+}
+.myOwlcarosel{
+    .owl-dots {
+        display: none;
+    }
+    .item{
+        text-align: center;
+    }
+        input[type=checkbox] {
+            display:none;
+        }
+        input[type=checkbox] + label {
+            display:inline-block;
+            padding: 0 0px 0 22px;
+            background: url(../images/addbut1.png);
+            background-repeat: no-repeat;
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            bottom: 0px;
+            font-weight: normal;
+            font-family: robomedium;
+            cursor: pointer;
+            
+        }
+        
+            input[type=checkbox]:checked + label {
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            bottom: 0px;
+            display:inline-block;
+            padding: 0 0px 0 22px;
+            background: url(../images/minusbut1.png);
+            background-repeat: no-repeat;
+            font-weight: normal;
+            font-family: robomedium;
+            cursor: pointer;  
+        }
+
+    .owl-prev{
+        background: url(../images/back1.png)!important;
+        background-repeat: no-repeat!important;
+        /*float: left;*/
+        color: transparent!important;
+        height: 12px;
+        width: 12px;
+        padding: 12px!important;
+        text-align: center;
+        border-radius: 20px!important;
+        position: absolute;
+        left: -6%;
+        top: 30%;
+        &:hover{
+            background: url(../images/back1hover.png)!important;
+            background-repeat: no-repeat;
+        }
+    }
+    .owl-next{
+        color: transparent!important;
+        height: 12px;
+        width: 12px;
+        padding: 12px!important;
+        text-align: center;
+        background-position: 42%;
+        border-radius: 20px!important;
+        background: url(../images/back2.png)!important;
+        background-repeat: no-repeat;
+        /*float: right;*/
+        position: absolute;
+        right: -6%;
+        top: 30%;
+        &:hover{
+            background: url(../images/back2hover.png)!important;
+            background-repeat: no-repeat;
+        }
+
+    }
+    .owl-nav{
+        width: 65px;
+        margin-left: 47%;
+    }
+}
+.savDiv{
+    position: absolute;
+    top: 336px;
+    right: 15px;
+    text-align: right;  
+    padding: 10px 0 0;
+    margin: 12px 0 0;
+}
+.saveBut{
+    background: #068b38;
+    color: #fff!important;
+    font-size: 16px;
+    border-radius: 13px!important;
+    height: 32px!important;;
+    padding: 2px 20px!important;
+    min-width: auto!important;;
+    line-height: normal!important;
+    &:hover{
+        background: #036527;
+    }
+    .fa{
+        margin: -4px 2px 0px;
+    }
+}
+.tab-content>.active > div:nth-child(5){
+    display:block!important
+}
+.hciContract{
+    img{
+        border: none!important;
+    }
+    .ContractDocImg{
+        width: 80px!important;
+        margin: 0px auto 10px;
+        border: none!important;
+    }
+    .contractName{
+        font-family: robomedium;
+        border-top:2px solid rgba(250, 51, 82, 0.52);
+        font-size: 16px;
+        margin: 10px 0;
+        padding: 8px 0 0;
+        word-wrap: break-word;
+    }
+    .contactControls{
+        width: 80px;
+        margin: 0px auto;
+        .downImg{
+            background: url("../images/down.png") no-repeat;
+            width:23px;
+            height: 24px;
+            display: block;
+            &:hover{
+                background: url("../images/downhover.png") no-repeat;
+            }
+        }
+        .delImg{
+            background: url("../images/del.png") no-repeat;
+            width:20px;
+            height: 24px;
+            display: block;
+            &:hover{
+                background: url("../images/delhover.png") no-repeat;
+            }
+        }
+    }
+}
+.addContIcon{
+    float: right;
+    width: auto;
+    color: #fff;
+    background:#068b38;
+    padding: 5px 6px 3px;
+   @include border-radius(20px);
+    font-size: 15px;
+    margin: -5px 0 0;
+    font-weight: normal;
+    &:hover{
+        background: $primary-color;
+        color: #fff;
+    }
+}
+.myModalSmall{
+    z-index: 10040;
+    .modal-dialog{
+        width: 300px;
+        margin: 15% auto;
+    }
+   .modal-header{
+        background:none!important;
+        border: none!important
+    }
+    .newText{font-size: 15px;    float: right;}
+
+    .close{
+        font-size: 30px;
+        margin: 0;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        color: $cancelBut-color;
+        opacity: 1;
+        @include border-radius(50px);
+        border: 1px solid;
+        padding: 0px 7px;
+        font-weight: normal;    z-index: 10000;
+        &:hover{
+            color: $primary-color;
+        }
+    }
+    .modal-content{
+        border-radius: 20px;
+    }
+    .SavebutDiv{
+        text-align: center;
+        padding: 20px 0 10px;
+    }
+    .popupSavebut{
+        background: $primary-color;
+        color:#fff ;
+        @include border-radius(13px);
+        font-size: 18px;
+        font-weight: normal;
+        width: 110px;
+        &:hover{
+            background: $primary-darker;
+        }
+    }
+    .popupAddicon{
+        position: absolute;
+        top: -28px;
+        background: $primary-color;
+        width: 61px;
+        height: 61px;
+        border: 4px solid #fff;
+        @include border-radius(100%);
+        margin: 0px auto;
+        text-align: center;
+        left: 41%;
+        font-size: 25px;
+        color: #fff;
+        padding: 10px;
+    }
+    .hciPopup{
+        .newText{
+            float: none;    display: inline-flex;
+        }
+        .mat-form-field{
+            margin: -8px 0 0;
+        }
+        .mat-form-field-infix{
+            border: 1px solid #ccc;
+            padding: .4375em 6px;
+            font-family: robomedium;
+        }
+        .mat-form-field-underline{
+            height: 0px;
+            .mat-form-field-ripple{
+                top: 5px;
+            }
+        }
+    }
+    
+    .hciFile{
+        margin: 6px 0px 0px 20px;
+        .file {
+            position: relative;
+            height: 36px;
+          
+          }
+          
+          .file > input[type="file"] {
+            position: absoulte;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width:90px;
+          }
+          
+          .file > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-position: right;
+            background: $primary-color;;
+            font-weight: normal;
+            height: 28px;
+            padding: 0 18px;
+            margin: 0;
+            line-height: 28px;
+            @include border-radius(20px);
+            font-size: 13px;
+          }
+    }
+}
+.subBrand{
+    border-bottom: 2px solid #ffd2d9;
+    padding: 0 0 8px;
+    margin: 10px 0px 15px;
+}
+.subBrand1{
+
+    padding: 0 0 8px;
+    .myOwlcarosel .item{
+        border-bottom: 2px solid #ffd2d9;
+    }
+}
+
+.ManageRequests{
+   
+    .orange-menu{
+        margin: 0px;
+        .new-pad{
+            padding: 8px 5px;
+            vertical-align: middle;
+            .specDate {
+                font-family: roboBold;
+                font-size: 12.5px;
+            }
+            .meetId{
+                font-size: 16px;
+                @media(min-width:1400px){
+                    font-size: 17px;
+                    width: 107px;
+                    display: inline-block;
+                }
+               }
+       }
+       .newTim {
+        font-family: roboBold;
+        font-size: 14px;
+        margin: 0 0px;
+        @media(min-width:1400px){
+            font-size: 14px;
+            width: 165px;
+            display: inline-block;
+        }
+    }
+       .docName{text-align: left;    font-family: roboBold;font-size: 15px;    margin: 0;
+            @media(min-width:1400px){
+                font-size: 18px;
+            }
+         }
+       .reqSpec{  border: none;margin: 0;font-size: 16px;
+            @media(min-width:1400px){
+                font-size: 18px;
+            }
+        }
+       .docCount{    font-size: 16px;margin: 13px 0 0;}
+       .inlineDiv{
+           img{
+            @media(max-width:1399px){
+               width: 21px;
+            }
+           }
+       
+       .specDocImg{
+        width: 35px;height: 35px;
+        @media(min-width:1800px) and (max-width:9000px){
+            width: 50px;height: 50px;
+           }
+       }
+    }
+    .detpartContent{    min-height: 145px;}
+       .reqMainimg{
+        width: 67px;height: 67px;
+        @media(min-width:1800px) and (max-width:9000px){
+            width: 120px;height: 120px;
+           }
+       }
+       .detimg1{
+        width: 100px;
+        height: 100px;
+        @media(min-width:1800px) and (max-width:9000px){
+            width: 100px;
+            height: 100px;
+           }
+       }
+       .customPage{
+        padding: 10px;
+       }
+       .partAddress{
+        font-size: 14px;    line-height: 18px;
+        p{
+            margin-bottom: 4px;
+            word-wrap: break-word;
+            min-height: 18px;
+            padding: 0 6px;
+        }
+       }
+       .partName{
+        min-height: 34px;
+       }
+       .partImage{
+           .removedv{
+            margin: 15px 0 0;
+           }
+       }
+       .sarrw{
+        width: 16%;
+        @media(min-width:1400px) and (max-width:3000px){
+            width: 11%;
+           }
+      }
+       .reqBut{
+           padding: 0 5px;
+           min-width: auto!important;
+           font-size: 12px;
+           @media(min-width:1400px){
+            padding: 0 20px;
+            font-size: 14px;
+           }
+       }
+       .reqDetails{
+        .specTime{
+            width: auto;
+           }
+           .spectim{
+                width: 22px;    font-size: 13px;font-family: roboBold;
+                              
+           }
+           .spechour{    font-size: 22px;    margin: 0 10px;
+                @media(min-width:1400px){
+                    font-size: 25px;
+                    width: 60px;
+                    display: inline-block;
+                }
+            }
+       }
+    .docTime span, .docPage span, .docUsed span {
+        font-size: 13.5px;
+    }
+    .docUsed, .docPage, .docTime{
+        font-size: 22px;
+    }
+    .reqDetails {
+        td.col-md-4.new-pad {
+            width: 340px;
+        }
+        td.col-md-3.new-pad {
+            width: 223px;
+        }
+        tr{
+            cursor: pointer;
+        }
+    }
+    }
+    .tabContent .reqSpec{
+        padding: 0px 0;font-size: 20px;
+    }
+}
+.paymentTable{
+    tbody>tr>td{
+        vertical-align: middle;
+        border-bottom: 2px solid #ffd2d9;
+        border-top: none;
+    }
+   tbody>tr:hover {
+        background-color: #eae9e9;
+    }
+    p{
+        margin-bottom: 0px;
+    }
+}
+.meetId{
+    font-family: robomedium;
+    font-size: 17px;
+    img{
+        margin-right: 10px;    max-width: 50px;
+    }
+}
+.payDate{
+    span{
+        font-size: 19px;
+    }
+    .payTime{
+        font-size: 17px;
+        small{
+            font-size: 13px;  
+        }
+    }
+}
+.payPrice{
+    font-size: 25px;
+}
+.payAccept{
+    background: #daaaf4;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    a{color:#fff;}
+    span{
+        display: block;
+        .fa{
+            font-size: 20px;
+        }
+    }
+}
+.payReject{
+    background: #f58787;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    a{color:#fff;}
+    span{
+        display: block;
+        .fa{
+            font-size: 20px;
+        }
+    }
+    .baricn .fa{
+        font-size: 12px;
+        margin: 6px 0px 0 6px;
+        float: right;
+    }
+}
+.payDiv{
+    border-bottom: 2px solid #ffd2d9;
+    height: 33px;
+    margin-bottom: 20px;
+}
+.paySearch {
+    margin: -8px 0 0;
+    .mat-form-field-placeholder {
+        color: rgb(0, 0, 0);
+        margin: -4px 0;
+        font-size: 15px!important;
+    }
+    .mat-form-field-underline{
+        height: 2px;
+    }
+    .mat-form-field-underline, .mat-form-field-ripple {
+        background-color: #ffd2d9;
+    }
+   
+}
+.paySort{
+    padding-top: 0px;
+    float: right;
+    .mat-select-underline{
+        background-color: #ffd2d9;
+        height: 2px;
+    }
+    .mat-select-arrow{
+        background: url("../images/droparrow.png");
+        border: none;
+        background-repeat: no-repeat;
+        width: 27px;
+        height: 10px;
+    }
+    .mat-select-trigger{
+        height: 26px;
+    }
+    .mat-select-arrow, .mat-select-disabled .mat-select-value, .mat-select-trigger{
+        color: rgb(0, 0, 0);
+    }
+}
+.paySort:focus:not(.mat-select-disabled).mat-primary .mat-select-arrow, .paySort:focus:not(.mat-select-disabled).mat-primary .mat-select-trigger {
+    color: #000 !important;
+}
+
+.paySort:focus:not(.mat-select-disabled).mat-primary .mat-select-underline {
+    background-color: #FFD2D8;
+}
+.addpayTest{
+    color: #000;
+    text-align: center;
+    font-family: roboBold;
+    width: 55%;
+    margin: 18px auto 0;
+    border-top: 2px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
+    padding: 7px;
+    line-height: 30px;
+    font-size: 20px;
+}
+#paymentPopup{
+    .close{
+        margin: 0;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        color: $cancelBut-color;
+        opacity: 1;
+        @include border-radius(50px);
+        border: 1px solid;
+        padding: 0px 7px;
+        font-weight: normal;    z-index: 10000;
+        &:hover{
+            color: $primary-color;
+        }
+    }
+
+}
+#reasonPopup{
+    .modal-dialog{
+        width:500px;
+    }
+  textarea{
+      resize: vertical;
+  }
+    .newText{
+        float: none;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+    }
+
+}
+.samCorner{
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid $primary-color;
+   @include rotate(45deg);
+    margin: -18px -11px;
+}
+.samTime{
+    font-size: 20px;
+    small{
+        font-size: 14px;
+    }
+}
+.samImg{
+    max-width: 55px;
+}
+.mediDes {
+    font-size: 17px;
+    text-align: center;
+    font-family: robomedium;
+    padding: 10px 10px;
+}
+.mediName {
+    font-family: robomedium;
+    font-size: 19px;
+    border-top: 2px solid #fa3352;
+    padding: 10px 10px;
+    width: 90%;
+    margin: 10px auto 30px;
+}
+#addSamplePopup{
+    .modal-body{
+        padding: 40px 29px 20px;
+    }
+    .modal-content{
+        border-radius: 0px;
+    }
+}
+.elligiText{
+    font-weight: normal;
+    font-size: 18px;
+ label{
+    font-family: robomedium;
+    font-weight: normal;
+    font-size: 18px;
+ }
+}
+#requestPopup,#eventPopup{
+    @include customPopup;
+}
+.docfullNam{
+    font-size: 18px;
+    font-family: robobold;    margin: 10px;
+}
+.docDet{
+    font-size: 17px;
+    font-family: robomedium;
+}
+.detailContent{
+    text-align: center;
+    font-size: 16px;width: 80%;    margin: 6% auto 3px;
+    font-family: robomedium;
+}
+.reqMeetdet{
+    text-align: center;    margin-bottom: 6%;
+    p{
+        span{
+            margin: 18px;
+            font-family: robomedium;
+            font-size: 17px;
+        }
+    }
+}
+.pollData{
+    text-align: center; margin: 4% 0 0;
+    p{
+        img{    margin: -3px 10px 0;}
+        font-family: robomedium;
+        font-size: 16px;
+        display: inline-block;    margin: 0 10px;
+    }
+
+}
+.sysdoc{
+    position: absolute;
+    max-width: 110px;
+}
+.eventImg{
+    max-width: 75px;
+    margin: 10px;
+}
+.eventsuspend{
+    background: #71d5f1;
+    color:#fff;
+    text-align: center;
+    font-size: 16px;
+    a{color:#fff;}
+    span{
+        display: block;
+        .fa{
+            font-size: 20px;
+        }
+    }
+}
+.eventBut{
+    border: 1px solid $cancelBut-color!important;
+   @include border-radius(20px!important);
+    padding: 0px 10px 0 8px!important;
+    line-height: 20px!important;
+    float: right;
+    margin: 10px 10px 0!important;
+    text-transform: uppercase;
+    font-size: 12.5px !important;
+    min-width: auto!important;
+    height: auto!important;
+    span{
+        font-size: 12.5px!important;
+    }
+    &:hover{
+        background: $secondary-darker;
+        
+    }
+}
+.pollTitle{
+    font-size: 15px;
+    font-family: robomedium;
+}
+.editiconImg{
+    margin: -2px 0 5px;
+}
+.eventId{
+    font-size:17px;
+}
+.eventDate{
+    span{
+        font-size: 18px;
+        margin: 0 0 0 6px;      
+    }
+}
+.archVideo{
+    border-top: 2px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
+    font-family: robomedium;
+    font-size: 20px;
+    padding: 10px 0;
+    width: 80%;
+}
+.videoName{
+    font-family: robomedium;
+    font-size: 17px;
+}
+.profDet{
+    margin: 0 0 25px;
+}
+.eventpopupTim{
+    width: 32%;
+    vertical-align: top;
+    p{
+        font-size: 18px;
+        font-family: robomedium;
+    }
+}
+#webniartopicPopup{
+@include customPopup;
+    .webniarDetails {
+        vertical-align: top;
+    }
+    .webTit{
+        font-size: 20px;
+        font-family: roboBold;
+        padding: 0 25px;
+    }
+    .webImg{
+        float: left;
+        margin: 0px 15px 0 0px;
+    }
+    .webId{
+        font-size: 18px;
+        font-family: roboBold;
+        margin: 0;
+    }
+    .webTim{
+        font-size: 25px;
+        margin: 0;
+        font-family: robomedium;
+        small{
+            font-size: 18px;
+        }
+    }
+    .webDat{
+        font-family: roboBold;
+        font-size: 18px;
+    }
+    .profDet {
+        margin: 0px 0 40px;
+    }
+    .webdocNam{
+        font-size: 15px;
+        font-family: robomedium;
+    }
+    .webSpeak{
+        width: 35%;
+    }
+}
+.eventprofImg{
+    border-radius: 100%;
+    width: 40px;
+}
+#editeventPopup{
+    .modal-content{
+        border-radius: 0px;
+    }
+    .modal-dialog {
+        width: 470px;
+    }
+    .mat-form-field {
+        width: 70%;
+        margin-right: 10px;
+    }
+    .addpayTest{
+        width: 16%;
+        border-top: none;    margin: 5px auto 0;
+        @include Onlyborderbottom;
+    }
+    .calIcon {
+        img{
+            max-width: 25px;
+        }
+    }
+    .refr{
+        font-size: 20px;
+        color: #6b6ffb;
+        margin: 0 5px 0 0;
+      
+    }
+    .delet{
+        font-size: 21px;
+        color: $cancelBut-color;
+    }
+    .mat-form-field-underline {
+        background-color: #ccc;
+    }
+    .editHr{
+        margin:0;
+        @include Onlyborderbottom;
+    }
+    .close{
+        padding: 1px 6px;    font-size: 21px;
+        top: 28px;
+    }
+}
+.cdk-overlay-container{
+    z-index: 1000000;
+}
+#eventarchivePopup{
+    @include customPopup;
+    .modal-dialog {
+        width: 800px;
+    }
+    .modal-content{
+        padding: 20px 20px 20px;
+    }
+    
+    .webniarDetails{
+        img{
+            max-width: 85px;
+        }
+    }
+    p{
+        font-family: roboBold;
+        font-size: 17px;
+        small{
+            font-size: 14px;
+        }
+    }
+    td{
+        vertical-align: top;
+        border-bottom: 2px solid $primary-color;
+        padding: 12px 8px 10px;
+    }
+    .addpayTest{
+        margin: 10px auto 0;
+    }
+}
+#eventquestPopup{
+    @include customPopup;
+    .modal-dialog {
+        width: 800px;
+    }
+    .modal-content{
+        padding: 20px 20px 20px;
+    }
+    .questSec{
+        background: transparent;
+        border-top:none;
+        border-bottom: none;
+    }
+    td{
+  
+        padding: 10px;
+        border-bottom: 2px solid $primary-color;
+    }
+    .mat-checkbox-layout{
+        margin-right: 10px;
+    }
+    .mat-checkbox-inner-container{
+        height: 14px;
+        width: 14px;
+    }
+    .mat-checkbox-frame{
+        border-radius: 0px;
+        border-width: 1px;
+    }
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
+        background-color: #7b7296;
+    }
+    .mat-checkbox-checked .mat-checkbox-checkmark {
+        opacity: 0;
+    }
+    .questDetail{
+        font-size: 15px;
+    }
+    label{
+        margin-bottom: 0;
+    }
+    .quescon{
+        margin: 0 0 10px;
+    }
+    p{
+        margin: 0 0 0px;
+    }
+    .addpayTest{
+        margin: 0px auto 0;        
+    }
+}
+.notRele{
+    font-family: roboregular;
+    background: #f58786;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #fff;
+}
+.caroDiv{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:10px;    margin:0px auto 10px;
+}
+.borone .owl-item{
+  border-bottom:2px solid #ffd2d9;
+    padding-bottom: 5px;
+}
+.docsImgg {
+    width: 40px;
+    display: inline-block;
+     img {
+        width: 35px;
+    }
+}
+.syncLabl{
+    margin: 10px 0!important;
+}
+#ManageTopics .savDiv {
+    top: 283px;
+}
+.acceptButton{
+    border: 1px solid;
+    margin: 10px 0;
+    border-radius: 10px;
+    background: transparent;padding: 0 10px;
+    width: 100%;
+    &:hover{
+        background: $primary-color;
+        color: #fff;
+    }
+}
+.cusCaro   .caroDiv {
+    margin: 0px auto 10px;
+    }
+@media only screen and (device-width: 1400px) {
+    
+}
+
+.scrolldiv {
+    position: fixed;
+    top: 135px;
+    z-index: 10000;
+    border: none;
+    left: 0%;
+    padding: 0 2%;
+    background: transparent;
+}   
+.scrollTable {
+    width: 78%;
+    position: fixed;
+    top: 85px;
+}
+.butpayAccept{
+    background: rgba(8, 90, 165, 0.62);
+}
+.butpay{
+    background: transparent;
+    border: none;
+    font-weight: normal;    color: #fff;
+}

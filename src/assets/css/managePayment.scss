@@ -1,0 +1,164 @@
+.managePayment{
+    margin-bottom: 40px;
+    .dataListnew{
+        margin: 5px 0px 0;    padding: 9px 0px 15px;
+    }
+    .searchPart {
+        margin: 10px 0 20px;
+        @include Onlybordertop;
+        padding: 30px 15px 0;
+    }
+    .reqBut {
+        border: 2px solid $cancelBut-color;
+        border-radius: 20px;
+        padding: 0 10px;
+        line-height: 25px;
+        text-transform: uppercase;
+        margin: 25% auto 0;
+  &:hover {
+        background: $cancelBut-color;
+        color: #fff;
+    }
+    }
+    .reqBut1 {
+    border: 2px solid $cancelBut-color;
+    border-radius: 20px;
+    padding: 3px 8px;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0% auto 0;
+    font-size: 12px;
+    &:hover {
+        background: $cancelBut-color;
+        color: #fff;
+    }
+    }
+    .paymentImgg {
+        float: left;
+        width: 33%;
+        p{
+            font-family: roboBold;    font-size: 15px;
+        }
+        .detimg1{
+            width: 70px;
+            height: 70px;
+        }
+    }
+    .paymentInfom {
+        float: right;
+        width: 64%;
+        table{
+            td{
+                font-size: 12px;
+                font-family: roboBold;
+            }
+            th{
+                padding: 0 10px 8px 0px;
+            }
+            p{
+                word-break: break-all;
+            }
+        }
+    }
+    .newBorder{
+        border-right: 3px solid $primary-color;
+        padding-right: 8px;
+    }
+    .prfNam{
+        font-family: roboBold;
+    }
+    .statusDetail{
+        th{
+            font-size: 13px;
+            font-family: roboBold;
+            padding:3px 3px 5px 0px;
+        }
+        .btnpay{
+            background: #daaaf4;
+            color: #fff;
+            border: none;    border-radius: 20px;
+            padding: 4px 10px;
+        }
+        .btnpayRej{
+        background: #f58787;
+        color: #fff; border: none;    border-radius: 20px;
+        padding: 4px 10px;
+        }
+    }
+    .oldamt{
+        color: #7f19ee;
+        font-size: 22px;
+        font-family: robomedium;
+        margin: 5px 0 0;
+    }
+    .amt{
+        color: $primary-color;;
+        font-weight: normal;
+        font-family: roboBold;
+        font-size: 13px;
+    }
+    .detailsMap{
+        margin:6px 0;
+        text-align: center;
+        a{
+            color: #7f19ee;
+            font-family: robomedium;
+            font-size: 14px;
+        }
+
+    }
+    .blackCheck .mat-checkbox-inner-container{
+        margin-right: 0px;
+        margin-top: 0px;
+    }
+    .payDate{
+        font-family: roboMedium;
+        span{
+            font-size: 15px;
+        }
+    }
+    .reqSpec{
+        font-size: 17px;
+    }
+}
+.vdoTime{
+    font-size: 15px;
+}
+.playImg{
+    width: 80px;
+    height: 60px;
+    border: 1px solid #7f19ee;
+    border-radius: 5px;
+    text-align: center;
+    padding: 3px 0px 3px 3px;
+    img{
+        width: 55px;
+    }
+
+}
+.bor2{
+    border-right: 2px solid $primary-color;
+}
+.vdoSection{
+margin: 30px 0 ;
+}
+.vdoControlbut{
+    position: absolute;
+    top: -32px;
+    right: 0;
+    z-index: 1000;
+}
+.subCaty{
+    font-family: roboMedium;
+    font-size: 15px;
+}
+.pyicon{
+    img{
+        width: 100px;
+        max-width: 85%;
+        margin:5px auto 0;
+}
+}
+.brandingSec {
+    padding: 0px 4% 0 9%;
+}

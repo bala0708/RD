@@ -1,0 +1,404 @@
+<div class="col-lg-12 manageBrands">
+    <div class="leftContent">
+        <div class="roles col-md-12">
+          <p class="pull-left">Company</p>
+          <a href="javascript:void(0);" class=" pull-right" mdTooltip="Add Clients" (click)=enableClients()><img src="assets/images/add_brands.png" class="img-responsive imgUser"></a>
+        </div>
+        <div class="dataList col-md-12" [hidden]="is_add">
+            <div class="row">
+                <div class="col-md-12">
+                    <form enctype="multipart/form-data" id="form1" (ngSubmit)="cRole.form.valid && addClients(cRole)" #cRole="ngForm" novalidate>
+                        <!-- <file-uploader [maxSizeInKb]="110" [allowMultiple]="true" [fileType]="'application/*'" 
+(onSelection)="fileuploaderFileChange($event)"  [required]="false"></file-uploader> -->
+                    <table width="100%" class="contTabl">
+                            <tr><td width=" 25%"><label>Client Name:</label></td>
+                            <td>
+                        <div class="md-form input-effect">   
+                                <input type="text" class="effect-17"
+                                  autocomplete="off" 
+                                  required 
+                                  id="orangeForm-name"
+                                  [(ngModel)]=clients.brand_name_new
+                                  #brand_name_new=ngModel 
+                                  name="brand_name_new"
+                                  minlength="5"
+                                  maxlength="20">                       
+                                <span class="focus-border"></span>
+                                </div>
+                               <!--  <div *ngIf="!brand_name_new.valid && brand_name_new.touched">
+                                  <div *ngIf="brand_name_new.errors.required" class="errNam">*Brand name is required</div>
+                                  <div *ngIf="!brand_name_new.errors.minlength">
+                                      Client Name must be at least 5 characters long.
+                                  </div>
+                                </div> -->
+      <div *ngIf="brand_name_new.errors && (brand_name_new.dirty || brand_name_new.touched)" class="alert">
+        <small [hidden]="!brand_name_new.errors.required">
+          Client Name is required!
+        </small>
+        <small [hidden]="!brand_name_new.errors.minlength">
+          Client Name must be at least 5 characters long.
+        </small>
+        <small [hidden]="!brand_name_new.errors.maxlength">
+          Client Name cannot be more than 20 characters long.
+        </small>
+      </div>
+                               <!--  <div *ngIf="!brand_name_new.valid">{{brand_name_new.errors| json}}</div> -->
+                            </td>     
+                        </tr>
+                        <tr>
+                            <td><label>Client image:</label></td>
+                        <td>
+                          
+                        <image-upload class="sizeImage" [buttonCaption]="'Client Image'" [max]="1"
+                        (onRemove)="imageRemoved1($event)"
+                         (onFileUploadFinish)="fileChanged($event.file)">
+                                <i class="fa fa-cloud-upload"></i> 
+                        </image-upload>
+                        
+                        <small style="color: red">* Client Image is required</small>
+                    </td>
+                    </tr>
+                    </table>
+                        <div class="pull-right m20">
+                            <input type="button"  class="baseButton" (click)=disableClients() value="Cancel">
+                            <button  [disabled]="!cRole.form.valid || isEmpty1"  class="baseButton" md-colors="{background: '#303F9F}" type="submit">Save</button>
+                        
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div [hidden]="is_view" class="dataList col-md-12">  
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="myCarousel" class="carousel fdi-Carousel slide">
+                        <!-- Carousel items -->
+                        <div *ngIf="cart.length == 0">
+                                No Records Found
+                        </div>
+                           <div class="carousel customCarosel fdi-Carousel slide" id="eventCarousel" data-interval="0" *ngIf="cart.length != 0">
+                               <div class="carousel-inner" *ngIf="cart.length != 0">
+                                   <div class="item" *ngFor="let data of cart | orderby: DESC" [ngClass]="{active: data == 1}">
+                                       <div class="col-lg-4"  *ngFor="let items of dataList[data-1]">   
+                                          <div class="thumbnail">
+                                           <a href="javascript:void(0);" class="brandMainImg" style="cursor: default;"><img style="cursor: pointer;" 
+                                             src="{{API_URL}}/{{items.upload_path}}/{{items.brand_image}}" 
+                                             class="img-responsive imagesMap center-block"
+                                             (click)=brandsView(items.id)
+                                             [ngClass]="{active: items.id==activeID}"></a>
+                                           <div class="text-center brandNam">{{items.brand_name}}</div>
+                                           <div class="captionControls" [ngClass]="{Modelactive: items.id==activeID}">
+                                              <p class="newRole" [ngClass]="{activeNew: items.id==activeID,activeSus: items.active_status==0}">                                         
+                                                  <a href="javascript:void(0);" 
+                                                  (click)=viewEditClients(items.id)
+                                                  mdTooltip="Edit Client"
+                                                  data-toggle="modal" data-target="#myModal" data-backdrop="static"
+                                                  class="pull-left brandEdit"></a>
+                                                  <a href="javascript:void(0);" mdTooltip="Suspend Client" *ngIf="items.active_status==1" (click)=suspendClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                                  <a href="javascript:void(0);" mdTooltip="Active Client"  *ngIf="items.active_status==0" (click)=activeClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                                  <a href="javascript:void(0);" mdTooltip="Delete Client" (click)=deleteClients(items.id) class="pull-right brandDel"></a>
+                                                 </p>
+                                           </div>
+                                          </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <a class="left carousel-control" [hidden]="cart.length == 0" href="#eventCarousel" data-slide="prev">
+                                    <img src="assets/images/leftarrow.png" class="slideMenuLeft">
+                                </a>
+                               <a class="right carousel-control" [hidden]="cart.length == 0" href="#eventCarousel" data-slide="next">
+                                    <img src="assets/images/leftarrow.png" class="slideMenuRight">
+                                </a>
+                           </div>
+                           <!--/carousel-inner-->
+                       </div><!--/myCarousel-->
+                </div>
+            </div>
+        </div>
+        <div class="dataList col-md-12">
+        <div class="roles_IMG col-md-12 ">
+            <p class="pull-left">Products</p>
+            <a (click)=addProd() href="javascript:void(0);" mdTooltip="Add Products"><img src="assets/images/add_products.png" class="img-responsive imgUser pull-right"></a>
+            
+          </div>
+          
+        <div [hidden]=is_prodList class="dataList_img col-md-12 padd0">
+            <div *ngIf="(clientsListViewInit | filter: queryString).length === 0">
+                <ul class="role-list">
+                   <li> No data found</li>
+                </ul>
+              </div>
+            <div class="role-list" >
+              
+                  <table width="100%" class="brandTable">
+                  <tr *ngFor="let prods of clientsListViewInit"  [ngClass]="{active: prods.id==productData.id}">
+                      <td>
+                       <a (click)=loadProduct(prods.id,1)>
+                            <img class="img-responsive"  src="{{API_URL}}{{prods.product_image[0].upload_path}}/{{prods.product_image[0].product_image}}" >
+                        </a> 
+                      </td>
+                    <td width="" class="tdPadding productNam"> {{prods.product_name}}</td>
+                    <td width="">
+                        <div class="proList captionControls" [ngClass]="{proListActive: prods.id==productData.id}">   
+                            
+                        </div>
+                    </td>
+                    <td width=""><small class="pull-right positionList">Created on <br> {{prods.createdAt | date:'dd MMM yyyy'}}</small></td>
+                  </tr>
+                  </table>
+                
+                </div>
+        </div>
+        <div class="dataList_img col-md-12" [hidden]=is_prod>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form (ngSubmit)="pRole.form.valid && addProducts(pRole)" #pRole="ngForm">
+                            <table width="100%" class="contTabl">
+                                    <tr><td width=" 25%"><label>Product Name:</label></td>
+                                    <td>
+                                <div class="md-form input-effect">   
+                                        <input type="text"
+                                         class="effect-17" 
+                                         autocomplete="off" 
+                                         required 
+                                         minlength="5" 
+                                         maxlength="20" 
+                                         id="orangeForm-name" 
+                                         [(ngModel)]=productsData.product_name_new 
+                                         #product_name_new=ngModel 
+                                         name="product_name_new">                       
+                                        
+                                        <span class="focus-border"></span>
+                                        
+                                        </div>
+                                        <!-- <div *ngIf="product_name.touched && product_name.invalid" class="errNam">*Product name is required</div> -->
+
+      <div *ngIf="product_name_new.errors && (product_name_new.dirty || product_name_new.touched)" class="alert">
+              <small [hidden]="!product_name_new.errors.required">
+                Client Name is required!
+              </small>
+              <small [hidden]="!product_name_new.errors.minlength">
+                Client Name must be at least 5 characters long.
+              </small>
+              <small [hidden]="!product_name_new.errors.maxlength">
+                Client Name cannot be more than 20 characters long.
+              </small>
+            </div>                                        
+                                    </td>     
+                                </tr>
+                                <tr>
+                                    <td><label>Product image:</label></td>
+                                <td>
+                       
+                       
+                        <image-upload
+                        required
+                        class="sizeImage" [buttonCaption]="'Product Image'" [max]="1"
+                        (onRemove)="imageRemoved($event)"
+                        (onFileUploadFinish)="fileChangedProduct($event.file)">
+                                <i class="fa fa-cloud-upload"></i> 
+                        </image-upload>
+                         <small style="color: red">* Product Image is required</small>
+                                </td>
+                                </tr>
+                            </table>
+                        <div class="pull-right m20">
+                                <input type="button"  class="baseButton" (click)=disableProct() value="Cancel">
+                                <button  [disabled]="!pRole.form.valid || isEmpty"  class="baseButton" type="submit">Save</button>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="rightContent" *ngIf="(clientsListViewInit | filter: queryString).length != 0">
+            <div class="roles" *ngIf="(productData).length != 0">
+                    <p class="pull-left">
+                      
+                      <b class="color">{{productData.product_name}}</b>                           
+                      <b *ngIf="productData.active_status==0"  class="alert">- Suspend</b> 
+                    </p>
+                    <div class="pull-right captionControls cusMg" >   
+                            <p class="newRole">                                                                        
+                            <a href="javascript:void(0);" (click)=EnableUpdate() mdTooltip="Edit Product" class="pull-left brandEdit"></a>
+                            <a href="javascript:void(0);" *ngIf="productData.active_status==1" (click)=suspendUpdate(productData.id) mdTooltip="Suspend Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0);" *ngIf="productData.active_status==0" (click)=activeUpdate(productData.id) mdTooltip="Active Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0);" (click)=deleteProduct(productData.id) mdTooltip="Delete Product" class="pull-right brandDel"></a>
+                        </p>
+                        </div>
+                  </div>
+        <div class="roles-view">
+        <md-tab-group md-align-tabs="bottom" id="ink-top-fix">
+            <md-tab label="Details">
+                <div *ngIf="(productData | filter: queryString).length === 0">
+                        No Records Found
+                </div>
+                <div class="col-lg-12" *ngIf="(productData).length != 0">
+                    <div class="col-lg-2">
+                        <div class="productLogo" >
+                            <img *ngIf="disable == 0" class="img-responsive" src="{{API_URL}}/{{productData.product_image[0].upload_path}}{{productData.product_image[0].product_image}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                            <form  name="editRole" (ngSubmit)="PRole.form.valid && editProducts(PRole)" #PRole="ngForm" novalidate>
+                                    <ul class="err">
+                                        <li>{{errors}}</li>
+                                      </ul>
+                                    <table width="100%" class="productTable">                
+                                      <tr>
+                                        <td class="newText">Product Name:</td>
+                                        <td>
+                                            <input type="text" [disabled]=is_editDis autocomplete="off" required id="orangeForm-name" placeholder="Product Name" [(ngModel)]=productData.product_name #product_name=ngModel name="product_name">
+                                            <span *ngIf="product_name.touched && product_name.invalid" class="alert">Product name is required</span>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="newText">Product Image:</td>
+                                        <td>
+                                                <image-upload class="sizeImage"
+                                                (onRemove)="imageRemoved2($event.file)"
+                                                (onFileUploadFinish)="fileProduct($event.file)"
+                                                 [buttonCaption]="'Product Image'" [max]="1">
+                                                        <i class="fa fa-cloud-upload"></i> 
+                                                </image-upload>
+                                                
+                                        </td>
+                                      </tr> 
+                                      <tr>
+                                        <td class="newText">Product Description:</td>
+                                        <td>
+                                            <textarea class="brandDes" type="text" [disabled]=is_editDis autocomplete="off" required id="orangeForm-name" placeholder="Product Description" [(ngModel)]=productData.product_desc #product_desc=ngModel name="product_desc">
+                                            </textarea>
+                                            <div *ngIf="product_desc.touched && product_desc.invalid" class="alert">Product Description is required</div>
+                                        </td>
+                                      </tr>  
+                                      <tr>
+                                        <td class="newText">Attachments</td>
+                                        <td class="brandDocdetails">
+                                                <label  class="product-file-upload pull-left">
+                                                         Documents 
+                                                    </label>
+                                                    <div class="pull-right docUpload ">
+                                                     <label for="file-upload"> <i class="fa fa-plus "></i></label>
+                                                    <input id="file-upload" [disabled]=is_editDis (change)=fileChangedDocs($event.target.files) type="file"/>
+                                                    </div>
+                                            <ul class="attachList col-md-12" *ngIf="product_docsA.length > 0" >
+                                                <li *ngFor="let dataProds of product_docsA">
+                                                     
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+                                           
+                                            <ul class="attachList  col-md-12" >
+                                                    
+                                                    <li *ngFor="let imageProds of productDocs">
+                                                            <span>
+                                                               <i class="icon-remove" *ngIf=is_editPro><a mdTooltip="Remove Docs" (click)="removeAtt(imageProds,imageProds.id)">X</a></i>
+                                                                <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'xlsx'">
+                                                                <small class="dcNam">
+                                                                   {{imageProds.original_file_name | slice:0:6}}
+                                                                                                   </small>
+                                                            </span>                                                            
+                                                    </li>
+                                            </ul>
+                                        </td>
+                                      </tr>                                                                                                 
+                                    </table>
+                                    <div class="col-lg-12 editSec ">
+                                    <div class="col-lg-3 pull-right" *ngIf=is_editPro>
+                                          <button  class="col-lg-3 baseButton"  [disabled]="!PRole.form.valid || isEmpty2" color="mycolor" type="submit" md-button>Update</button>
+                                    </div>
+                                </div>
+                                </form> 
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="Topics">
+                <div *ngIf="(topics | filter: queryString).length === 0">
+                        No Records Found
+                </div>
+                         
+ 
+            <div class="role-list col-md-12" >
+                    <table width="70%" class="brandTable">  
+                               
+                  <tr *ngFor="let prods of topics">                    
+                    <td class="tdPadding productNam"> {{prods.topics.topic_title }} </td>                   
+                    <td class="tdPadding productNam"> {{prods.product_name}}</td>
+<!--                     <td class="controlTd">
+                            <div class="proList captionControls">   
+                                <p class="newRole">                                                                             
+                                <a href="javascript:void(0);"  class="pull-left brandEdit"></a>
+                                <a href="javascript:void(0);" ><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0);" ><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0);"  class="pull-right brandDel"></a>
+                            </p>
+                            </div>
+                        </td> -->
+                    <td ><small class="pull-right positionList">Created on <br> {{prods.createdAt | date:'dd MMM yyyy'}}</small></td>
+                  </tr>
+                  
+                </table>
+            </div>
+            </md-tab>
+          </md-tab-group>
+          </div>
+    </div>
+  </div>
+  <!-- ______________________________________________________________________________________ -->
+  <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" [hidden]="loading">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" (click)="reload()">&times;</button>
+              <h4 class="modal-mdTooltip">Client</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-8">
+                    <form enctype="multipart/form-data" id="form2" (ngSubmit)="ecRole.form.valid && updateClientData(ecRole)" #ecRole="ngForm" novalidate>
+                        <div class="md-form">                          
+                        <input type="text" autocomplete="off" required id="orangeForm-name" placeholder="Brand Name" [(ngModel)]=editClientsData.brand_name #brand_name=ngModel name="brand_name">                       
+                        <div *ngIf="brand_name.touched && brand_name.invalid" class="alert">Brand name is required</div>
+                        </div>
+                        <small style="color:red">* Brand image</small>
+                        <image-upload class="sizeImage" [buttonCaption]="'Client Image'" [max]="1" 
+                        (onFileUploadFinish)="fileChangedEdit($event.file)"
+                        (onRemove)="imageRemoved3($event)">
+                        </image-upload>
+                        
+                        <img id="blah" src="#" />
+                        <div class="pul-right">
+                            <button  [disabled]="!ecRole.form.valid"  class="btn btn-primary" md-colors="{background: '#303F9F}" type="submit">Save</button>
+                        
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Brand Image</h4>
+                    <img *ngIf="editClientsData" style="width:191px;" class="img-responsive" src="{{API_URL}}{{editClientsData.upload_path}}{{editClientsData.brand_image}}" class="img-responsive">
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+          </div>
+      
+        </div>
+      </div>
+  <ngx-loading [show]="loading"></ngx-loading>

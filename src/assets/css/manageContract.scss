@@ -1,0 +1,138 @@
+.contract-menu{
+    margin: 0 0 5%;
+    .dataListnew {
+         margin: 5px 0 0;
+    }
+    .reqBut {
+        border: 2px solid $cancelBut-color;
+        border-radius: 20px;
+        padding: 0 20px;
+        line-height: 25px;
+        text-transform: uppercase;
+        margin: 25% auto;
+    }
+    .reqBut:hover {
+        background: $cancelBut-color;
+        color: #fff;
+    }
+    .dataList{
+        margin: 5px 0 0;
+    }
+    .contImage{
+        width: 35%;
+        float: left;    text-align: center;
+    }
+    .contDetails{
+        width: 60%;
+        float: right;
+    }
+    .contName{
+        color: $primary-color;
+        font-family: robomedium;
+        font-size: 17px;
+    }
+    .contControls{
+   
+        img{
+            max-width: 38px;
+            margin: 10px 1% 0 2%;
+        }
+    }
+    .parTitle h4{
+        width: 135px;
+        border-top:none;
+        background: $primary-color;
+        color:#fff;    font-family: roboregular;
+    }
+    .sInputDiv{
+        margin: 1px 0 0px;
+    }
+    .sarrw {
+        p{
+            margin:0;
+        }
+    }
+    .file {
+        position: relative;
+        height: 36px;
+      
+      }
+      
+      .file > input[type="file"] {
+        position: absoulte;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0
+      }
+      
+      .file > label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background:url("../images/upload.png");
+        color: transparent;
+        border-radius: 0px;
+        text-align: center;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: right;
+        border-bottom: 1px solid  $primary-color;
+      }
+    .filePart{
+        padding: 0px 0px 0 0;
+        margin: 0 0 15px;
+        border-right: 1px solid $primary-color;
+    }
+    .fileImage{
+        width: 28%;
+        float: left;
+        text-align: center;
+        img{
+            max-width: 50px;
+        }
+    }
+    .fileDetails{
+        width: 72%;
+        float: right;
+        padding: 0 6px;
+    }
+    .fileName{
+        color: #000;
+        font-family: robomedium;
+        font-size: 13.5px;
+        line-height: 20px;
+        margin: 0;
+    }
+    .fileControls{ 
+        img{
+            max-width: 24px;
+            margin: 10px 10% 0 0%;
+            &:hover{
+                opacity: 0.8;
+            }
+         }
+    }
+    .fileTitle{
+        @include Onlyborderbottom;
+        margin:10px 0 15px;
+        h4{
+            width: 105px;
+            border-top: none;
+            background: $primary-color;
+            color: #fff;
+            font-family: roboregular;
+            padding: 6px 5px;
+            font-size: 13.5px;margin:0;
+        }
+       
+    }
+    .contcheckDiv{
+        display: inline-block;
+        width:120px;
+    }
+
+}

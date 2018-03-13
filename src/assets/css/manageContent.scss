@@ -1,0 +1,307 @@
+.manageContent{
+    margin: 0 0 5%;
+    .dataList {
+         margin: 5px 0 0;
+    }
+    .dataListnew {
+        margin: 5px 0 0;
+   }
+    .role-list {
+        margin: 0px 0;
+    }
+    .condet{
+        margin:20px 0;
+    }
+    .parTitle{
+        margin: 15px 0;
+        border-bottom: none;
+        @include Onlybordertop;
+        h4{
+            padding: 15px 5px;
+        }
+    }
+    .ctList{
+        margin: 5px 0 0;
+        padding: 9px 9px 0px;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #a9a7a7;
+    }
+    .hciFile{
+
+        .file {
+            position: relative;
+            height: 36px;
+          
+          }
+          
+          .file > input[type="file"] {
+            position: absoulte;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width:90px;
+          }
+          
+          .file > label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background: url(../images/upload.png);
+            color: transparent;
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            text-align: center;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-position: right;
+            border-bottom: 1px solid  $primary-color;
+          }
+    }
+    label{
+        font-size: 14px;    font-family: robomedium;
+        font-weight: normal;
+    }
+}   
+.confresh{
+    position: absolute;
+    right: 105px;
+    font-size: 23px;
+    color: $primary-darker;
+    top: 7px;
+}
+.inIcon{
+    display: inline-block;margin: 3px 3px 3px;
+}
+.contMainimg{
+    max-width: 100%;
+    width: 110px;
+    margin: 0px auto;
+    display: block;
+    height: 110px;
+    border: 2px solid  $primary-color;
+}
+.creatDetails {
+    width: 32%;
+    display: inline-block;
+    font-family: robomedium;
+    font-size: 15px;
+    padding: 8px 5px 10px 0px;
+    position: relative;
+    .creatDat{
+        color: $primary-color;
+    }
+    p{
+        margin: 0px;
+    }
+    .vertHr{
+        @include rotate(90deg);
+        top: 27px;
+        right: 0px;
+        margin: 3px;
+        border-top: 2px solid #4bb1de;
+        width: 34px;
+        position: absolute;
+        @media (max-width:1370px){
+            right: -14px;
+        }
+    }
+}
+.acidjs-rating-stars,
+.acidjs-rating-stars label::before
+{
+    display: inline-block;
+}
+ 
+.acidjs-rating-stars label:hover,
+.acidjs-rating-stars label:hover ~ label
+{
+    background: url(../images/rate2.png);
+    background-repeat:no-repeat; 
+}
+ 
+.acidjs-rating-stars *
+{
+    margin: 0;
+    padding: 0;
+}
+ 
+.acidjs-rating-stars input
+{
+    display: none;
+}
+ 
+.acidjs-rating-stars
+{
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+ 
+.acidjs-rating-stars label
+{
+    color: transparent;
+    background: url(../images/rate1.png);
+    background-repeat:no-repeat; 
+}
+ 
+.acidjs-rating-stars label::before
+{
+    content: "\2605";
+    width: 19px;
+    line-height: 19px;
+    text-align: center;
+    font-size: 19px;
+    cursor: pointer;
+
+}
+ 
+.acidjs-rating-stars input:checked ~ label
+{
+   background: url(../images/rate2.png);
+   background-repeat:no-repeat; 
+}
+ 
+.acidjs-rating-disabled
+{
+    opacity: .50;
+     
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    pointer-events: none;
+}
+.c1Td{
+    width:40%;
+}
+.c1Td,.c2Td{
+    label{
+        font-size: 16px;    font-family: robomedium;
+        font-weight: normal;
+    }
+}
+.c2Td{
+    .mat-input-element{
+        font-family: robomedium;
+        font-size: 15px;
+        color: $primary-color;
+        vertical-align: top;
+    }
+
+}
+.controlElement{
+    position: absolute;
+    right: 0;
+    top: 23px;
+    img{
+        margin: 0 10px;
+    }
+}
+.controlTab {
+    position: relative;
+    .framimg {
+        max-width: 56%;
+        margin: 35px auto;
+    }
+     .mat-tab-header {
+        position: absolute;
+        top: -65px;
+        right: 0;
+        direction: rtl;
+        border-bottom: none!important;
+        .mat-tab-label{
+            height: 48px!important;
+            padding: 0 24px;
+        }
+        
+        .mat-tab-label:nth-child(1){
+            background: url("../images/desktop.png") no-repeat;
+            background-position:center; 
+        }
+        .mat-tab-label-active:nth-child(1){
+            background: url("../images/com.png") no-repeat;
+            background-position:center; 
+        }
+        .mat-tab-label:nth-child(2){
+            background: url("../images/tab.png") no-repeat;
+            background-position:center; 
+        }
+       .mat-tab-label-active:nth-child(2){
+            background: url("../images/tab1.png") no-repeat;
+            background-position:center; 
+        }
+        .mat-tab-label:nth-child(3){
+            background: url("../images/cell.png") no-repeat;
+            background-position:right; 
+        }
+        .mat-tab-label-active:nth-child(3){
+            background: url("../images/cell1.png") no-repeat;
+            background-position:right; 
+        }
+        .mat-ink-bar {
+            background-color: transparent;
+        }
+    }
+}
+.desktopFrame {
+    background: url("../images/iMacFrame.png") no-repeat;
+    background-position: 20% -10%;
+    width: 600px;
+    height: 385px;
+    background-size: 78%;
+    padding: 26px 57px;
+    margin: 0px auto;
+}
+.desktopDocs{
+    position: absolute;
+    border: none;
+    left: 0;
+    right: 0;
+    top: 2%;
+    height: 68%;
+    margin: 0px auto;
+    padding: 2% 1% 1%;
+    width: 54%;    
+} 
+.tabDocs{
+    position: absolute;
+    border: none;
+    left: 0;
+    right: 0;
+    top: 0px;
+    height: 100%;
+    margin: 0px auto;
+    padding: 3% 4% 2%;
+    width: 54%;
+}
+.mobileDocs{
+    position: absolute;
+    border: none;
+    left: 0px;
+    right: 0;
+    top: 6%;
+    height: 89%;
+    margin: 0px auto;
+    padding: 1% 3px 3% 5px;
+    width: 29.3%;
+    @media (min-width:1399px){
+        padding: 2%;
+        width: 26.3%;
+    }
+}
+.frameSec{
+    position: relative;
+}
+.frameSec .mbFrame {
+    max-width: 32%;
+    width: 100%;    margin: 0 auto;
+    @media (min-width:1399px){
+        max-width: 25%;
+    }
+}
+.frameSec.ndfHFb-c4YZDc-q77wGc {
+    display: none!important;
+}

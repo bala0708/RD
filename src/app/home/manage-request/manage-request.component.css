@@ -1,0 +1,27 @@
+.customPage{
+	padding: 16px 0 0 0;
+    background: #fff;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 1px -3px #000;
+}
+.activeRow{
+	background : #ddd;
+}
+.reqBg{
+	cursor: pointer !important;
+}
+.descp{
+	line-height: 34px;
+	width: 100%;
+	border-bottom: 1px;
+	text-decoration: underline;
+	text-decoration-color: #f97c2a;
+	text-decoration-style: solid;
+}
+.reqSpec {
+	text-align: center !important;
+}
+.customPages{
+	padding: 7px;
+}

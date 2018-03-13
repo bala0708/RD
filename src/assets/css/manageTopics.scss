@@ -1,0 +1,207 @@
+.manageTopics{
+    margin: 0 0 40px 0;
+    .newRole p {
+        display: inline;
+        margin: 3px;
+        a{
+            margin: -6px 12px;
+        }
+    }
+    .dataList {
+        margin: 5px 0 0;
+   }
+   .trackField .list-groupD {
+    background: #ececee;
+   }
+   .availTopic {
+        background: none;
+        color: #000;
+        padding: 6px 0px;
+    }
+    .trackField .panel-heading {
+        padding: 10px 0px 0;
+    }
+    .searchDiv{
+        padding: 0 10px 10px 10px;
+        @include Onlyborderbottom;
+    }
+}
+.topicTable{
+    width:100%;
+    margin: 20px 0;
+    .activeTopic{
+        background: #ececee;
+    }
+    td{
+        padding: 4px;
+        width: 1%;
+        vertical-align: middle;
+        border-bottom: 1px solid #ccc;
+    }
+    .topicProfImg{
+        width: 4%;
+        img{
+            width: 50px;
+        }
+    }
+    .topicTit{
+        width: 10%;
+        p{
+            font-size: 16px;
+            font-family: robomedium;    margin: 0;
+        
+        }
+    }
+    .colorCount{
+        color: $primary-color;
+        font-size: 22px;
+    }
+    .topic{
+        font-family: robomedium;
+        text-align: right;
+        font-size: 13px;
+        margin: 0;
+    }
+    .meeting{
+        font-size: 16px;
+    }
+    .listOne {
+        font-size:19px;
+        color: $primary-color;
+        width: 50px;
+        text-align: right;    font-family: robomedium;
+    }
+    .listTwo{
+        font-size: 19px;
+        color: #095ba7;
+        width: 50px;
+        text-align: right;    font-family: robomedium;margin: 15px 0 0;
+    }
+    .dataCount{
+        margin: 0;
+    }
+}
+.topicProfileImg {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+
+}
+.topTable{
+    td{
+        margin: 20px 0;
+    }
+}
+.newAttach{
+    background: #ececee;
+    margin: 0px 0;
+    padding: 10px 10px 0px;
+    li {
+        display: inline-block;
+        margin: 0 0 0 13px;
+        width: 29%;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        text-align: center;
+        padding: 10px 0 0;
+    }
+} 
+.hciPanel{
+    background: #ececee;
+    padding: 0;
+}
+.hciDrag{
+    height: 300px;
+    overflow-y: auto;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;    box-shadow: none;
+}
+.hciDrag::-webkit-scrollbar {
+    width: 5px;
+    /* /background: #666; */
+  }
+  .hciDrag::-webkit-scrollbar-thumb {
+    background: $primary-color; 
+  }
+  .hciCont{
+    .panel-heading {
+        padding: 14px 0px;
+    }
+  }
+  .meetTit{
+      border-bottom:1px solid $primary-color; 
+      font-family: robomedium;
+      margin: 0px 0 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      max-height: 43px;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+  }
+  .meetTimSec{
+      p{
+        display: inline-block;
+        font-family: robomedium;
+      }
+     .mainTime{
+        font-size: 25px;
+        color: $primary-color; 
+        font-family: roboregular;    float: left;    padding-right: 10px;
+      }
+      .cancelbutton{
+        border: 2px solid #ff0000;
+        border-radius: 20px;
+        padding: 0 14px;
+        line-height: 22px;
+        text-transform: uppercase;
+        font-size: 12px;
+        min-width: auto;
+        float: right;
+      }
+      .pasbutton{
+        background:  $primary-color;
+        border-radius: 0px;
+        padding: 0 10px;
+        line-height: 25px;
+        font-size: 14px;
+        color: #fff;
+        float: left;
+        min-width: auto;
+        font-weight: normal;
+      }
+
+  }
+ .topicdocImg{
+    border-radius: 50%;
+    width: 32px;
+    margin: 0 8px 3px 0px;
+    display: inline-block;
+ }
+ .fullSec{
+     background: #eee;
+     padding: 8px 8px 4px;
+     margin: 0 0 10px;
+ }
+ .topbggnew{
+    background: #fff;
+    border-left: 6px solid $primary-color;
+    padding: 8px;
+    width: 48%;
+    margin-right: 2%;
+ }   
+ .topicMeetid {
+    font-family: robomedium;
+}
+.topicMeet {
+  padding: 0 0 0 15px;
+    p{
+        font-family: robomedium;
+        display: inline-block;
+        font-size: 13px;
+    }
+}

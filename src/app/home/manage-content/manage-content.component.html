@@ -1,0 +1,623 @@
+<div class="col-lg-12 manageContent">
+    <div class="leftContent">
+        <div class="roles col-md-12">
+          <p class="pull-left">Content</p>
+          <div class="pull-right">
+              <a href="javascript:void(0);" class="confresh"><i class="fa fa-refresh"></i></a>
+             <div class="addIcon">
+                <a href="javascript:void(0);" mdTooltip="Add Content" (click)=enableSection()>
+                 <i class="fa fa-plus"></i></a>
+             </div>
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+          </div>
+          
+        </div>
+  <div [hidden]=is_list>
+        <div class="dataListnew col-md-12">
+<!--            <input type="checkbox" name="all" 
+                    [checked]="isAllChecked()" (change)="checkAll($event)"/> -->
+                    <div class="col-md-12 searchPart">
+            <div class="col-md-9 padd0">
+          <div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Content..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          </div>
+          <div class="col-md-3 padd0 ">
+              <div class="pull-right">
+                  <p class="inIcon"><a href="javascript:void(0);" mdTooltip="Suspend Content"><img src="assets/images/pause.png"/> </a></p>  
+                  <p class="inIcon"> <a href="javascript:void(0);" mdTooltip="Delete Content"><img src="assets/images/delete.png"/> </a> </p>
+                  <p class="inIcon"><a mdTooltip="Filter"><img src="assets/images/reqarr2.png" class="">
+                  </a></p>
+              </div>
+              
+          </div>
+        </div>
+        <div class="reqDetails col-md-12 padd0">
+          <div class="col-md-12 scrollingPart">
+              <div *ngIf="(topicListView | filter: queryString).length === 0">
+                <ul class="role-list">
+                  <li> No matches found</li>
+                </ul>
+              </div>
+              <div *ngFor="let item of topicListView | filter: queryString  | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div class="col-md-12 padd0 reqBg green-bg" [ngClass]="{active: item.id==topicListViewInit.id}">
+     <div class="col-md-12 padd0 borTopBot">
+              
+                  <div class="col-md-3 new-pad text-center" style="cursor: pointer;" (click)="topicView(item.id,2)">
+                      <img src="{{APIURL}}{{item.coner_image_path}}{{item.cover_name_name}}" class="contMainimg">
+                  </div>
+                  <div class="col-md-9 new-pad ">
+                    <ul class="role-list col-md-11 padd0" >
+                      <li style="cursor: pointer;" (click)="topicView(item.id)">
+                        
+                        <p class="reqSpec ">{{item.content_name}}</p>
+                      </li>
+                    </ul>
+                    <div class="creatDetails">
+                      <p class="creatTit">Create on:</p>
+                      <p class="creatDat">{{item.createdAt | date:'dd MMM yyyy'}}</p>
+                      <hr class="vertHr">
+                    </div>
+                    <div class="creatDetails">
+                        <p class="creatTit">Updated on:</p>
+                        <p class="creatDat">{{item.updatedAt | date:'dd MMM yyyy'}}</p>
+                        <hr class="vertHr">
+                      </div>
+                      <div class="creatDetails">
+                          <p class="creatTit">Rating:</p>
+                          <div class="creatDat">
+                              <div class="acidjs-rating-stars">                                 
+                                      <input type="radio" disabled name="group-1" [checked]="item.rating>=5" id="group-1-0" value="5" /><label for="group-1-0"></label>
+                                      <input type="radio" disabled name="group-1" [checked]="item.rating>=4" id="group-1-1" value="4" /><label for="group-1-1"></label>
+                                      <input type="radio" disabled name="group-1" [checked]="item.rating>=3" id="group-1-2" value="3" /><label for="group-1-2"></label>
+                                      <input type="radio" disabled name="group-1" [checked]="item.rating>=2" id="group-1-3" value="2" /><label for="group-1-3"></label>
+                                      <input type="radio" disabled name="group-1" [checked]="item.rating>=1" id="group-1-4"  value="1" /><label for="group-1-4"></label>
+                                  
+                              </div>
+                            </div>
+                        </div>
+                  </div>
+     </div>
+              </div>
+
+              </div>
+            </div>
+              <div class="col-lg-12 customPage"  *ngIf="(topicListView).length != 0">
+        <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+      </div>
+          
+      </div>
+    </div>
+
+    </div>
+        <div class="dataList_img" [hidden]=is_add>
+                       <div class="col-lg-12 ctList  ">
+                    <form (ngSubmit)="addTopic.form.valid && addTopics(addTopic)" #addTopic="ngForm">
+                        <table width="100%" class="contTabl">
+                          <tr><td width=" 25%"><label>Content Name:</label></td>
+                            <td>
+                        <div class="md-form input-effect">   
+                                <input class="effect-17"  type="text" autocomplete="off" required id="orangeForm-name"  [(ngModel)]=topics.content_name #content_name=ngModel name="content_name">                       
+                                <span class="focus-border"></span>
+                              </div>
+                        <div *ngIf="content_name.touched && content_name.invalid" class="errNam">*Content name is required</div>
+                            </td>     
+                      </tr>
+                         <tr>
+                           <td width=" 25%"><label>Content File:</label></td>
+                           <td>
+                          <div class="hciFile">
+                              <div  class="file">
+                                  <label for="file-input"></label>
+                              <input type="file" (change)="fileChangeEvent($event)" name="content_file" id="file-input">
+                              <div *ngIf="content_file.dirty && content_file.invalid" class="alert">Content File is required</div>
+                            </div>
+                            <ul class="attachList col-md-12" *ngIf="content_file.length > 0" >
+                                                <li *ngFor="let dataProds of content_file">
+                                                     
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+                          </div>
+                        </td>
+                  </tr>
+                  <tr>
+                    <td><label>Content Image:</label></td>
+                    <td>                   
+                    <small style="color: red">* Content Image is required</small>   
+                      <image-upload class="sizeImage" [buttonCaption]="'Content Image'" [max]="1"
+                        (onRemove)="imageRemoved1($event)"
+                         (onFileUploadFinish)="fileChanged($event.file)">
+                                <i class="fa fa-cloud-upload"></i> 
+                        </image-upload></td>
+                  </tr>
+                       </table>
+                    <div class="col-md-12 m20 padd0">
+                        <div class="pull-right ">
+                                <input type="button"  class="baseButton" (click)="disableSection();addTopic.reset()" value="Cancel">
+                                <button  [disabled]="!addTopic.form.valid || isEmpty"  class="baseButton" type="submit">Save</button>
+                            
+                        </div>
+                      </div>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+    <div class="rightContent" *ngIf="(topicListView | filter: queryString).length != 0">
+            <div class="roles col-md-12 "> 
+                    <p class="baseColor pull-left">
+                      
+                      <b class="baseColor">{{topicListViewInit.content_name}}</b> 
+                      <b *ngIf="topicListViewInit.active_status==0"  class="alert">- Suspend</b>           
+                    </p>
+                    <div class="controlBut pull-right">
+                        <p class="pauseIcon"><a mdTooltip="Edit Content" href="javascript:void(0);" (click)="enableEdit()"><img src="assets/images/cont-edit.png"/> </a></p> 
+                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==1"><a mdTooltip="Suspend Content" class="" (click) = suspendContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
+                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==0"><a mdTooltip="Active Content" class="" (click) = activeContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
+                        <p class="delIcon">
+                            <a mdTooltip="Delete Content" class="" (click) = deleteTopic(topicListViewInit.id) >
+                                <img src="assets/images/delete.png"/> 
+                            </a>
+                          </p>
+                    </div>
+                  </div>
+        <div class="roles-view col-md-12 ">
+        <md-tab-group md-align-tabs="bottom" id="ink-top-fix">
+            <md-tab label="Details">
+                <div *ngIf="(topicListViewInit).length === 0">
+                        No Records Found
+                </div>
+                <div class="col-md-12 condet" *ngIf="(topicListViewInit).length != 0">
+                    <div class="col-md-12 padd0">
+                           <form  name="editRole" (ngSubmit)="NormalForm.form.valid && editTopic(NormalForm)" #NormalForm="ngForm" novalidate>
+                                    <ul class="err">
+                                        <li>{{errors}}</li>
+                                      </ul>
+                                      <div class="col-md-8 col-md-push-2">
+                                    <table width="100%">                
+                                      <tr>
+                                        <td class="newText">Content Name:</td>
+                                        <td>
+                                            <input type="text" [disabled]=is_editDis autocomplete="off" required id="orangeForm-name" placeholder="Eligibility Name" [(ngModel)]=topicListViewInit.content_name #content_name=ngModel name="content_name">
+                                            <span *ngIf="content_name.touched && content_name.invalid" class="alert">Eligibility name is required</span>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                          <td class="newText"> <label>Content Image:</label></td>
+                                          <td>                                            
+                                            <image-upload class="sizeImage" [buttonCaption]="'Content Image'" [max]="1"
+                                              (onRemove)="imageRemoved2($event)"
+                                               (onFileUploadFinish)="fileChanged2($event.file)">
+                                                      <i class="fa fa-cloud-upload"></i> 
+                                              </image-upload></td>
+                                        </tr>
+                                      <tr *ngIf="topicListViewInit.file_name">
+                                        <td class="newText">Existing Content File:</td>
+                                        <td>                                          
+                                          <a href="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}" download><button type="button" class="btn btn-primary pull-left">Download</button></a>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="newText">Upload New File:</td>
+                                        <td>
+                                         <!-- <input type="file" (change)="fileChangeEventUpdate($event)" name="content_file" required=""> -->
+
+                                         <div class="hciFile">
+                              <div  class="file">
+                                  <label for="file-input1"></label>
+                              <input type="file" (change)="fileChangeEventUpdate($event)" name="content_file" id="file-input1">
+                            </div>
+                            <ul class="attachList col-md-12" *ngIf="content_file_update.length > 0" >
+                                                <li *ngFor="let dataProds of content_file_update">
+                                                     
+                                                    <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'pdf'">
+                                                                <img src="assets/images/word.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'docx'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'png'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpg'">
+                                                                <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'jpeg'">
+                                                                <img src="assets/images/excel.png" class="attachListImg" *ngIf="(dataProds.name | extension) == 'xlsx'">
+                                                                <small class="dcNam">{{dataProds.name}}</small>
+                                                </li>
+                                            </ul>
+                          </div>                        
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </div>  <div style="clear: both;"></div>
+                                    <div class="col-md-4 col-md-offset-6" [hidden]="is_edit">
+                                          <button  class="baseButton"  [disabled]="!NormalForm.form.valid" color="mycolor" type="submit" md-button>Update</button>
+                                          <button  class="baseButton" (click)="disableEdit()" color="mycolor" type="button" md-button>Cancel</button>
+                                    </div>
+                                </form>
+                                <div style="clear: both;"></div>
+                                <hr>
+                                <form>
+                                <div class="col-md-2 padd0"> <img src="{{APIURL}}{{topicListViewInit.coner_image_path}}{{topicListViewInit.cover_name_name}}" class="img-responsive"></div>
+                                <div class="col-md-5">
+                                  <table width="100%">
+                                    <tr>
+                                      <td class="c1Td"><label>Created on:</label></td>
+                                      <td class="c2Td"><md-form-field class="example-full-width">
+                                            <input mdInput placeholder="" [value]="topicListViewInit.createdAt | date:'dd MMM yyyy'" disabled>
+                                          </md-form-field>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1Td"><label>Updated on:</label></td>
+                                        <td class="c2Td"><md-form-field class="example-full-width">
+                                              <input mdInput placeholder="" [value]="topicListViewInit.updatedAt | date:'dd MMM yyyy'" disabled>
+                                            </md-form-field>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                          <td class="c1Td"><label>Source:</label></td>
+                                          <td class="c2Td">
+                                            <md-form-field class="example-full-width">
+                                                <input mdInput placeholder="" [value]="topicListViewInit.site_url" disabled>
+                                              </md-form-field>
+                                          </td>
+                                        </tr>
+                                  </table>
+                                </div>
+                                <div class="col-md-5">
+                                    <table width="100%">
+                                        <tr>
+                                          <td class="c1Td"><label>Format:</label></td>
+                                          <td class="c2Td"><md-form-field *ngIf="topicListViewInit.file_name" class="example-full-width">
+                                                <input mdInput placeholder="" [value]="topicListViewInit.file_name | extension" disabled>
+                                              </md-form-field>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="c1Td"><label>Assigned to:</label></td>
+                                            <td class="c2Td"><md-form-field class="example-full-width">
+                                                  <input mdInput placeholder="" [value]="topicListViewInit.assiginedTopicCount" disabled>
+                                                </md-form-field>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                              <td class="c1Td"><label>Used In:</label></td>
+                                              <td class="c2Td"><md-form-field class="example-full-width">
+                                                    <input mdInput placeholder="" [value]="topicListViewInit.usedMeetingCount" disabled>
+                                                  </md-form-field>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="c1Td"><label>Rating:</label></td>
+                                                <td class="c2Td">
+                              <div class="acidjs-rating-stars">                                 
+                                      <input type="radio" disabled name="group-2" [checked]="topicListViewInit.rating>=5" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                                      <input type="radio" disabled name="group-2" [checked]="topicListViewInit.rating>=4" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                                      <input type="radio" disabled name="group-2" [checked]="topicListViewInit.rating>=3" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                                      <input type="radio" disabled name="group-2" [checked]="topicListViewInit.rating>=2" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                                      <input type="radio" disabled name="group-2" [checked]="topicListViewInit.rating>=1" id="group-2-4"  value="1" /><label for="group-2-4"></label>                                  
+                              </div>
+                                                </td>
+                                              </tr>
+                                      </table>
+                                </div>
+                                </form>
+                    </div>
+                    <div class="col-md-12 padd0">
+                        <div class="parTitle"><h4>Preview</h4>
+                       <!-- <div class="pull-right controlElement">
+                          <img src="assets/images/cell.png">
+                          <img src="assets/images/tab.png">
+                          <img src="assets/images/com.png">
+                        </div>-->
+                        </div>
+                        <md-tab-group class="controlTab">
+                            <md-tab label=""> 
+                              <div class="col-md-12">    
+                                                           
+                              <div *ngIf="fileExtensions=='jpg'"  class="frameSec">
+                                <img class="desktopDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg"  >
+                              </div>
+                              <div *ngIf="fileExtensions=='jpeg'"  class="frameSec">
+                                <img class="desktopDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='png'"  class="frameSec">
+                                <img class="desktopDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='docx'"  class="frameSec">
+                                <iframe class="desktopDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='pdf'"  class="frameSec">
+                                <iframe class="desktopDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg ">
+                              </div>
+                              <div *ngIf="fileExtensions=='xlsx'"  class="frameSec">
+                                <iframe class="desktopDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='pptx'"  class="frameSec">
+                                <iframe class="desktopDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/iMacFrame.png" class="img-responsive framimg">
+                              </div>
+                               
+                              </div>
+                            </md-tab>
+                            <md-tab label="">
+                                <div class="col-md-12 "> 
+                              <div *ngIf="fileExtensions=='jpg'" class="frameSec">
+                                <img class="tabDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='jpeg'" class="frameSec">
+                                <img class="tabDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='png'" class="frameSec">
+                                <img class="tabDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='docx'" class="frameSec">
+                                <iframe class="tabDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='pdf'" class="frameSec">
+                                <iframe class="tabDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='xlsx'" class="frameSec">
+                                <iframe class="tabDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                              <div *ngIf="fileExtensions=='pptx'" class="frameSec">
+                                <iframe class="tabDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/ipad_frame.png" class="img-responsive framimg">
+                              </div>
+                                  
+                                </div>
+                            </md-tab>
+                            <md-tab label="">
+                                <div class="col-md-12">                                 
+
+                              <div *ngIf="fileExtensions=='jpg'"  class="frameSec">
+                                <img class="mobileDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='jpeg'"  class="frameSec">
+                                <img class="mobileDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='png'"  class="frameSec">
+                                <img class="mobileDocs" src="{{APIURL}}{{topicListViewInit.content_path}}{{topicListViewInit.file_name}}">
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='docx'"  class="frameSec">
+                                <iframe class="mobileDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='pdf'"  class="frameSec">
+                                <iframe class="mobileDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='xlsx'"  class="frameSec">
+                                <iframe class="mobileDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>
+                              <div *ngIf="fileExtensions=='pptx'"  class="frameSec">
+                                <iframe class="mobileDocs" [src]="fileUrl"></iframe>
+                                <img src="assets/images/mobileWrapperImg.png" class="img-responsive mbFrame" >
+                              </div>                              
+                                  
+                               </div>
+                            </md-tab>
+                            
+                          </md-tab-group>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="HCI">
+<div class="col-lg-12 padd0 hciCont" >
+                  <form (ngSubmit)="contentUser.form.valid && assignHciUser(contentUser)" #contentUser="ngForm" novalidate>
+                  <div class="col-lg-6">
+
+                      <div class="panel-heading">
+                          <span class="availTopic"> Available User</span>
+                      </div>
+<div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryHCIA" name="searchroleName"  id="searchroleName" placeholder="Search User..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          <br>
+          
+                        <div class="panel-body hciPanel">
+                          <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='availableUser'>
+                          <li *ngFor="let item of availableUser | filter: queryHCIA">
+                            <div class="col-lg-12 detPart">
+                              <div class="detpartContent">
+                                <div class="partDetails">
+                                  <div class="partProfile">
+                                      <p class="partName"> {{item.firstName}}</p>
+                                     <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                    </div>
+                                    <!-- <button class="rmButton">Remove</button> -->
+                                  </div>
+                                </div>
+                                <div class="partImage">
+                                  <p>
+                                   <img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">
+                                  <!--  <img src="assets/images/user1.jpg" class=" detimg1"> -->  </p>
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                       <div class="panel-heading">
+                        <span class="availTopic">Assigned User</span>
+                       </div>
+                       <div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryHCIU" name="searchroleName"  id="searchroleName" placeholder="Search User..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          <br>
+                      <div class="panel-body hciPanel">
+                      <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='assignUser'>
+                      <li *ngFor="let item of assignUser | filter: queryHCIU">
+                        <div *ngIf="assignUser==''">No records Found</div>
+                        <div class="col-lg-12 detPart">
+                            <div class="detpartContent">
+                              <div class="partDetails">
+                                <div class="partProfile">
+                                    <p class="partName">{{item.firstName}}</p>
+                                    <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                      </div>
+                                      <!-- <button class="rmButton">Remove</button> -->
+                                    </div>
+                                  </div>
+                                
+                                <div class="partImage">
+                                    <p><img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">                        
+                                  </p>
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                      </li>
+                      </ul>
+                      </div>
+
+                   <div style="clear:both"></div>
+                   </div>  
+                   <div class="col-lg-12 editSec">
+                      <div class="col-lg-2 pull-right">
+                    <button  class="baseButton" color="mycolor" type="submit" md-button>Update</button>
+                      </div>
+                    </div>
+                  <div style="clear:both"></div>
+                </form> 
+              </div>
+            </md-tab>
+            <md-tab label="HCP">
+<div class="col-lg-12 padd0 hciCont" >
+                  <form (ngSubmit)="contentUser.form.valid && assignHciUser(contentUser)" #contentUser="ngForm" novalidate>
+                  <div class="col-lg-6">
+                      <div class="panel-heading">
+                          <span class="availTopic"> Available User</span>
+                      </div>
+                      <div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryHCPA" name="searchroleName"  id="searchroleName" placeholder="Search User..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          <br>
+                        <div class="panel-body hciPanel">
+                          <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='availableUserHcp'>
+                          <li *ngFor="let item of availableUserHcp | filter: queryHCPA">
+                            <div *ngIf="availableUserHcp==''">No records Found</div>
+                            <div class="col-lg-12 detPart">
+                              <div class="detpartContent">
+                                <div class="partDetails">
+                                  <div class="partProfile">
+                                      <p class="partName"> {{item.firstName}}</p>
+                                     <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                    </div>
+                                    <!-- <button class="rmButton">Remove</button> -->
+                                  </div>
+                                </div>
+                                <div class="partImage">
+                                  <p>
+                                   <img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">
+                                  <!--  <img src="assets/images/user1.jpg" class=" detimg1"> -->  </p>
+                                  <!-- <button class=" details">Details</button> -->
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                       <div class="panel-heading">
+                        <span class="availTopic">Assigned User</span>
+                       </div>
+                       <div class="input-group sInputDiv">
+            <input #input class="form-control sInput" type="text" [(ngModel)]="queryHCPU" name="searchroleName"  id="searchroleName" placeholder="Search User..."/>
+            <div class="input-group-addon sIcon">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+          </div>
+          <br>
+                      <div class="panel-body hciPanel">
+                      <ul class="list-group hciDrag" [dragula]='"evented-bag"' [dragulaModel]='assignUserHcp'>
+                      <li *ngFor="let item of assignUserHcp  | filter: queryHCPU">
+                        <div *ngIf="assignUserHcp==''">No records Found</div>
+                        <div class="col-lg-12 detPart">
+                            <div class="detpartContent">
+                              <div class="partDetails">
+                                <div class="partProfile">
+                                    <p class="partName">{{item.firstName}}</p>
+                                    <div class="partAddress">
+                                        <p class="colorWeight"> {{item.email}}</p>
+                                        <p class="colorWeight">{{item.telephone}}</p>
+                                      </div>
+                                      <!-- <button class="rmButton">Remove</button> -->
+                                    </div>
+                                  </div>
+                                
+                                <div class="partImage">
+                                    <p><img src="{{APIURL}}{{item.photo_path}}{{item.photo}}" class=" detimg1">                        
+                                  </p>
+                                  <button type="button" class=" details" (click)=modalPop.viewDetailsUsers(item.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                                </div>
+                              </div>
+                            </div>
+                      </li>
+                      </ul>
+                      </div>
+
+                   <div style="clear:both"></div>
+                   </div>  
+                   <div class="col-lg-12 editSec">
+                      <div class="col-lg-2 pull-right">
+                    <button  class="baseButton" color="mycolor" type="submit" md-button>Update</button>
+                      </div>
+                    </div>
+                  <div style="clear:both"></div>
+                </form> 
+              </div>
+            </md-tab>
+          </md-tab-group>
+          </div>
+    </div>
+  </div>
+  
+  <ngx-loading [show]="loading"></ngx-loading>
+<app-user-details #modalPop></app-user-details>

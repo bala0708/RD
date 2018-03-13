@@ -1,0 +1,434 @@
+<div class="col-lg-12 contract-menu">
+    <div class="leftContent">
+        <div class="roles  col-md-12">
+          <p class="pull-left">Contracts</p>
+          <div class="pull-right">
+              <div class="addIcon"><a href="#"><i class="fa fa-plus"></i></a></div>
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+            <div class="menuBar"></div>
+          </div>
+        </div>
+      
+        <div class="dataListnew col-md-12">
+                <div class="col-md-12  searchPart">
+          <div class="col-md-10 searchField">
+            <div class="input-group sInputDiv">
+                <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Role..."/>
+                <div class="input-group-addon sIcon">
+                  <span class="fa fa-search form-control-feedback"></span>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-2 padd0 sarrw">
+              <p class="pull-left"><img src="assets/images/reqarr.png" class=""></p>
+              <p class="pull-right"><img src="assets/images/reqarr2.png" class=""></p>
+          </div>
+        </div>
+        <div class="reqDetails col-md-12 padd0">
+           <!--loop start-->
+          <div class="col-md-12 padd0  reqBg">
+                <div class="col-md-12 padd0 borTopBot">
+          <div class="col-md-3 new-pad  text-center">
+            <img src="assets/images/cont.png" class="img-responsive">
+            
+          </div>
+          <div class="col-md-6 new-pad "> 
+              <p class="reqSpec">Chronic Lymphocytic Leukemia</p>
+              <div class="specDoc col-md-10 padd0"> 
+                  <div class="inlineDiv">
+                    <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                   
+                   
+                  </div>
+                  <div class="inlineDiv">
+                    <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                  
+                    
+                  </div>
+                  <div class="inlineDiv">
+                      <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                     
+                    
+                    </div>
+                   <div class="inlineDiv">
+                        <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                        
+                   </div>
+              </div>
+              <div class=" col-md-2">
+                <p class="docCount"> +34</p>
+              </div>
+          </div>
+          <div class="col-md-3 new-pad text-center">
+                <div class=""><button md-button class="reqBut ">Status</button>
+                </div>
+           </div>
+                </div>
+        </div>
+        <!--loop end-->
+        <div class="col-md-12 padd0    reqBg">
+                <div class="col-md-12 padd0 borTopBot">
+            <div class="col-md-3 new-pad text-center">
+              <img src="assets/images/cont.png" class="img-responsive">
+           
+            </div>
+            <div class="col-md-6 new-pad "> 
+                <p class="reqSpec">Chronic Lymphocytic Leukemia</p>
+                <div class="specDoc col-md-10 padd0"> 
+                    <div class="inlineDiv">
+                      <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                      
+                    </div>
+                    <div class="inlineDiv">
+                      <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                     
+                    </div>
+                    <div class="inlineDiv">
+                        <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                        
+                      </div>
+                     <div class="inlineDiv">
+                          <p><img src="assets/images/testUser.png" class="specDocImg"></p>
+                          
+                     </div>
+                </div>
+                <div class=" col-md-2">
+                  <p class="docCount"> +34</p>
+                </div>
+            </div>
+            <div class="col-md-3 new-pad text-center ">
+                <div class=""><button md-button class="reqBut ">Status</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+    </div>
+    <!--left content end -->
+    <!---right content start-->
+    <div class="rightContent">
+        <div class="roles">
+            <p class="roleSmall pull-left"> <b class="baseColor">Contract Title</b></p>
+            
+            <div class="pull-right controlBut">
+                <p class="pauseIcon"><a href="javascript:void(0);"><img src="assets/images/cont-edit.png"/> </a></p> 
+              <p class="pauseIcon"><a href="javascript:void(0);"><img src="assets/images/pause.png"/> </a></p>  
+              <p class="delIcon"> <a href="javascript:void(0);"><img src="assets/images/delete.png"/> </a> </p>
+            </div>
+           
+        </div>
+        <div class="roles-view col-md-12">
+          <md-tab-group>
+              <md-tab label="Details" >
+                  <div class="col-md-12 detTable">
+                  <table width="70%" class="col-md-8 ">                
+                      <tr>
+                        <td class="newText">Title:</td>
+                        <td><md-form-field class="example-full-width">
+                            <input mdInput placeholder="" value="">
+                          </md-form-field></td>
+                      </tr>
+                      <tr>
+                          <td class="newText">Client/Brand:</td>
+                          <td>
+                              <md-form-field class="example-full-width">
+                                  <input mdInput placeholder="" value="">
+                                </md-form-field>
+                          </td>
+                        </tr>   
+                        <tr>
+                            <td class="newText">Elligibility</td>
+                            <td class="blackCheck">
+                                <div class="contcheckDiv"> <mat-checkbox class="newCheck">Mandatory</mat-checkbox></div>
+                                <div class="contcheckDiv"> <mat-checkbox class="newCheck">Topic Specific</mat-checkbox></div><br>
+                                <div class="contcheckDiv"> <mat-checkbox class="newCheck">Optional</mat-checkbox></div>
+                                <div class="contcheckDiv"> <mat-checkbox class="newCheck">HCI Specific</mat-checkbox></div>
+                                
+                            </td>
+                          </tr>               
+                      <tr>
+                          <td class="newText">Notes:</td>
+                          <td>
+                            <md-form-field class="example-full-width">
+                              <input mdInput placeholder="" value="">
+                            </md-form-field><br>
+                            <md-form-field class="example-full-width">
+                              <input mdInput placeholder="" value="">
+                            </md-form-field><br>
+                          
+                          </td>
+                        </tr>
+                        <tr>
+                            <td class="newText">Attachment:</td>
+                            <td>
+                            <div class="file">
+                                <label for="file-input"></label>
+                                <input type="file" id="file-input">
+                                </div>
+                                <div class="col-md-12 padd0">
+                                    <div class="col-md-12 padd0 fileTitle">
+                                            <div class="col-md-2 padd0"><h4>Recent Uploads</h4></div>
+                                    </div>
+                                        <div class="col-md-6 filePart">
+                                            <div class="fileImage">
+                                                <p><img src="assets/images/pdf.png" class=""></p>
+                                            </div>
+                                            <div class="fileDetails">
+                                                <div class="fileProfile">
+                                                <h4 class="fileName">Chronic Lymphocytic Leukemia</h4>
+                                                <div class="fileControls">
+                                                    <a href="javascript:void(0);"> <img src="assets/images/delete.png" class=""></a>
+                                                    <a href="javascript:void(0);"> <img src="assets/images/pause.png" class=""></a>
+                                                    <a href="javascript:void(0);"> <img src="assets/images/quest.png" class=""></a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 filePart">
+                                            <div class="fileImage">
+                                                <p><img src="assets/images/excel.png" class=""></p>
+                                                </div>
+                                            <div class="fileDetails">
+                                                <div class="fileProfile">
+                                                    <h4 class="fileName">Chronic Lymphocytic Leukemia</h4>
+                                                    <div class="fileControls">
+                                                        <a href="javascript:void(0);"> <img src="assets/images/delete.png" class=""></a>
+                                                        <a href="javascript:void(0);"> <img src="assets/images/pause.png" class=""></a>
+                                                        <a href="javascript:void(0);"> <img src="assets/images/quest.png" class=""></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                </div>
+                               <div class="col-md-12 padd0">
+                                            <div class="col-md-12 padd0 fileTitle">
+                                                    <div class="col-md-2 padd0"><h4>Older Uploads</h4></div>
+                                            </div>
+                                           <div class="col-md-6 filePart">
+                                                    <div class="fileImage">
+                                                        <p><img src="assets/images/pdf.png" class=""></p>
+                                                    </div>
+                                                    <div class="fileDetails">
+                                                        <div class="fileProfile">
+                                                        <h4 class="fileName">Chronic Lymphocytic Leukemia</h4>
+                                                        <div class="fileControls">
+                                                            <a href="javascript:void(0);"> <img src="assets/images/delete.png" class=""></a>
+                                                            <a href="javascript:void(0);"> <img src="assets/images/pause.png" class=""></a>
+                                                            <a href="javascript:void(0);"> <img src="assets/images/quest.png" class=""></a>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-6 filePart">
+                                                    <div class="fileImage">
+                                                        <p><img src="assets/images/excel.png" class=""></p>
+                                                        </div>
+                                                    <div class="fileDetails">
+                                                        <div class="fileProfile">
+                                                            <h4 class="fileName">Chronic Lymphocytic Leukemia</h4>
+                                                            <div class="fileControls">
+                                                                <a href="javascript:void(0);"> <img src="assets/images/delete.png" class=""></a>
+                                                                <a href="javascript:void(0);"> <img src="assets/images/pause.png" class=""></a>
+                                                                <a href="javascript:void(0);"> <img src="assets/images/quest.png" class=""></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                 </div>
+                             </td>
+                          </tr>                                                        
+                    </table>
+                  
+                  </div>
+                   
+                   
+              </md-tab>
+              <md-tab label="Topics">
+                <div class="col-md-12 tabContent">
+                        <table width="70%" class="col-md-8 ">                
+                                <tr>
+                                  <td class="newText">Title:</td>
+                                  <td><md-form-field class="example-full-width">
+                                      <input mdInput placeholder="" value="">
+                                    </md-form-field></td>
+                                </tr>
+                                <tr>
+                                    <td class="newText">Client/Brand:</td>
+                                    <td>
+                                        <md-form-field class="example-full-width">
+                                            <input mdInput placeholder="" value="">
+                                          </md-form-field>
+                                    </td>
+                                  </tr>   
+                         </table>
+                         <div class="col-md-12 padd0">
+                            <div class="col-md-6">
+                                <div class="col-md-6"><p>Available Topics</p></div>
+                                <div class="col-md-6"><button md-button>Action</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                         </div>
+                         
+                </div>
+              </md-tab>
+              <md-tab label="HCI">
+                <div class="col-md-12 tabContent">
+                    <table width="70%" class="col-md-8 ">                
+                            <tr>
+                              <td class="newText">Title:</td>
+                              <td><md-form-field class="example-full-width">
+                                  <input mdInput placeholder="" value="">
+                                </md-form-field></td>
+                            </tr>
+                            <tr>
+                                <td class="newText">Client/Brand:</td>
+                                <td>
+                                    <md-form-field class="example-full-width">
+                                        <input mdInput placeholder="" value="">
+                                      </md-form-field>
+                                </td>
+                              </tr>   
+                     </table>
+            </div>
+              </md-tab>
+              <md-tab label="Signed Docs">
+                  <div class="col-md-12 detTable">
+                      <table width="70%" class="col-md-8 ">                
+                          <tr>
+                            <td class="newText">Title:</td>
+                            <td><md-form-field class="example-full-width">
+                                <input mdInput placeholder="" value="">
+                              </md-form-field></td>
+                          </tr>
+                          <tr>
+                              <td class="newText">Client/Brand:</td>
+                              <td>
+                                  <md-form-field class="example-full-width">
+                                      <input mdInput placeholder="" value="">
+                                    </md-form-field>
+                              </td>
+                            </tr>                
+                          <tr>
+                              <td class="newText">Product:</td>
+                              <td>
+                                <md-form-field class="example-full-width">
+                                  <input mdInput placeholder="" value="">
+                                </md-form-field>
+                                                             
+                              </td>
+                            </tr>
+                                                                                 
+                        </table>
+                      
+                      </div>
+                        <div class="col-md-12 ">
+                          <div class="col-md-12 padd0 parTitle">
+                            
+                              <div class="col-md-2 padd0"><h4>Signed Contracts</h4></div>
+                            <div class="col-md-7 padd0 col-md-offset-3">
+                                <div class="col-md-7 col-md-offset-3 ">
+                                  <div class="input-group sInputDiv">
+                                      <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Role..."/>
+                                      <div class="input-group-addon sIcon">
+                                        <span class="fa fa-search form-control-feedback"></span>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 padd0 sarrw">
+                                    <p class="pull-left"><img src="assets/images/reqarr.png" class=""></p>
+                                    <p class="pull-right"><img src="assets/images/reqarr2.png" class=""></p>
+                                </div>
+                              </div>
+                           
+                          </div>
+                            <div class="col-md-4 detPart">
+                                <div class="detpartContent">
+                                
+                                <div class="contImage">
+                                    <p><img src="assets/images/testUser.png" class="detimg1"></p>
+                                 
+                                </div>
+                                <div class="contDetails">
+                                    <div class="partProfile">
+                                      <h4 class="contName">Mathew Hayden</h4>
+                                      <div class="partAddress">
+                                       <p>27 August 2017 </p>
+                                          
+                                      </div>
+                                      <div class="contControls">
+                                         <a href="javascript:void(0);"> <img src="assets/images/bulb.png" class=""></a>
+                                         <a href="javascript:void(0);"> <img src="assets/images/star.png" class=""></a>
+                                          <a href="javascript:void(0);"> <img src="assets/images/map.png" class=""></a>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-4 detPart">
+                              <div class="detpartContent">
+                                                             
+                                <div class="contImage">
+                                    <p><img src="assets/images/testUser.png" class="detimg1"></p>
+                                    
+                                </div>
+                                <div class="contDetails">
+                                    <div class="partProfile">
+                                      <h4 class="contName">Mark Taylor</h4>
+                                      <div class="partAddress">
+                                       <p>27 August 2017 </p>
+                                     
+                                      </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="contControls">
+                                    <a href="javascript:void(0);"><img src="assets/images/bulb.png" class=""></a>
+                                    <a href="javascript:void(0);"> <img src="assets/images/star.png" class=""></a>
+                                      <a href="javascript:void(0);"> <img src="assets/images/map.png" class=""></a>
+                                </div>
+                                <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                              </div>
+                             
+                            </div>
+                            <div class="col-md-4 detPart">
+                                <div class="detpartContent">
+                              
+                                <div class="contImage">
+                                    <p><img src="assets/images/testUser.png" class="detimg1"></p>
+                                 
+                                </div>
+                                <div class="contDetails">
+                                    <div class="partProfile">
+                                      <h4 class="contName">John Samuel</h4>
+                                      <div class="partAddress">
+                                       <p>27 August 2017 </p>
+                                         
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="contControls">
+                                    <a href="javascript:void(0);"><img src="assets/images/bulb.png" class=""></a>
+                                      <a href="javascript:void(0);"><img src="assets/images/star.png" class=""></a>
+                                        <a href="javascript:void(0);"><img src="assets/images/map.png" class=""></a>
+                                </div>
+                                <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                                </div>
+                                
+                            </div>
+                          </div>
+                 
+              </md-tab>
+
+          </md-tab-group>
+          
+
+  </div>
+</div>
+<style>
+
+</style>

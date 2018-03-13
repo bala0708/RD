@@ -1,0 +1,66 @@
+.questSec{
+    font-family: robomedium;
+    padding: 15px 10px 10px 0px;
+    @include Onlybordertop;
+    @include Onlyborderbottom;
+    background: #f8f8f8;
+    width: 99%;
+    .questCount{
+        background: #c188ff;
+        padding: 3px 3px 3px 5px;
+        color: #fff;
+        font-size: 24px;
+        font-family: roboregular;
+        width:40px;
+    }
+    .questDetail{
+
+        color: #000;
+        p{
+            margin:10px 0 0;
+        }
+       
+    }
+    input[type=checkbox] {
+        display:none;
+    }
+    
+    input[type=checkbox] + label {
+        display:inline-block;
+        padding: 0 0px 0 22px;
+        background: url(../images/black-check.png);
+        background-repeat: no-repeat;
+        height: 17px;
+        font-weight: normal;
+        font-family: robomedium;cursor: pointer;
+        margin: 0 10px 0 0px;
+    }
+    
+        input[type=checkbox]:checked + label {
+        height: 17px;
+        display:inline-block;
+        padding: 0 0px 0 22px;
+        background: url(../images/checked.png);
+        background-repeat: no-repeat;
+        font-weight: normal;
+        font-family: robomedium;
+        cursor: pointer;    margin: 0 10px 0 0px;
+    }
+    .questImg{
+        max-width:100%;
+    }
+    .questImg1{
+
+        p{
+            font-family: robomedium;
+            font-size: 13p;
+        }
+    }
+    .boderBot
+    {
+        @include Onlyborderbottom;
+    }
+    .questContent{
+        padding: 15px 0;
+    }
+}

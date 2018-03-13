@@ -1,0 +1,32 @@
+.Modelactive{
+	background: rgb(185, 184, 184);
+    color: #fff !important;
+}
+.ng-invalid:not(form)  {
+ /* border-left: 5px solid #a94442;  red */
+}
+.alert{
+	color: red;	
+    padding: 0;
+}
+.clientPhoto img{
+	width: 85px;
+	padding: 5px;
+}
+.clientPhoto a{
+    font-size: 17px;
+    margin: 0;
+    color: red;
+    font-weight: bold;
+}
+.activeNew{
+border-bottom: 2px solid #0a9e07 !important;
+}
+.activeSus{
+    border-bottom: 2px solid #ff0000 !important;
+    background: #f3a2ad !important;
+}
+.cusMg {
+    margin: -8px 0;
+    width: 15%;
+}

@@ -1,0 +1,161 @@
+    .managePolls{
+    margin: 0 0 5%;
+    .reqBut{
+        border: 2px solid $cancelBut-color;
+        border-radius: 20px;
+        padding: 0 13px;
+        line-height: 19px;
+        text-transform: uppercase;
+        font-family: robomedium;
+        font-size: 12px;
+        margin: 12px 0 0;
+        background: transparent;
+        &:hover{
+            background: $cancelBut-color;
+            color: #fff;
+        }
+    }
+    .dataListnew{
+        margin: 5px 0 0;
+    }
+    .role-list {
+        margin: 10px 0 0px;
+    }
+    .reqSpec {
+        font-size: 19px;
+    }
+    .creatDat {
+        float: right;
+        width: 49%;
+        text-align: center;
+        font-size: 24px;
+    }
+    .creatDat1 {
+        float: right;
+        width:48%;
+        font-size: 24px;color: $secondary-color;
+        text-align: right;
+    }
+    
+    .creatTit {
+        width: 51%;
+        float: left;
+        span{
+            font-size: 12px;
+            font-family: roboBold;
+        }
+    }
+    .c1Td{
+        width: 173px;
+    }
+    .leftTabl{
+        .c1Td{
+            width: 140px;
+        }
+    }
+    .polImg{
+        width: 150px;
+        height: 150px;
+    }
+    .detTable{
+    .mat-form-field {
+        width: 60px;
+    }
+    }
+    }
+    .qusSection {
+        margin: 10px 0 10px;@include Onlyborderbottom;
+    }
+    .quesTabl{
+    td{    width: 15%;}
+    }
+    .sumText{
+        font-family: roboMedium;
+        border-bottom: 2px solid $primary-color;
+        width: 90px;
+        padding: 0 0 8px;
+        margin: 8px 0 20px;
+    }
+    .qustp{
+        font-size: 16px;
+        font-family: roboRegular;
+        margin: 0;color: #000; 
+    }
+    .qustCount{
+        border-radius: 4px;
+        padding: 4px 0;
+        font-size: 25px;
+        font-family: roboMedium;
+        
+    }
+    .actNew{
+        border: 1px solid #ccc;    padding: 5px;
+        margin: 8px;
+       .ContNum{
+           color: $secondary-color;    font-size: 30px;
+        }
+     
+        .qustp{
+            font-size: 18px;
+        }
+    }
+    .ContNum{
+        color: $primary-darker;
+    }
+    .previewBut{
+        background: $secondary-color;
+        color: #fff;
+        border: none;
+        box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.39);
+        border-radius: 20px;
+        padding: 5px 20%;
+        margin: 10px 0;    font-size: 16px;
+        &:hover{
+            background: $secondary-darker;
+        }
+    }
+    .updBut{
+        background: #0cd711;
+        color: #fff;
+        border: none;
+        box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.39);
+        border-radius: 20px;
+        padding: 5px 20%;
+        margin: 10px 0;    font-size: 16px;
+        &:hover{
+            background:#016F04;
+        }
+    }
+    .iconSec{
+        margin:6px 0 15px;
+        img{
+            width:28px;
+        }
+        a {
+            margin: 0 5% 0 0;
+        }
+    }
+        .plusIcn{
+            .fa-plus{
+                border: 2px solid #c188ff;
+                padding: 3px 5px 3px;
+                border-radius: 50%;
+                top: 5px;
+                color: #c188ff;
+            }
+        }
+        .minusIcn{
+            .fa-minus{
+                border: 2px solid red;
+                padding: 3px 5px 3px;
+                border-radius: 50%;
+                top: 5px;
+                color: red;
+            }
+        }
+.kpad{
+    padding: 0 2%;
+}
+.text-right{
+    text-align: right;
+}

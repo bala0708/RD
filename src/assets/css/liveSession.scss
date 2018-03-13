@@ -1,0 +1,133 @@
+.liveSession{
+    margin: 0 0 40px;
+
+    .roles{
+        position: relative;
+    }
+    .idNum{
+        position: absolute;
+        left: 48%;
+        color: $primary-color;
+    }
+    .questImg1 {
+        max-width: 27px;
+    }
+    .reqBg {
+        img{
+            margin: 0px auto;
+            max-width: 100%;
+        }
+    }
+    .liveTime{
+        color:$secondary-darker;
+        font-size: 21px;
+        font-family: robomedium;
+        line-height: normal;
+        margin: 30% 0 0;
+    }
+    .startTime{
+        font-size: 21px;
+        color: $primary-darker;
+        font-family: robomedium;
+        line-height: normal;
+        margin: 15% 0 0;
+    }
+    .inlineDiv {
+        p{
+            margin: 0;
+        }
+    }
+    .docCount{
+        margin: 0;
+    }
+
+    .logoSec{
+        padding: 9px 9px 9px;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid $cus-bordercolor;
+        margin: 5px 0;
+    }
+    .logoSecImg {
+        width: 120px;
+        height: 82px;
+    }
+    .dataListnew {
+        padding: 9px 0px 0px;
+    }
+    .questSec{
+        width:100%;
+        border:none;    margin-bottom: 10px;
+        .questContent {
+            padding: 15px 15px;
+        }
+    }
+
+    .newCheckdv{
+        margin: 10% 0 0;
+    }
+    .newCheckdv1{
+        margin: 5% 0 0;
+    }
+    .blackCheck{
+        .mat-checkbox-layout .mat-checkbox-label{
+            font-size: 13px;margin-right: 15px;
+        }
+    }
+    .actionSec {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        z-index: 10;
+        input[type=checkbox] {
+            display:none;
+        }
+        p{
+            margin: 0;
+        }
+        label{
+            margin:3px  6px;
+        }
+        input[type=checkbox] + label {
+            display:inline-block;
+            padding: 0 0px 0 22px;
+            background: url(../images/black-check.png);
+            background-repeat: no-repeat;
+            height: 17px;
+            font-weight: normal;
+            font-family: robomedium;cursor: pointer;
+            
+        }
+        
+            input[type=checkbox]:checked + label {
+            height: 17px;
+            display:inline-block;
+            padding: 0 0px 0 22px;
+            background: url(../images/checked.png);
+            background-repeat: no-repeat;
+            font-weight: normal;
+            font-family: robomedium;
+            cursor: pointer;  
+        }
+        .actionBut {
+            background: $secondary-color;
+            color: #fff;
+            border-radius: 20px;
+            padding: 2px 20px;
+            height: 26px;
+            line-height: 23px;
+            margin: 0px 20px 0;
+            width: auto;
+            min-width: auto;
+            border: none;
+            font-weight: normal;
+            font-size: 15px;
+        }
+    }
+    .new-pad {
+        padding: 8px;
+    }
+    .scrollingPart {
+        height: 334px;
+    }
+}

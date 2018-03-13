@@ -1,0 +1,11 @@
+
+  <div class="container" style="padding-top: 10%;">
+<div class="col-md-12 conSow">
+    <!--<iframe src = "assets/ViewerJS/#http://45.55.48.150:2118/images/contentfile/23b31814-9c24-4f7a-9134-1cf6623a918a.pdf" 
+        width='100%' height='auto' allowfullscreen webkitallowfullscreen></iframe>-->
+      
+  <iframe class="cusFrame" *ngIf="viewFile.file_name" [src] = "fileUrl" width='100%'  allowfullscreen webkitallowfullscreen></iframe>
+</div>
+  <p  *ngIf="!viewFile.file_name">No Document Found</p>
+
+  </div>
