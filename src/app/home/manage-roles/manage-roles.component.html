@@ -62,13 +62,13 @@
                   <tr>
                     <td class="newText">Name:</td>
                     <td><md-input-container>
-                        <input mdInput autocomplete="off" name="role_name" #role_name="ngModel"  [(ngModel)]="roleListViewInit.role_name" [disabled]=is_edit>
+                        <input matInput autocomplete="off" name="role_name" #role_name="ngModel"  [(ngModel)]="roleListViewInit.role_name" [disabled]=is_edit>
                       </md-input-container></td>
                   </tr>
                   <tr>
                       <td class="newText">Short Name:</td>
                       <td><md-input-container>
-                          <input mdInput autocomplete="off" name="role_short_name" #role_short_name="ngModel" [(ngModel)]="roleListViewInit.role_short_name"  [disabled]=is_edit>
+                          <input matInput autocomplete="off" name="role_short_name" #role_short_name="ngModel" [(ngModel)]="roleListViewInit.role_short_name"  [disabled]=is_edit>
                         </md-input-container></td>
                     </tr>                
                   <tr>
@@ -93,14 +93,14 @@
                       <tr>
                           <td class="newText">No of Users:</td>
                           <td><md-input-container>
-                              <input autocomplete="off" mdInput name="no_of_user" #no_of_user="ngModel"  [(ngModel)]="roleListViewInit.no_of_user" [disabled]=is_edit>
+                              <input autocomplete="off" matInput name="no_of_user" #no_of_user="ngModel"  [(ngModel)]="roleListViewInit.no_of_user" [disabled]=is_edit>
                             </md-input-container></td>
                         </tr>  
 
                       <tr>
                         <td class="newText">Feature Device access:</td>
                         <td><md-input-container>
-                            <input autocomplete="off" mdInput name="feature_device_access" #feature_device_access="ngModel" [(ngModel)]="roleListViewInit.feature_device_access" [disabled]=is_edit>
+                            <input autocomplete="off" matInput name="feature_device_access" #feature_device_access="ngModel" [(ngModel)]="roleListViewInit.feature_device_access" [disabled]=is_edit>
                           </md-input-container></td>
                       </tr>                                                              
                 </table>
@@ -257,7 +257,7 @@
                   <tr>
                     <td class="newText">Name:</td>
                     <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !username.valid }">
-                        <input mdInput 
+                        <input matInput 
                           autocomplete="off" 
                           autofocus
                           name="username" 
@@ -271,7 +271,7 @@
                   <tr>
                       <td class="newText">Short Name:</td>
                       <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !role_short_name.valid }">
-                          <input mdInput 
+                          <input matInput 
                             autocomplete="off" 
                             name="role_short_name" 
                             [(ngModel)]="roleUser.role_short_name" 
@@ -306,7 +306,7 @@
                       <tr>
                           <td class="newText">No of Users:</td>
                           <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !no_of_users.valid }">
-                              <input mdInput 
+                              <input matInput 
                                 type="number"
                                 autocomplete="off" 
                                 name="no_of_users" 
@@ -320,7 +320,7 @@
                             <tr>
                                 <td class="newText">Feature Device access:</td>
                                 <td><md-input-container [ngClass]="{ 'has-error': role.submitted && !feature_device_access.valid }">
-                                    <input mdInput 
+                                    <input matInput 
                                       type="number"
                                       autocomplete="off" 
                                       name="feature_device_access" 

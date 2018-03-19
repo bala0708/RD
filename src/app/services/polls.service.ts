@@ -101,6 +101,13 @@ export class PollsService {
             return data;
         }).catch(this.handleError);
     }
+    addQuestion(data){
+        return this.http.post('/addQuestion',data)
+        .map((response: Response)=>{
+            let data = response.json();
+            return data;
+        }).catch(this.handleError); 
+    }
     public handleError(error: Response) {
         return Observable.throw(error || 'Server error'); 
     }

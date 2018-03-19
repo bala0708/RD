@@ -1350,3 +1350,12 @@
     border: none;
     font-weight: normal;    color: #fff;
 }
+
+input.mobileplus::after{
+    content: " + ";
+    width: 20px;
+    height:20px;
+    position: absolute;
+    right: 0;
+    font-size: 16px;
+}

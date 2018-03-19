@@ -234,7 +234,7 @@
                   <table width="100%" class="contTabl">
                       <tr><td width=" 25%"><label>Description</label></td>
                         <td>
-                          <div class="md-form input-effect">   
+                          <div class="mat-form input-effect">   
                             <input class="effect-17" type="text" autocomplete="off" required id="orangeForm-name" [value]="paymentInit.description"> 
                             <span class="focus-border"></span>
                           </div>                
@@ -257,7 +257,7 @@
                 </div>
                  
               </md-tab>
-              <md-tab label="Notes" mdTooltip="Disabled">
+              <md-tab label="Notes" matTooltip="Disabled">
                 
                <!-- <div class="col-md-12 vdoSection padd0" *ngIf="paymentInit.meeting">
                   <div class="col-md-6 padd0">
@@ -267,7 +267,7 @@
                       </div>
                       <div class="col-md-7"> 
                         <a *ngIf="paymentInit.meeting.meetingVideo[0].video_url" target="_blank" href="{{paymentInit.meeting.meetingVideo[0].video_url}}">
-                          <p mdTooltip="Click here to view video in New Tab"   class="reqSpec">{{paymentInit.meeting.topic.topic_title}}</p>
+                          <p matTooltip="Click here to view video in New Tab"   class="reqSpec">{{paymentInit.meeting.topic.topic_title}}</p>
                         </a> 
                         <p class="vdoTime"><span>{{paymentInit.createdAt | date:'h:mm'}}{{paymentInit.createdAt | date:'a'}} - {{dateZone}}</span><span class="pull-right">{{paymentInit.createdAt | date:'yyyy-M-dd'}}</span></p>
                       </div>

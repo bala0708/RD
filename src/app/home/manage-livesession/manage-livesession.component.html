@@ -1,707 +1,974 @@
 <div class="col-lg-12 liveSession">
-    <div class="leftContent">
-        <div class="roles  col-md-12">
-          <p class="pull-left">Live Sessions</p>
-          <div class="pull-right">
-            <div class="menuBar"></div>
-            <div class="menuBar"></div>
-            <div class="menuBar"></div>
-          </div>
+  <div class="leftContent">
+      <div class="roles  col-md-12">
+        <p class="pull-left">Live Sessions</p>
+        <div class="pull-right">
+          <div class="menuBar"></div>
+          <div class="menuBar"></div>
+          <div class="menuBar"></div>
         </div>
-        <div class=" col-md-12 logoSec">
-          <div class="logoSecImg">  
-          <img src="assets/images/logo.jpg" class="img-responsive">
-          </div>
+      </div>
+      <div class=" col-md-12 logoSec">
+        <div class="logoSecImg">  
+        <img src="assets/images/logo.jpg" class="img-responsive">
         </div>
-        <div class="dataListnew col-md-12">
-            <div class="col-md-12  searchPart">
-          <div class="col-md-10 searchField">
-            <div class="input-group sInputDiv">
-                <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Live Session..."/>
-                <div class="input-group-addon sIcon">
-                  <span class="fa fa-search form-control-feedback"></span>
-                </div>
+      </div>
+      <div class="dataListnew col-md-12">
+          <div class="col-md-12  searchPart">
+        <div class="col-md-10 searchField">
+          <div class="input-group sInputDiv">
+              <input #input class="form-control sInput" type="text" [(ngModel)]="queryString" name="searchroleName"  id="searchroleName" placeholder="Search Live Session..."/>
+              <div class="input-group-addon sIcon">
+                <span class="fa fa-search form-control-feedback"></span>
               </div>
-          </div>
-          <div class="col-md-2 padd0 sarrw">
-              <p class="pull-left"><img src="assets/images/reqarr.png" class=""></p>
-              <p class="pull-right"><img src="assets/images/reqarr2.png" class=""></p>
-          </div>
-        </div>
-
-        <div class="reqDetails col-md-12 padd0">
-           <!--loop start-->
-              <div class="customPage" *ngIf="(listLiveSession | SearchPipe: queryString).length === 0">
-                        No Records Found
-                </div> 
-                <div class="col-md-12 scrollingPart">
-      <div *ngFor="let items of listLiveSession | SearchPipe : queryString | paginate: { itemsPerPage: 10, currentPage: p }" class="reqDetails col-md-12 padd0" >  
-          <div class="col-md-12 padd0 reqBg" [ngClass]="{'blue-bg': items.typeOfMeeting==1, 'green-bg': items.typeOfMeeting==2, 'Darkgreen-bg': items.typeOfMeeting==3, 'activeRow':items.id==activeRow}">
-              <div class="col-md-12 padd0 borTopBot">
-            <div class="col-md-3 new-pad " (click)="getOneRecord(items.id)">
-            <img src="{{APIURL}}{{items.user.photo_path}}{{items.user.photo}}" class="reqMainimg">
-            <p class="docName">{{items.user.firstName}}</p>
-          </div>
-          <div class="col-md-6 new-pad " (click)="getOneRecord(items.id)"> 
-              <p class="reqSpec">{{items.topic.topic_title}}</p>
-              <div class="specDoc col-md-10 padd0"> 
-                  <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[0]">
-                    <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
-                        <img *ngIf="items.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
-                        <img *ngIf="items.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
-                        <img *ngIf="items.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
-                  </div> -->
-                  <div class="inlineDiv" *ngFor="let dataReq of items.meetingRequest;let i=index">
-                    <div *ngIf="i<4">
-                    <div *ngIf="dataReq.toUser">
-                     <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="specDocImg"></p>
-                     <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
-                     <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
-                     <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
-                    </div>
-                    </div>
-                  </div>
-                  <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[1]">
-                    <p><img src="{{APIURL}}{{items.meetingRequest[1].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
-                        <img *ngIf="items.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
-                        <img *ngIf="items.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
-                        <img *ngIf="items.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
-                  </div>
-                  <div class="inlineDiv" *ngIf="items.meetingRequest[2]">
-                      <p><img src="{{APIURL}}{{items.meetingRequest[2].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
-                        <img *ngIf="items.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
-                        <img *ngIf="items.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
-                        <img *ngIf="items.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
-                    </div>
-                   <div class="inlineDiv" *ngIf="items.meetingRequest[3]">
-                        <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[3].toUser.photo}}" class="specDocImg"></p>
-                        <img *ngIf="items.meetingRequest[3].status=='0'"  class="" src="assets/images/quest.png">
-                        <img *ngIf="items.meetingRequest[3].status=='1'" class="" src="assets/images/cusChecked.png">
-                        <img *ngIf="items.meetingRequest[3].status=='2'" class="" src="assets/images/cusCheck.png">
-                   </div> -->
-              </div>
-              <div class=" col-md-2">
-                <p class="docCount"> +{{items.meetingRequest.length}}</p>
-              </div>
-          </div>
-            <div class="col-md-3 new-pad ">
-                  <p class="meetId"> ID:{{items.id}}</p>
-                  <p class="startTime" *ngIf="items.status==1 && !items.sessionId">{{getTimeDifference(items.start_time)}}</p>
-                 <p class="liveTime" *ngIf="items.status==1 && items.sessionId">Live Now</p> 
-                 <p class="liveTime" *ngIf="items.status==2">Completed</p>          
             </div>
-              </div>
         </div>
-        <!--loop end-->
+        <div class="col-md-2 padd0 sarrw">
+            <p class="pull-left"><img src="assets/images/reqarr.png" class=""></p>
+            <p class="pull-right"><img src="assets/images/reqarr2.png" class=""></p>
+        </div>
       </div>
+
+      <div class="reqDetails col-md-12 padd0">
+         <!--loop start-->
+            <div class="customPage" *ngIf="(listLiveSession | SearchPipe: queryString).length === 0">
+                      No Records Found
+              </div> 
+              <div class="col-md-12 scrollingPart">
+    <div *ngFor="let items of listLiveSession | SearchPipe : queryString | paginate: { itemsPerPage: 10, currentPage: p }" class="reqDetails col-md-12 padd0" >  
+        <div class="col-md-12 padd0 reqBg" [ngClass]="{'blue-bg': items.typeOfMeeting==1, 'green-bg': items.typeOfMeeting==2, 'Darkgreen-bg': items.typeOfMeeting==3, 'activeRow':items.id==activeRow}">
+            <div class="col-md-12 padd0 borTopBot">
+          <div class="col-md-3 new-pad " (click)="getOneRecord(items.id)">
+          <img src="{{APIURL}}{{items.user.photo_path}}{{items.user.photo}}" class="reqMainimg">
+          <p class="docName">{{items.user.firstName}}</p>
+        </div>
+        <div class="col-md-6 new-pad " (click)="getOneRecord(items.id)"> 
+            <p class="reqSpec">{{items.topic.topic_title}}</p>
+            <div class="specDoc col-md-10 padd0"> 
+                <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[0]">
+                  <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                      <img *ngIf="items.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                      <img *ngIf="items.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                      <img *ngIf="items.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                </div> -->
+                <div class="inlineDiv" *ngFor="let dataReq of items.meetingRequest;let i=index">
+                  <div *ngIf="i<4">
+                  <div *ngIf="dataReq.toUser">
+                   <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="specDocImg"></p>
+                   <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                   <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                   <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
+                  </div>
+                  </div>
+                </div>
+                <!-- <div class="inlineDiv" *ngIf="items.meetingRequest[1]">
+                  <p><img src="{{APIURL}}{{items.meetingRequest[1].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                      <img *ngIf="items.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                      <img *ngIf="items.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                      <img *ngIf="items.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
+                </div>
+                <div class="inlineDiv" *ngIf="items.meetingRequest[2]">
+                    <p><img src="{{APIURL}}{{items.meetingRequest[2].toUser.photo_path}}{{items.meetingRequest[0].toUser.photo}}" class="specDocImg"></p>
+                      <img *ngIf="items.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                      <img *ngIf="items.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                      <img *ngIf="items.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                  </div>
+                 <div class="inlineDiv" *ngIf="items.meetingRequest[3]">
+                      <p><img src="{{APIURL}}{{items.meetingRequest[0].toUser.photo_path}}{{items.meetingRequest[3].toUser.photo}}" class="specDocImg"></p>
+                      <img *ngIf="items.meetingRequest[3].status=='0'"  class="" src="assets/images/quest.png">
+                      <img *ngIf="items.meetingRequest[3].status=='1'" class="" src="assets/images/cusChecked.png">
+                      <img *ngIf="items.meetingRequest[3].status=='2'" class="" src="assets/images/cusCheck.png">
+                 </div> -->
+            </div>
+            <div class=" col-md-2">
+              <p class="docCount"> +{{items.meetingRequest.length}}</p>
+            </div>
+        </div>
+          <div class="col-md-3 new-pad ">
+                <p class="meetId"> ID:{{items.id}}</p>
+                <p class="startTime" *ngIf="items.status==1 && !items.sessionId">{{getTimeDifference(items.start_time)}}</p>
+               <p class="liveTime" *ngIf="items.status==1 && items.sessionId">Live Now</p> 
+               <p class="liveTime" *ngIf="items.status==2">Completed</p>          
+          </div>
+            </div>
       </div>
-      <div class="col-lg-12 customPage"  *ngIf="(listLiveSession).length != 0">
-        <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
-      </div>
-        <!--loop end-->
-      </div>
+      <!--loop end-->
     </div>
     </div>
-    <!--left content end -->
-    <!---right content start-->
-    <div class="rightContent">
+    <div class="col-lg-12 customPage"  *ngIf="(listLiveSession).length != 0">
+      <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+    </div>
+      <!--loop end-->
+    </div>
+  </div>
+  </div>
+  <!--left content end -->
+  <!---right content start-->
+  <div class="rightContent">
 
-        <div class="roles" *ngIf="(requestInit).length != 0">
-            <p class="roleSmall pull-left"> <b class="baseColor">{{requestInit.topic.topic_title}}</b></p>
-            <p class="idNum">ID:{{requestInit.id}}</p>
-            <div class="pull-right controlBut">
-             
-              <p class="pauseIcon"><a href="javascript:void(0);" (click)="suspendMeeting(requestInit.id)"><img src="assets/images/pause.png"/> </a></p>  
+      <div class="roles" *ngIf="(requestInit).length != 0">
+          <p class="roleSmall pull-left"> <b class="baseColor">{{requestInit.topic.topic_title}}</b></p>
+          <p class="idNum">ID:{{requestInit.id}}</p>
+          <div class="pull-right controlBut">
            
-            </div>
-           
-        </div>
-        <div class="roles-view col-md-12">
-          <md-tab-group>
-              <md-tab label="Details">
-                <div class="customPage" *ngIf="(requestInit).length === 0">
-                        No Records Found
-                </div>
-                  <div class="col-md-12 detTable" *ngIf="(requestInit).length != 0">
-                  <table width="70%" class="col-md-8 ">                
-                      <tr>
-                        <td class="newText">Topic:</td>
-                        <td><md-form-field class="example-full-width">
-                            <input mdInput [value]="requestInit.topic.topic_title">
-                          </md-form-field></td>
-                      </tr>
-                      <tr>
-                          <td class="newText">ID:</td>
-                          <td>
-                              <md-form-field class="example-full-width">
-                                  <input mdInput [value]="requestInit.id">
-                                </md-form-field>
-                          </td>
-                        </tr>                
-                      <tr>
-                          <td class="newText">Description:</td>
-                          <td>
-                            <div class="descp">
-                              <p>{{requestInit.queryRelated}}</p>
-                            </div>
-                          </td>
-                        </tr>
-                                                                               
-                    </table>
-                    <div class="col-md-4 displayTime">
-                <p class="specTime">
-                   <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
-                   <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
-                </p>
-                <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
-                     <hr>
-                    </div>
-                  </div>
-                    <div class="col-md-12 " *ngIf="(requestInit).length != 0">
-                        <div class="parTitle"><h4>Participants</h4></div>
-                        <div class="col-md-4 detPart"  *ngFor="let dataReq of requestInit.meetingRequest;let i=index">
-                          <div *ngIf="i<3">
-                          <div *ngIf="dataReq.toUser">
-                           <div class="detpartContent">
-                              <div class="partDetails">
-                                 <div class="partProfile">
-                                    <h4 class="partName">{{dataReq.toUser.firstName}}</h4>
-                                    <div class="partAddress">
-                                       <p>{{dataReq.toUser.companyName}} </p>
-                                       <p>{{dataReq.toUser.email}}  </p>
-                                       <p>{{dataReq.toUser.telephone}} </p>
-                                       <button type="button" class=" details" (click)=viewDetailsUsers(dataReq.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="partImage">
-                                 <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="detimg1"></p>
-                                 
-                              </div>
-                              <div class="notifyImg">
-                                 <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
-                                 <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
-                                 <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
-                              </div>
-                           </div>
-                           </div>
-                           </div>
-                        </div>
-                        <!-- <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[0]">
-                            <div class="detpartContent">
-                            <div class="partDetails">
-                                <div class="partProfile">
-                                  <h4 class="partName">{{requestInit.meetingRequest[0].toUser.firstName}}</h4>
-                                  <div class="partAddress">
-                                   <p>{{requestInit.meetingRequest[0].toUser.companyName}} </p>
-                                      <p>{{requestInit.meetingRequest[0].toUser.email}}  </p>
-                                      <p>{{requestInit.meetingRequest[0].toUser.telephone}} </p>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="partImage">
-                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[0].toUser.photo_path}}{{requestInit.meetingRequest[0].toUser.photo}}" class="detimg1"></p>
-                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[0].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
-                            </div>
-                            <div class="notifyImg">
-                                <img *ngIf="requestInit.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
-                                <img *ngIf="requestInit.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
-                                <img *ngIf="requestInit.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
-                            </div>
-                            </div>
-                           
-                        </div>
-                        <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[1]">
-                          <div class="detpartContent">
-                            <div class="partDetails">
-                                <div class="partProfile">
-                                  <h4 class="partName">{{requestInit.meetingRequest[1].toUser.firstName}}</h4>
-                                  <div class="partAddress">
-                                   <p>{{requestInit.meetingRequest[1].toUser.companyName}} </p>
-                                      <p>{{requestInit.meetingRequest[1].toUser.email}}  </p>
-                                      <p>{{requestInit.meetingRequest[1].toUser.telephone}} </p>
-                                  </div>
-                                </div>
-                            </div>
-                         
-                            <div class="partImage">
-                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[1].toUser.photo_path}}{{requestInit.meetingRequest[1].toUser.photo}}" class="detimg1"></p>
-                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[1].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
-                            </div>
-                            <div class="notifyImg">
-                              <img *ngIf="requestInit.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
-                              <img *ngIf="requestInit.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
-                              <img *ngIf="requestInit.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
-                            </div>
+            <p class="pauseIcon"><a href="javascript:void(0);" (click)="suspendMeeting(requestInit.id)"><img src="assets/images/pause.png"/> </a></p>  
+         
+          </div>
+         
+      </div>
+      <div class="actionSec">
+          <div class="pull-left"> <button mat-button class="actionBut">Action</button></div>
+          <div class="pull-right"> 
+            <!--<input type="checkbox"  class="questCheck" id="true5">
+            <label for="true5"></label>-->
+            <p class="blackCheck">
+                <mat-checkbox class="newCheck"></mat-checkbox>
+            </p>
+          </div>
+      </div>
+      <div class="roles-view col-md-12">
+          <mat-tab-group md-align-tabs="bottom" id="ink-top-fix">
+            <mat-tab label="Details">
+              <div class="customPage" *ngIf="(requestInit).length === 0">
+                      No Records Found
+              </div>
+                <div class="col-md-12 detTable" *ngIf="(requestInit).length != 0">
+                <table width="70%" class="col-md-8 ">                
+                    <tr>
+                      <td class="newText">Topic:</td>
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput [value]="requestInit.topic.topic_title">
+                        </mat-form-field></td>
+                    </tr>
+                    <tr>
+                        <td class="newText">ID:</td>
+                        <td>
+                            <mat-form-field class="example-full-width">
+                                <input matInput [value]="requestInit.id">
+                              </mat-form-field>
+                        </td>
+                      </tr>                
+                    <tr>
+                        <td class="newText">Description:</td>
+                        <td>
+                          <div class="descp">
+                            <p>{{requestInit.queryRelated}}</p>
                           </div>
-                         
-                        </div>
-                        <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[2]">
-                            <div class="detpartContent">
+                        </td>
+                      </tr>
+                                                                             
+                  </table>
+                  <div class="col-md-4 displayTime">
+              <p class="specTime">
+                 <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                 <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+              </p>
+              <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
+                   <hr>
+                  </div>
+                </div>
+                  <div class="col-md-12 " *ngIf="(requestInit).length != 0">
+                      <div class="parTitle"><h4>Participants</h4></div>
+                      <div class="col-md-4 detPart"  *ngFor="let dataReq of requestInit.meetingRequest;let i=index">
+                        <div *ngIf="i<3">
+                        <div *ngIf="dataReq.toUser">
+                         <div class="detpartContent">
                             <div class="partDetails">
-                                <div class="partProfile">
-                                  <h4 class="partName">{{requestInit.meetingRequest[2].toUser.firstName}}</h4>
+                               <div class="partProfile">
+                                  <h4 class="partName">{{dataReq.toUser.firstName}}</h4>
                                   <div class="partAddress">
-                                   <p>{{requestInit.meetingRequest[2].toUser.companyName}} </p>
-                                      <p>{{requestInit.meetingRequest[2].toUser.email}}  </p>
-                                      <p>{{requestInit.meetingRequest[2].toUser.telephone}} </p>
+                                     <p>{{dataReq.toUser.companyName}} </p>
+                                     <p>{{dataReq.toUser.email}}  </p>
+                                     <p>{{dataReq.toUser.telephone}} </p>
+                                     <button type="button" class=" details" (click)=viewDetailsUsers(dataReq.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
                                   </div>
-                                </div>
+                               </div>
                             </div>
                             <div class="partImage">
-                                <p><img src="{{APIURL}}{{requestInit.meetingRequest[2].toUser.photo_path}}{{requestInit.meetingRequest[2].toUser.photo}}" class="detimg1"></p>
-                                <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[2].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                               <p><img src="{{APIURL}}{{dataReq.toUser.photo_path}}{{dataReq.toUser.photo}}" class="detimg1"></p>
+                               
                             </div>
                             <div class="notifyImg">
-                              <img *ngIf="requestInit.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
-                              <img *ngIf="requestInit.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
-                              <img *ngIf="requestInit.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                               <img *ngIf="dataReq.status=='0'"  class="" src="assets/images/quest.png">
+                               <img *ngIf="dataReq.status=='1'" class="" src="assets/images/cusChecked.png">
+                               <img *ngIf="dataReq.status=='2'" class="" src="assets/images/cusCheck.png">
                             </div>
-                            </div>
-                            
-                        </div> -->
+                         </div>
+                         </div>
+                         </div>
                       </div>
-                   
-              </md-tab>
-              <md-tab label="Participants">
-                <div class="customPage" *ngIf="(requestInit).length === 0">
-                        No Records Found
-                </div>
-                <div class="col-md-12 tabContent" *ngIf="(requestInit).length != 0">
-                  <div class="col-md-4 detPart">
-                      <p class="reqSpec">{{requestInit.topic.topic_title}}</p>
-                      <div class="partTime">
-                      <p class="specTime">
-                       <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
-                       <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
-                       </p>
-                      <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
-                      </div>
-                    </div>
-                    <div class="col-md-4 detPart" *ngFor="let users of requestInit.meetingRequest">
-                        <div *ngIf="users.toUser"> 
-                      <div class="detpartContent">
+                      <!-- <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[0]">
+                          <div class="detpartContent">
                           <div class="partDetails">
                               <div class="partProfile">
-                                <h4 class="partName">{{users.toUser.firstName}}</h4>
-                                  <div class="partAddress">
-                                   <p>{{users.toUser.companyName}} </p>
-                                      <p>{{users.toUser.email}}  </p>
-                                      <p>{{users.toUser.telephone}} </p>
-                                  </div>
+                                <h4 class="partName">{{requestInit.meetingRequest[0].toUser.firstName}}</h4>
+                                <div class="partAddress">
+                                 <p>{{requestInit.meetingRequest[0].toUser.companyName}} </p>
+                                    <p>{{requestInit.meetingRequest[0].toUser.email}}  </p>
+                                    <p>{{requestInit.meetingRequest[0].toUser.telephone}} </p>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="partImage">
+                              <p><img src="{{APIURL}}{{requestInit.meetingRequest[0].toUser.photo_path}}{{requestInit.meetingRequest[0].toUser.photo}}" class="detimg1"></p>
+                              <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[0].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                          </div>
+                          <div class="notifyImg">
+                              <img *ngIf="requestInit.meetingRequest[0].status=='0'"  class="" src="assets/images/quest.png">
+                              <img *ngIf="requestInit.meetingRequest[0].status=='1'" class="" src="assets/images/cusChecked.png">
+                              <img *ngIf="requestInit.meetingRequest[0].status=='2'" class="" src="assets/images/cusCheck.png">
+                          </div>
+                          </div>
+                         
+                      </div>
+                      <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[1]">
+                        <div class="detpartContent">
+                          <div class="partDetails">
+                              <div class="partProfile">
+                                <h4 class="partName">{{requestInit.meetingRequest[1].toUser.firstName}}</h4>
+                                <div class="partAddress">
+                                 <p>{{requestInit.meetingRequest[1].toUser.companyName}} </p>
+                                    <p>{{requestInit.meetingRequest[1].toUser.email}}  </p>
+                                    <p>{{requestInit.meetingRequest[1].toUser.telephone}} </p>
+                                </div>
                               </div>
                           </div>
                        
                           <div class="partImage">
-                              <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>
-                              <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                              <p><img src="{{APIURL}}{{requestInit.meetingRequest[1].toUser.photo_path}}{{requestInit.meetingRequest[1].toUser.photo}}" class="detimg1"></p>
+                              <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[1].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
                           </div>
                           <div class="notifyImg">
-                            <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
-                              <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
-                              <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                            <img *ngIf="requestInit.meetingRequest[1].status=='0'"  class="" src="assets/images/quest.png">
+                            <img *ngIf="requestInit.meetingRequest[1].status=='1'" class="" src="assets/images/cusChecked.png">
+                            <img *ngIf="requestInit.meetingRequest[1].status=='2'" class="" src="assets/images/cusCheck.png">
                           </div>
                         </div>
                        
-                      </div>                      
                       </div>
-                </div>
-              </md-tab>
-              <md-tab label="Content">
-                  <div class="col-md-12 tabContent">
-                    <div class="col-md-12 contentDetail">
-                      <div class="col-md-8 ">
-                         <p> <span class="conLabel">Topic:</span>  <span class="reqSpec">Chronic Lymphocytic Leukemia</span></p>
-                         <p> <span class="conLabel">ID: </span> <span class="conCount">158</span></p>
-                      </div>
-                      <div class="col-md-4 displayTime">
-                          <p class="specTime">
-                              <span class="spechour" >01:00 </span>
-                              <span class="spectim">PM EST</span>
-                           </p>
-                           <p class="specDate">15 September 17</p>
-                           <hr>
+                      <div class="col-md-4 detPart" *ngIf="requestInit.meetingRequest[2]">
+                          <div class="detpartContent">
+                          <div class="partDetails">
+                              <div class="partProfile">
+                                <h4 class="partName">{{requestInit.meetingRequest[2].toUser.firstName}}</h4>
+                                <div class="partAddress">
+                                 <p>{{requestInit.meetingRequest[2].toUser.companyName}} </p>
+                                    <p>{{requestInit.meetingRequest[2].toUser.email}}  </p>
+                                    <p>{{requestInit.meetingRequest[2].toUser.telephone}} </p>
+                                </div>
+                              </div>
                           </div>
+                          <div class="partImage">
+                              <p><img src="{{APIURL}}{{requestInit.meetingRequest[2].toUser.photo_path}}{{requestInit.meetingRequest[2].toUser.photo}}" class="detimg1"></p>
+                              <button type="button" class=" details" (click)=viewDetailsUsers(requestInit.meetingRequest[2].toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                          </div>
+                          <div class="notifyImg">
+                            <img *ngIf="requestInit.meetingRequest[2].status=='0'"  class="" src="assets/images/quest.png">
+                            <img *ngIf="requestInit.meetingRequest[2].status=='1'" class="" src="assets/images/cusChecked.png">
+                            <img *ngIf="requestInit.meetingRequest[2].status=='2'" class="" src="assets/images/cusCheck.png">
+                          </div>
+                          </div>
+                          
+                      </div> -->
                     </div>
-                    <div class="col-md-12 docInfo">
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 01</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 02</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 03</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 04</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 05</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Document Name 06</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div> </div>
-                  </div>
-              </md-tab>
-              <md-tab label="Polls">
-                  <div class="col-md-12 tabContent">
-                    <div class="col-md-12 contentDetail">
-                      <div class="col-md-8 ">
-                         <p> <span class="conLabel">Topic:</span>  <span class="reqSpec">Chronic Lymphocytic Leukemia</span></p>
-                         <p> <span class="conLabel">ID: </span> <span class="conCount">158</span></p>
-                      </div>
-                      <div class="col-md-4 displayTime">
-                          <p class="specTime">
-                              <span class="spechour" >01:00 </span>
-                              <span class="spectim">PM EST</span>
-                           </p>
-                           <p class="specDate">15 September 17</p>
-                           <hr>
-                          </div>
+            </mat-tab>
+            
+            <mat-tab label="Participants">
+              <div class="customPage" *ngIf="(requestInit).length === 0">
+                      No Records Found
+              </div>
+              <div class="col-md-12 tabContent" *ngIf="(requestInit).length != 0">
+                <div class="col-md-4 detPart">
+                    <p class="reqSpec">{{requestInit.topic.topic_title}}</p>
+                    <div class="partTime">
+                    <p class="specTime">
+                     <span class="spechour" >{{requestInit.start_time | date:'h:mm'}}</span>
+                     <span class="spectim">{{requestInit.start_time | date:'a'}} {{dateZone}}</span>
+                     </p>
+                    <p class="specDate">{{requestInit.start_time | date:'dd MMMM yyyy'}}</p>
                     </div>
-                    <div class="col-md-12 docInfo">
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 001</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 002</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 003</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 003</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/doc.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 004</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 detPart">
-                            <div class="detpartContent">
-                                <div class="docImg">
-                                    <p><img src="assets/images/pdf.png" class="detimg"></p>
-                                   
-                                </div>
-                              <div class="docDetail">
-                                 <h4 class="docDetailName">Poll Name 005</h4>
-                                 <div class="">
-                                   <p class="docUsed">05 <span>Used </span></p>
-                                   <p class="docPage">97 <span>Pages </span></p>
-                                   <p class="docTime">24 <span>Time</span> </p>
-                                 </div>
-                              </div>
-                              
-                              <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
-                            </div>
-                        </div> </div>
                   </div>
-              </md-tab>
-              <md-tab label="Q&A">
-                  <div class="col-md-12 tabContent" >
-                   
-                    <div class="col-md-12 questSec">
-                      <div class="col-md-12 boderBot questContent">
-                      <div class="col-md-8 padd0">
-                        
-                          <div class="questCount col-md-1">Q1</div>
-                          <div class="questDetail col-md-11">Is the following statement true or false? When using a computerized system in a clinical trial, 
-                            make sure to use defaults that enter data into a field when the field is left empty 
-                            <!--<p><input type="checkbox"  class="questCheck" id="true"><label for="true">True</label>
-                              <input type="checkbox" class="questCheck" id="false" checked><label for="false">False</label>
-                            </p>-->
-                            <p class="blackCheck">
-                              <mat-checkbox class="newCheck">True</mat-checkbox>
-                              <mat-checkbox class="newCheck">False</mat-checkbox>
-                            </p>
-                          </div>
-                        
+                  <div class="col-md-4 detPart" *ngFor="let users of requestInit.meetingRequest">
+                      <div *ngIf="users.toUser"> 
+                    <div class="detpartContent">
+                        <div class="partDetails">
+                            <div class="partProfile">
+                              <h4 class="partName">{{users.toUser.firstName}}</h4>
+                                <div class="partAddress">
+                                 <p>{{users.toUser.companyName}} </p>
+                                    <p>{{users.toUser.email}}  </p>
+                                    <p>{{users.toUser.telephone}} </p>
+                                </div>
+                            </div>
+                        </div>
+                     
+                        <div class="partImage">
+                            <p><img src="{{APIURL}}{{users.toUser.photo_path}}{{users.toUser.photo}}" class="detimg1"></p>
+                            <button type="button" class=" details" (click)=viewDetailsUsers(users.toUser.id) data-backdrop="static" data-toggle="modal" data-target="#userModel">Details</button>
+                        </div>
+                        <div class="notifyImg">
+                          <img *ngIf="users.status=='0'"  class="" src="assets/images/quest.png">
+                            <img *ngIf="users.status=='1'" class="" src="assets/images/cusChecked.png">
+                            <img *ngIf="users.status=='2'" class="" src="assets/images/cusCheck.png">
+                        </div>
                       </div>
-                      <div class="col-md-4 padd0 text-center">
-                        <div class="col-md-4"> <img src="assets/images/testUser.png" class="questImg"></div>
-                        
-                        <div class="col-md-4 newCheckdv1">
-                            <a href="javascript:void(0);" class="cusLink"> <img src="assets/images/tick.png" class="questImg1">
-                        <p> Approve</p></a>
-                       <a href="javascript:void(0);" class="cusLink"><img src="assets/images/close.png" class="questImg1">
-                       <p> Reject</p></a>
-                      </div>
-                      <div class="col-md-4 newCheckdv">
-                        <!-- <input type="checkbox"  class="questCheck" id="true3">
-                        <label for="true3"></label>-->
-                        <p class="blackCheck">
-                            <mat-checkbox class="newCheck"></mat-checkbox>
-                        </p>
-                      </div>
-                      </div>
-                      </div>
-                      <div class="col-md-12 questContent ">
-                          <div class="col-md-8 padd0">
-                             <div class="questCount col-md-1">Q2</div>
-                              <div class="questDetail col-md-11">A subject in a clinical trial develops a stomach infection that was treated with antibiotics,
-                                  and wants to withdraw from the study. What do you do?
-                                <!--<p><input type="checkbox"  class="questCheck" id="true1"><label for="true1">Report this as a SAE</label>
-                                  <input type="checkbox" class="questCheck" id="false1" checked><label for="false1">Document and explain the withdrawal</label>
-                                </p>-->
-                                <p class="blackCheck">
-                                  <mat-checkbox class="newCheck">Report this as a SAE</mat-checkbox>
-                                  <mat-checkbox class="newCheck">Document and explain the withdrawal</mat-checkbox>
-                                </p>
+                     
+                    </div>                      
+                    </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Content">
+                <div class="col-md-12 tabContent">
+                  <div class="col-md-12 contentDetail">
+                    <div class="col-md-8 ">
+                       <p> <span class="conLabel">Topic:</span>  <span class="reqSpec">Chronic Lymphocytic Leukemia</span></p>
+                       <p> <span class="conLabel">ID: </span> <span class="conCount">158</span></p>
+                    </div>
+                    <div class="col-md-4 displayTime">
+                        <p class="specTime">
+                            <span class="spechour" >01:00 </span>
+                            <span class="spectim">PM EST</span>
+                         </p>
+                         <p class="specDate">15 September 17</p>
+                         <hr>
+                        </div>
+                  </div>
+                  <div class="col-md-12 docInfo">
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
                               </div>
-                           
-                          </div>
-                          <div class="col-md-4 padd0 text-center">
-                            <div class="col-md-4"> <img src="assets/images/testUser.png" class="questImg"></div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 01</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
                             
-                            <div class="col-md-4 newCheckdv1"> <img src="assets/images/tick.png" class="questImg1">
-                            <p> Approved </p></div>
-                            <div class="col-md-4 newCheckdv">
-                              <!-- <input type="checkbox"  class="questCheck" id="true4">
-                              <label for="true4"></label>-->
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 02</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 03</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 04</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 05</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Document Name 06</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div> </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Polls">
+                <div class="col-md-12 tabContent">
+                  <div class="col-md-12 contentDetail">
+                    <div class="col-md-8 ">
+                       <p> <span class="conLabel">Topic:</span>  <span class="reqSpec">Chronic Lymphocytic Leukemia</span></p>
+                       <p> <span class="conLabel">ID: </span> <span class="conCount">158</span></p>
+                    </div>
+                    <div class="col-md-4 displayTime">
+                        <p class="specTime">
+                            <span class="spechour" >01:00 </span>
+                            <span class="spectim">PM EST</span>
+                         </p>
+                         <p class="specDate">15 September 17</p>
+                         <hr>
+                        </div>
+                  </div>
+                  <div class="col-md-12 docInfo">
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 001</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 002</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 003</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 003</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/doc.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 004</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/remove.png" class=""></div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 detPart">
+                          <div class="detpartContent">
+                              <div class="docImg">
+                                  <p><img src="assets/images/pdf.png" class="detimg"></p>
+                                 
+                              </div>
+                            <div class="docDetail">
+                               <h4 class="docDetailName">Poll Name 005</h4>
+                               <div class="">
+                                 <p class="docUsed">05 <span>Used </span></p>
+                                 <p class="docPage">97 <span>Pages </span></p>
+                                 <p class="docTime">24 <span>Time</span> </p>
+                               </div>
+                            </div>
+                            
+                            <div class="notifyImg"><img src="assets/images/cusChecked.png" class=""></div>
+                          </div>
+                      </div> </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Q&A">
+                <div class="col-md-12 tabContent" >
+                 
+                  <div class="col-md-12 questSec">
+                    <div class="col-md-12 boderBot questContent">
+                    <div class="col-md-8 padd0">
+                      
+                        <div class="questCount col-md-1">Q1</div>
+                        <div class="questDetail col-md-11">Is the following statement true or false? When using a computerized system in a clinical trial, 
+                          make sure to use defaults that enter data into a field when the field is left empty 
+                          <!--<p><input type="checkbox"  class="questCheck" id="true"><label for="true">True</label>
+                            <input type="checkbox" class="questCheck" id="false" checked><label for="false">False</label>
+                          </p>-->
+                          <p class="blackCheck">
+                            <mat-checkbox class="newCheck">True</mat-checkbox>
+                            <mat-checkbox class="newCheck">False</mat-checkbox>
+                          </p>
+                        </div>
+                      
+                    </div>
+                    <div class="col-md-4 padd0 text-center">
+                      <div class="col-md-4"> <img src="assets/images/testUser.png" class="questImg"></div>
+                      
+                      <div class="col-md-4 newCheckdv1">
+                          <a href="javascript:void(0);" class="cusLink"> <img src="assets/images/tick.png" class="questImg1">
+                      <p> Approve</p></a>
+                     <a href="javascript:void(0);" class="cusLink"><img src="assets/images/close.png" class="questImg1">
+                     <p> Reject</p></a>
+                    </div>
+                    <div class="col-md-4 newCheckdv">
+                      <!-- <input type="checkbox"  class="questCheck" id="true3">
+                      <label for="true3"></label>-->
+                      <p class="blackCheck">
+                          <mat-checkbox class="newCheck"></mat-checkbox>
+                      </p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-12 questContent ">
+                        <div class="col-md-8 padd0">
+                           <div class="questCount col-md-1">Q2</div>
+                            <div class="questDetail col-md-11">A subject in a clinical trial develops a stomach infection that was treated with antibiotics,
+                                and wants to withdraw from the study. What do you do?
+                              <!--<p><input type="checkbox"  class="questCheck" id="true1"><label for="true1">Report this as a SAE</label>
+                                <input type="checkbox" class="questCheck" id="false1" checked><label for="false1">Document and explain the withdrawal</label>
+                              </p>-->
                               <p class="blackCheck">
-                                  <mat-checkbox class="newCheck"></mat-checkbox>
+                                <mat-checkbox class="newCheck">Report this as a SAE</mat-checkbox>
+                                <mat-checkbox class="newCheck">Document and explain the withdrawal</mat-checkbox>
                               </p>
                             </div>
-                              
-                          </div>
-                          </div>
-                    </div>
-                  </div>
-                 
-              </md-tab>
-              <md-tab label="Sessions">
-                  <div class="col-md-12 tabContent">                      
-                      <div class="col-md-12 contentDetail" *ngIf="!enableSection">
-                        Loading Please Wait !
+                         
                         </div>
-                    <div class="col-md-12 contentDetail" *ngIf="enableSection">
-                        <video-recepient></video-recepient>
-                    </div>
+                        <div class="col-md-4 padd0 text-center">
+                          <div class="col-md-4"> <img src="assets/images/testUser.png" class="questImg"></div>
+                          
+                          <div class="col-md-4 newCheckdv1"> <img src="assets/images/tick.png" class="questImg1">
+                          <p> Approved </p></div>
+                          <div class="col-md-4 newCheckdv">
+                            <!-- <input type="checkbox"  class="questCheck" id="true4">
+                            <label for="true4"></label>-->
+                            <p class="blackCheck">
+                                <mat-checkbox class="newCheck"></mat-checkbox>
+                            </p>
+                          </div>
+                            
+                        </div>
+                        </div>
                   </div>
-              </md-tab>
-             
-              
-          </md-tab-group>
-          <div class="actionSec">
-              <div class="pull-left"> <button md-button class="actionBut">Action</button></div>
-              <div class="pull-right"> 
-                <!--<input type="checkbox"  class="questCheck" id="true5">
-                <label for="true5"></label>-->
-                <p class="blackCheck">
-                    <mat-checkbox class="newCheck"></mat-checkbox>
-                </p>
-              </div>
-          </div>
+                </div>
+               
+            </mat-tab>
+            <mat-tab label="Review Report">
+                <div class="col-md-12 tabContent" >
+                    <mat-tab-group md-align-tabs="bottom" id="ink-top-fix">
+                        <mat-tab label="General Info">
+                            <div class="col-md-12 detTable" *ngIf="(requestInit).length != 0">
+                            <table class="col-md-12">                
+                                <tr class="mb-15">
+                                  <td class="newText">Date of Review:</td>
+                                  <td><mat-form-field class="example-full-width">
+                                      <input matInput [value]="requestInit.topic.topic_title">
+                                    </mat-form-field></td>
+                                  </tr>
+                                <tr class="mb-15">
+                                    <td class="newText">Name of Reviewer:</td>
+                                    <td><mat-form-field class="example-full-width">
+                                        <input matInput [value]="requestInit.topic.topic_title">
+                                      </mat-form-field></td>
+                                  </tr>
+                                <tr class="mb-15">
+                                    <td class="newText">Representative Name:</td>
+                                    <td><mat-form-field class="example-full-width">
+                                        <input matInput [value]="requestInit.topic.topic_title">
+                                      </mat-form-field></td>
+                                  </tr>
+                                  <tr class="mb-15">
+                                      <td class="newText">Field Force:</td>
+                                      <td>
+                                          <mat-checkbox class="newCheck">B&L Rx</mat-checkbox>
+                                          <mat-checkbox class="newCheck">B&L Surgical </mat-checkbox>
+                                          <mat-checkbox class="newCheck">B&L Vision Care     </mat-checkbox>
+                                          <mat-checkbox class="newCheck">Ortho|Dermatologics    </mat-checkbox>
+                                          <mat-checkbox class="newCheck">Neurology   </mat-checkbox>
+                                          <mat-checkbox class="newCheck">ORAPharma   </mat-checkbox>
+                                          <mat-checkbox class="newCheck">Salix   </mat-checkbox>
+                                          <mat-checkbox class="newCheck">Solta   </mat-checkbox>
+                                          <mat-form-field style="width:100px;,argin-left:10px;" class="example-full-width">
+                                            <input matInput [value]="" placeholder="Other">
+                                          </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Territory Geography: </td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Total number of prescribing HCPs present:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Total number of non-prescribing HCPs present:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Total number of non-prescribing HCPs present:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Total number of “others” present (e.g. Company or Vendor employees):</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Names of other Valeant Employees present:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="requestInit.topic.topic_title">
+                                          </mat-form-field></td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                      <div class="pull-left"> <button mat-raised-button color="primary">Save</button></div>
+                                    </td>
+                                    </tr>
+                                </table>
+                                </div>
+                          </mat-tab>
+                          <mat-tab label="Program Details">
+                              <div class="col-md-12 detTable">
+                                  <tr class="mb-15">
+                                      <td class="newText">Speaker Name:</td>
+                                      <td><mat-form-field class="example-full-width">
+                                          <input matInput [value]="">
+                                        </mat-form-field></td>
+                                    </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">Program Title:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="">
+                                          </mat-form-field></td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                        <td class="newText">Location:</td>
+                                        <td><mat-checkbox class="newCheck">Restaurant</mat-checkbox>
+                                        <mat-checkbox class="newCheck">In-Office/In-Hospital</mat-checkbox>
+                                        <mat-checkbox class="newCheck">Other (e.g. convention, etc)</mat-checkbox>
+                                        </td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                        <td class="newText">Program Type:</td>
+                                        <td><mat-checkbox class="newCheck">In-Person</mat-checkbox>
+                                        <mat-checkbox class="newCheck">WebEx/Webcast</mat-checkbox>
+                                        <mat-checkbox class="newCheck">Telecon</mat-checkbox>
+                                        </td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                        <td class="newText">Product:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                        <input matInput [value]="">
+                                        </mat-form-field></td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                        <td class="newText">Venue Name:</td>
+                                        <td><mat-form-field class="example-full-width">
+                                        <input matInput [value]="">
+                                        </mat-form-field></td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                          <td class="newText">City and State:</td>
+                                          <td><mat-form-field class="example-full-width">
+                                          <input matInput [value]="">
+                                          </mat-form-field></td>
+                                        </tr>
+                                        <tr class="mb-15">
+                                            <td class="newText">Scheduled Program Time:
+                                                </td>
+                                            <td><mat-form-field class="example-full-width">
+                                            <input matInput [value]="">
+                                            </mat-form-field></td>
+                                          </tr>
+                                          <tr class="mb-15">
+                                              <td class="newText">*Program Start Time:</td>
+                                              <td><mat-form-field class="example-full-width">
+                                              <input matInput [value]="">
+                                              </mat-form-field></td>
+                                            </tr>
+                                            <tr class="mb-15">
+                                                <td class="newText">*Program End Time:</td>
+                                                <td><mat-form-field class="example-full-width">
+                                                <input matInput [value]="">
+                                                </mat-form-field></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                <div class="pull-left"> <button mat-raised-button color="primary">Save</button></div>
+                                              </td>
+                                       </tr>
+                              </div>
+                          </mat-tab>
+                          <mat-tab label="Program Review">
+                              <div class="col-md-12 detTable report">
+                                  <tr class="mb-15">
+                                      <td class="newText">Was the program held at an appropriate location conducive to scientific discussions (i.e. private room)?
+                                          </td>
+                                      <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                        <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                        <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                      
+                                    </tr>
+                                    <tr class="mb-15">
+                                        <td class="newText">If a meal was provided, did it appear to be modest in nature and consistent with company policies? (N/A if no meal was provided)
+                                            </td>
+                                            <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                            <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                            <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                      </tr>
+                                      <tr class="mb-15">
+                                          <td class="newText">Were the PRC-approved slides presented without any modifications or omissions? 
+                                              </td>
+                                              <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                              <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                              <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                        </tr>
+                                        <tr class="mb-15">
+                                            <td class="newText">Were the materials provided to the attendees PRC-approved without any modifications? 
+                                                (N/A if no materials were provided)
+                                                </td>
+                                                <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                          </tr>
+                                          <tr class="mb-15">
+                                              <td class="newText">Were PIs (or approved material containing a PI) made available to all attendees?
+                                                  </td>
+                                                  <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                  <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                  <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                            </tr>
+                                            <tr class="mb-15">
+                                                <td class="newText">Were the speaker's responses to HCP questions within label handled appropriately?
+                                                    (N/A if no questions were asked)
+                                                    
+                                                    </td>
+                                                    <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                    <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                    <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                              </tr>
+                                              <tr class="mb-15">
+                                                  <td class="newText">Were questions that could be related to off-label uses handled appropriately by the Speaker or by referring the HCP to Medical Affairs? (N/A if no off-label questions were asked)
+                                                      </td>
+                                                      <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                      <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                      <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                </tr>
+                                                <tr class="mb-15">
+                                                    <td class="newText">If the speaker provided inaccurate information about company products that could impact patient safety, did the sales representative interrupt the program and correct the information and/or address the issue? (N/A if this situation did not arise)
+                                                        </td>
+                                                        <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                        <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                        <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                  </tr>
+                                                  <tr class="mb-15">
+                                                      <td class="newText">If the speaker provided inaccurate information that does NOT implicate patient safety concerns, did the sales representative address the issue with the speaker after the program? (N/A if this situation did not arise)
+                                                          </td>
+                                                          <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                          <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                          <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                    </tr>
+                                                    <tr class="mb-15">
+                                                        <td class="newText">Was the speaker prepared and engaging?
+                                                            </td>
+                                                        <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                        <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                        <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                      </tr>
+                                                      <tr class="mb-15">
+                                                          <td class="newText">Did the speaker disclose that they are speaking on behalf of the Company?
+                                                              </td>
+                                                              <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                              <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                              <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                        </tr>
+                                                        <tr class="mb-15">
+                                                            <td class="newText">Were the attendees at the program appropriate for the topic being presented?
+                                                                (N/A if no attendees were present at the program)
+                                                                
+                                                                </td>
+                                                                <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                                <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                                <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                          </tr>
+                                                          <tr class="mb-15">
+                                                              <td class="newText">Was the minimum requirement for sales representative attendance met? (i.e. 1 rep per 6 HCPs)
+                                                                  </td>
+                                                                  <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                                  <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                                  <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                            </tr>
+                                                            <tr class="mb-15">
+                                                                <td class="newText">If a meal/snack was provided ancillary to the Speaker Program, was a sign-in sheet completed by all attendees? (N/A if no meals or snacks were provided)
+                                                                    </td>
+                                                                    <td><mat-checkbox class="newCheck">Yes</mat-checkbox></td>
+                                                                    <td><mat-checkbox class="newCheck">No</mat-checkbox></td>
+                                                                    <td><mat-checkbox class="newCheck">N/A</mat-checkbox></td>
+                                                              </tr>
+                                                              <tr class="mb-15">
+                                                                  <td class="newText">Were all other observations during the review in compliance with company policy?
+                                                                      </td>
+                                                                  <td colspan="3"><mat-form-field class="example-full-width">
+                                                                      <input matInput [value]="">
+                                                                      </mat-form-field>
+                                                                  </td>
+                                                                </tr>
+                                                              </div>
+                                </mat-tab>
 
-  </div>
+                 
+                  </mat-tab-group>
+                </div>
+            </mat-tab>
+           
+            
+        </mat-tab-group>
+        
+
 </div>
-    <div id="userModel" class="modal fade" role="dialog">
-      <div class="modal-dialog" [hidden]="loading">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">User Detail</h4>
-          </div>
-          <div class="modal-body">
-            <div class="col-lg-12">
-              <div class="col-lg-4">
-                <img src="{{APIURL}}{{userDetails.photo_path}}{{userDetails.photo}}" class="img-responsive">
-              </div>
-              <div class="col-lg-8">
-                <table class="table">
-                  <tr>
-                    <td>Name</td>
-                    <td>{{userDetails.firstName}} {{userDetails.lastName}}</td>
-                  </tr>
-                  <tr>
-                    <td>Email</td>
-                    <td>{{userDetails.email}}</td>
-                  </tr>
-                  <tr>
-                    <td>Telephone</td>
-                    <td>{{userDetails.telephone}}</td>
-                  </tr>
-                  <tr>
-                    <td>Experience</td>
-                    <td>{{userDetails.yrsOfExperience}}</td>
-                  </tr>
-                  <tr>
-                    <td>Biography</td>
-                    <td>{{userDetails.biography}}</td>
-                  </tr>
-                </table>
-              </div>
+</div>
+  <div id="userModel" class="modal fade" role="dialog">
+    <div class="modal-dialog" [hidden]="loading">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">User Detail</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-12">
+            <div class="col-lg-4">
+              <img src="{{APIURL}}{{userDetails.photo_path}}{{userDetails.photo}}" class="img-responsive">
+            </div>
+            <div class="col-lg-8">
+              <table class="table">
+                <tr>
+                  <td>Name</td>
+                  <td>{{userDetails.firstName}} {{userDetails.lastName}}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{userDetails.email}}</td>
+                </tr>
+                <tr>
+                  <td>Telephone</td>
+                  <td>{{userDetails.telephone}}</td>
+                </tr>
+                <tr>
+                  <td>Experience</td>
+                  <td>{{userDetails.yrsOfExperience}}</td>
+                </tr>
+                <tr>
+                  <td>Biography</td>
+                  <td>{{userDetails.biography}}</td>
+                </tr>
+              </table>
             </div>
           </div>
-          <div style="clear: both"></div>
         </div>
-    
+        <div style="clear: both"></div>
       </div>
+  
     </div>
+  </div>
 <!-- <ngx-loading [show]="loading"></ngx-loading> -->

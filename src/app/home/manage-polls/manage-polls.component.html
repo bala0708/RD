@@ -227,7 +227,7 @@
                             </div>
                           </div>
                           <div class="col-lg-4 iconSec kpad">
-                              <a  matTooltip="Add " class="plusIcn"><i class="fa fa-plus"></i></a>
+                              <a  matTooltip="Add " class="plusIcn" data-backdrop="static" data-toggle="modal" data-target="#addQuestion"><i class="fa fa-plus"></i></a>
                               <a href=""><img src="assets/images/icons.png"/></a>
                               <a href=""><img src="assets/images/icon2.png"/></a>
                           </div>
@@ -328,6 +328,65 @@
                   <div style="clear:both"></div>
                 </form> 
               </div>
+
+              <div class="modal fade myModalNorm" id="addQuestion" tabindex="-1" role="dialog" 
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" [hidden]="loading">
+                  <div class="modal-content">
+                      <!-- Modal Header -->
+                      <div class="popupAddicon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                      <div class="modal-header">
+                          Add Question
+                      </div>
+                      
+                      <!-- Modal Body -->
+                      <div class="modal-body">
+                          
+                          <select (change)="qusType(addquestion)" name="selectedType" [(ngModel)]="selectedType">
+                              <option *ngFor="let items of questionType" value= {{items.id}} >
+                                {{items.type}} 
+                              </option>
+                            </select>
+                          <form role="form" autocomplete="off" name="formData" 
+                          (ngSubmit)="addQuestion(addquestion.value)"
+                             #addquestion="ngForm">                      
+                              <div><label for="question">question :</label> <input #input id="question" [(ngModel)]="question" type="text" name="question"></div>
+                              <div *ngIf="closedEnded"><label for="closeOpt1">option 1  :</label> <input #input id="closeOpt1" [(ngModel)]="o1" type="text" name="option1"></div>
+                              <div *ngIf="closedEnded"><label for="closeOpt2">option 2  :</label> <input #input id="closeOpt2" [(ngModel)]="o2" type="text" name="option2"></div>
+                              <div *ngIf="ratingScale"><label for="start">start range value  :</label> <input #input id="start" [(ngModel)]="o1" type="text" name="option1"></div>
+                              <div *ngIf="ratingScale"><label for="mid">mid range value  :</label><input #input id="mid" [(ngModel)]="o2" type="text" name="option2"></div>
+                              <div *ngIf="ratingScale"><label for="end">end value  :</label><input #input id="end" [(ngModel)]="o3" type="text" name="option3"></div>
+                              <div *ngIf="likertScale"><label for="likertOpt1">Option 1  :</label><input #input id="likertOpt1" [(ngModel)]="o1" type="text" name="option1"></div>
+                              <div *ngIf="likertScale"><label for="likertOpt2">Option 2 :</label><input #input id="likertOpt2" [(ngModel)]="o2" type="text" name="option2"></div>
+                              <div *ngIf="likertScale"><label for="likertOpt3">Option 3 :</label><input #input id="likertOpt3" [(ngModel)]="o3" type="text" name="option3"></div>
+                              <div *ngIf="likertScale"><label for="likertOpt4">Option 4 :</label><input #input id="likertOpt4" [(ngModel)]="o4" type="text" name="option4"></div>
+                              <div *ngIf="likertScale"><label for="likertOpt5">Option 5 :</label><input #input id="likertOpt5" [(ngModel)]="o5" type="text" name="option5"></div>
+                              <div *ngIf="likertScale"><label for="likertSelect1">Option 1  :</label><input #input id="likertSelect1" [(ngModel)]="so1" type="text" name="so1"></div>
+                              <div *ngIf="likertScale"><label for="likertSelect2">Option 2 :</label><input #input id="likertSelect2" [(ngModel)]="so2" type="text" name="so2"></div>
+                              <div *ngIf="likertScale"><label for="likertSelect3">Option 3 :</label><input #input id="likertSelect3" [(ngModel)]="so3" type="text" name="so3"></div>
+                              <div *ngIf="likertScale"><label for="likertSelect4">Option 4 :</label><input #input id="likertSelect4" [(ngModel)]="so4" type="text" name="so4"></div>
+                              <div *ngIf="likertScale"><label for="likertSelect5">Option 5 :</label><input #input id="likertSelect5" [(ngModel)]="so5" type="text" name="so5"></div>
+                              <div *ngIf="multiSelect"><label for="multiOpt1">Option 1  :</label><input #input id="multiOpt11" [(ngModel)]="o1" type="text" name="option1"></div>
+                              <div *ngIf="multiSelect"><label for="multiOpt12">Option 2 :</label><input #input id="multiOpt12" [(ngModel)]="o2" type="text" name="option2"></div>
+                              <div *ngIf="multiSelect"><label for="multiOpt13">Option 3 :</label><input #input id="multiOpt13" [(ngModel)]="o3" type="text" name="option3"></div>
+                              <div *ngIf="multiSelect"><label for="multiOpt14">Option 4 :</label><input #input id="multiOpt14" [(ngModel)]="o4" type="text" name="option4"></div>
+                              <div *ngIf="multiSelect"><label for="multiOpt15">Option 5 :</label><input #input id="multiOpt15" [(ngModel)]="o5" type="text" name="option5"></div>
+                              <div *ngIf="multiSelect"><label for="multiSelect1">Option 1  :</label><input #input id="multiSelect1" [(ngModel)]="mso1" type="checkbox" name="mso1"></div>
+                              <div *ngIf="multiSelect"><label for="multiSelect2">Option 2 :</label><input #input id="multiSelect2" [(ngModel)]="mso2" type="checkbox" name="mso2"></div>
+                              <div *ngIf="multiSelect"><label for="multiSelect3">Option 3 :</label><input #input id="multiSelect3" [(ngModel)]="mso3" type="checkbox" name="mso3"></div>
+                              <div *ngIf="multiSelect"><label for="multiSelect4">Option 4 :</label><input #input id="multiSelect4" [(ngModel)]="mso4" type="checkbox" name="mso4"></div>
+                              <div *ngIf="multiSelect"><label for="multiSelect5">Option 5 :</label><input #input id="multiSelect5" [(ngModel)]="mso5" type="checkbox" name="mso5"></div>
+                              <div class="SavebutDiv">
+                                  <button md-button class="popupSavebut" type="submit">Save & close</button>
+                                  <button md-button class="popupSavebut" (click)="reset();" >Cancel</button>
+                                </div>
+                          </form>   
+                            
+                          
+                            </div>
+                </div>
+                </div>
+</div>
           </mat-tab>
           <mat-tab label="HCP">
 
@@ -436,15 +495,15 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                       minlength="4" 
                       maxlength="10" 
                       required>
-                    <md-error *ngIf="poll_name.hasError('minlength')">
+                    <mat-error *ngIf="poll_name.hasError('minlength')">
                       Poll Name should be minimum 4 characters
-                    </md-error>
-                    <md-error *ngIf="poll_name.hasError('maxlength')">
+                    </mat-error>
+                    <mat-error *ngIf="poll_name.hasError('maxlength')">
                       Poll Name should be maximum 10 characters
-                    </md-error>
-                    <md-error *ngIf="poll_name.hasError('required')">
+                    </mat-error>
+                    <mat-error *ngIf="poll_name.hasError('required')">
                       Poll Name is <strong>required</strong>
-                    </md-error>
+                    </mat-error>
                   </mat-form-field>
                 </td>
                 </tr>
@@ -509,15 +568,15 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                       minlength="4" 
                       maxlength="10" 
                       required>
-                    <md-error *ngIf="poll_name.hasError('minlength')">
+                    <mat-error *ngIf="poll_name.hasError('minlength')">
                       Poll Name should be minimum 4 characters
-                    </md-error>
-                    <md-error *ngIf="poll_name.hasError('maxlength')">
+                    </mat-error>
+                    <mat-error *ngIf="poll_name.hasError('maxlength')">
                       Poll Name should be maximum 10 characters
-                    </md-error>
-                    <md-error *ngIf="poll_name.hasError('required')">
+                    </mat-error>
+                    <mat-error *ngIf="poll_name.hasError('required')">
                       Poll Name is <strong>required</strong>
-                    </md-error>
+                    </mat-error>
                   </mat-form-field>
                 </td>
                 </tr>

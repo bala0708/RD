@@ -5,7 +5,7 @@
 
         <div class="pull-right controlBut">
           <p class="pauseIcon"><a  data-backdrop="static" data-toggle="modal" data-target="#myModalNorm" ><img src="assets/images/addbut.png"/> </a></p>  
-          <p class="pauseIcon"><a ><img src="assets/images/pause.png"/> </a></p>  
+          <!-- <p class="pauseIcon"><a ><img src="assets/images/pause.png"/> </a></p>   -->
          <p class="delIcon"> <a ><img src="assets/images/delete.png"/> </a> </p>
         </div>
       </div>
@@ -21,7 +21,7 @@
                     </div>
                   </div>
               </div>
-              <div class="col-md-1">
+              <!-- <div class="col-md-1">
                   <a (click)="sort = !sort"><p class="pull-left"><img src="assets/images/reqarr.png" class=""></p></a>
                    <p class="pull-right"><a [matMenuTriggerFor]="menu"><img src="assets/images/reqarr2.png" class=""></a></p>    
                    <mat-menu #menu="matMenu">
@@ -29,15 +29,15 @@
                 <button (click)="filter(2)" mat-menu-item>Inactive</button>
                 <button (click)="filter(0)" mat-menu-item>Reset</button>
               </mat-menu>       
-              </div>
+              </div> -->
           </div>
     
     <div class="col-md-12">
         <table class="table hciTable table-hover">
             <thead>
               <tr>
-                <th>Firstname</th>
-                <th>User Type</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Mobile No</th>
                 <th>Tel No</th>
                 <th>Email ID</th>
@@ -52,10 +52,11 @@
               
               <tr *ngFor="let items of user | filter: queryString | orderby:sort | paginate: { itemsPerPage: 10, currentPage: page }" (click)="contents(items.id)" style="cursor: pointer;">
                   <td>{{items.firstName}}</td>
-                  <td *ngIf="items.userType==3">HCI</td>
+                  <td>{{items.lastName}}</td>
+                  <!-- <td *ngIf="items.userType==3">HCI</td>
                   <td *ngIf="items.userType==2">HCP</td>
                   <td *ngIf="items.userType==1">REP</td>
-                  <td *ngIf="items.userType==null">-</td>
+                  <td *ngIf="items.userType==null">-</td> -->
                   <td *ngIf="items.home_number">{{items.home_number}}</td>
                   <td *ngIf="items.home_number==null">-</td>
                   <td>{{items.telephone}}</td>
@@ -107,138 +108,140 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                             [(ngModel)]="addUsers.role" name="role" required #type="ngModel" 
                             >
                         <mat-radio-button value="1" [checked]="true">REP</mat-radio-button>
-                        <md-error *ngIf="f.submitted && !type.valid">
+                        <mat-error *ngIf="f.submitted && !type.valid">
                             Role is required
-                      </md-error>
+                      </mat-error>
                       </md-radio-group>
                       
                     </td>
                   </tr>
                   <tr>
                       <td class="newText">First Name:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  
                             name="firstName"
                             [(ngModel)]="addUsers.firstName"
                             #firstName=ngModel   
                             minlength="4" 
                             maxlength="10" 
                             required>
-                          <md-error *ngIf="firstName.hasError('minlength')">
+                          <mat-error *ngIf="firstName.hasError('minlength')">
                             First Name should be minimum 4 characters
-                          </md-error>
-                          <md-error *ngIf="firstName.hasError('maxlength')">
+                          </mat-error>
+                          <mat-error *ngIf="firstName.hasError('maxlength')">
                             First Name should be maximum 10 characters
-                          </md-error>
-                          <md-error *ngIf="firstName.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="firstName.hasError('required')">
                             First Name is <strong>required</strong>
-                          </md-error>
-                        </md-form-field>
+                          </mat-error>
+                        </mat-form-field>
                       </td>
                   </tr>
                   <tr>
                       <td class="newText">Last Name:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  value="" 
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  value="" 
                             name="lastName"
                             [(ngModel)]="addUsers.lastName"    
                             #lastName=ngModel   
-                            minlength="4" 
+                            minlength="" 
                             maxlength="10" 
                             required>
-                            <md-error *ngIf="lastName.hasError('minlength')">
+                            <mat-error *ngIf="lastName.hasError('minlength')">
                               Last Name should be minimum 4 characters
-                            </md-error>
-                            <md-error *ngIf="lastName.hasError('maxlength')">
+                            </mat-error>
+                            <mat-error *ngIf="lastName.hasError('maxlength')">
                               Last Name should be maximum 10 characters
-                            </md-error>
-                            <md-error *ngIf="lastName.hasError('required')">
+                            </mat-error>
+                            <mat-error *ngIf="lastName.hasError('required')">
                               Last Name is <strong>required</strong>
-                            </md-error>
-                        </md-form-field>
+                            </mat-error>
+                        </mat-form-field>
                       </td>
                   </tr>
                    <tr>
                       <td class="newText">Mobile No:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  value=""
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  value=""
                              name="home_number"
                              #home_number=ngModel   
                              minlength="10" 
                              maxlength="13"
+                             pattern="[0-9+]"
                              required
                             [(ngModel)]="addUsers.home_number">
-                            <md-error *ngIf="home_number.hasError('minlength')">
+                            <mat-error *ngIf="home_number.hasError('minlength')">
                               Mobile No. should be minimum 10 characters
-                            </md-error>
-                            <md-error *ngIf="home_number.hasError('maxlength')">
+                            </mat-error>
+                            <mat-error *ngIf="home_number.hasError('maxlength')">
                               Mobile No. should be maximum 13 characters
-                            </md-error>
-                            <md-error *ngIf="home_number.hasError('required')">
+                            </mat-error>
+                            <mat-error *ngIf="home_number.hasError('required')">
                               Mobile No. is <strong>required</strong>
-                            </md-error>
-                            <md-error *ngIf="home_number.hasError('pattern')">
+                            </mat-error>
+                            <mat-error *ngIf="home_number.hasError('pattern')">
                               Mobile No should be <strong>numbers </strong>
-                            </md-error>
+                            </mat-error>
                             
-                        </md-form-field>
+                        </mat-form-field>
                       </td>
                   </tr>
                    <tr>
                       <td class="newText">Telephone No:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  value="" 
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  value="" 
                             name="telephone"
                             [(ngModel)]="addUsers.telephone" 
-                             #telephone=ngModel   
+                             #telephone=ngModel
+                             pattern="[0-9+]"   
                              minlength="10" 
                              maxlength="13"
                              required>
-                            <md-error *ngIf="telephone.hasError('minlength')">
+                            <mat-error *ngIf="telephone.hasError('minlength')">
                               Telephone No. should be minimum 10 characters
-                            </md-error>
-                            <md-error *ngIf="telephone.hasError('maxlength')">
+                            </mat-error>
+                            <mat-error *ngIf="telephone.hasError('maxlength')">
                               Telephone No. should be maximum 13 characters
-                            </md-error>
-                            <md-error *ngIf="telephone.hasError('required')">
+                            </mat-error>
+                            <mat-error *ngIf="telephone.hasError('required')">
                               Telephone No. is <strong>required</strong>
-                            </md-error>
-                            <md-error *ngIf="telephone.hasError('pattern')">
+                            </mat-error>
+                            <mat-error *ngIf="telephone.hasError('pattern')">
                               Telephone No should be <strong>numbers </strong>
-                            </md-error>
+                            </mat-error>
                             
-                        </md-form-field>
+                        </mat-form-field>
                       </td>
                   </tr>
                   <tr>
                       <td class="newText">Email </td>
                       <td>
-                          <md-form-field class="example-full-width">
-                              <input mdInput 
+                          <mat-form-field class="example-full-width">
+                              <input matInput 
                               name="email"
                               #email=ngModel  
                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
                               [(ngModel)]="addUsers.email" 
                               required> 
-                              <md-error *ngIf="email.hasError('pattern')">
+                              <mat-error *ngIf="email.hasError('pattern')">
                                 Please enter a valid email address
-                              </md-error>
-                              <md-error *ngIf="email.hasError('required')">
+                              </mat-error>
+                              <mat-error *ngIf="email.hasError('required')">
                                 Email is <strong>required</strong>
-                              </md-error>
-                            </md-form-field>
+                              </mat-error>
+                            </mat-form-field>
                       </td>
                   </tr>
                   <tr>
                      <td class="newText">Default Password </td>
                      <td>
-                          <md-form-field class="example-full-width">
-                              <input mdInput 
+                          <mat-form-field class="example-full-width">
+                              <input matInput 
                               name="email"
                               value="password" 
                               readonly="true" 
                               disabled> 
-                            </md-form-field>
+                            </mat-form-field>
                       </td>
                   </tr>
                   <tr>

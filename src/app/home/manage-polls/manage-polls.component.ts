@@ -141,6 +141,89 @@ let json = {
         this.loading = false;
 	  	})
   }
+  questionType = [{
+    "id":1,
+    "type":"close ended"
+  },{
+    "id":2,
+    "type":"Rating scale"
+  },{
+    "id":3,
+    "type":"Likert scale"
+  },{
+    "id":4,
+    "type":"Multiple choice"
+  },{
+    "id":5,
+    "type":"open ended"
+  }];
+  selectedType: number = 1;
+  closedEnded: boolean =true;
+  ratingScale: boolean =false;
+  likertScale: boolean =false;
+  multiSelect: boolean =false;
+  openEnded: boolean =false;
+  qusType(form){
+    form.reset();
+    this.selectedType == 1 ? this.closedEnded = true : this.closedEnded = false;
+    this.selectedType == 2 ? this.ratingScale = true : this.ratingScale = false;
+    this.selectedType == 3 ? this.likertScale = true: this.likertScale = false;
+    this.selectedType == 4 ? this.multiSelect = true: this.multiSelect = false;
+    this.selectedType == 5 ? this.openEnded = true: this.openEnded = false;
+    window.console.log(this.selectedType);
+  } 
+  addQuestion(form){
+    let json = JSON.parse(JSON.stringify(form));
+    let question = {
+      "question" : json.question,
+      "polls" : 0,
+      "mandatory" : 1,
+      "questionOptions" : [], 
+      "questionType":this.selectedType
+     }
+     if(this.selectedType == 1){
+       question.questionOptions.push({"option_number":1,"option_text": json.option1}, {"option_number":2,"option_text": json.option2});
+       question["questionAnswer"] = [{"answer_option":json.selectedOption ? json.selectedOption : null}];                            
+     } else if(this.selectedType == 2){
+       question.questionOptions.push({"option_number":3,"option_text": json.option3});
+       question["questionAnswer"] = [{"answer_option":json.so1 ? json.so1 : null},
+                                     {"answer_option":json.so2 ? json.so2 : null},
+                                     {"answer_option":json.so3 ? json.so3 : null},
+                                     {"answer_option":json.so4 ? json.so4: null},
+                                     {"answer_option":json.so5 ? json.so5 : null}];
+     } else if(this.selectedType == 3 || this.selectedType == 4) {
+      question.questionOptions.push({"option_number":1,"option_text": json.option1},
+                                    {"option_number":2,"option_text": json.option2},
+                                    {"option_number":3,"option_text": json.option3},
+                                    {"option_number":4,"option_text": json.option4},
+                                    {"option_number":5,"option_text": json.option5});
+          if(this.selectedType == 3){
+            question["questionAnswer"] = [{"answer_option":json.so1 ? json.so1 : null},
+                                    {"answer_option":json.so2 ? json.so2 : null},
+                                    {"answer_option":json.so3 ? json.so3 : null},
+                                    {"answer_option":json.so4 ? json.so4: null},
+                                    {"answer_option":json.so5 ? json.so5 : null}];
+          } else {
+            question["questionAnswer"] = [{"answer_option":json.mso1 == true ? true : false},
+                                    {"answer_option":json.mso2 == true ? true : false},
+                                    {"answer_option":json.mso3 == true ? true : false},
+                                    {"answer_option":json.mso4 == true ? true : false},
+                                    {"answer_option":json.mso5 == true ? true : false}];
+          }      
+     }
+     this.loading = true;
+     this.pollsService.addQuestion(question)
+     .subscribe(
+       data => {
+        this.loading = false;
+         window.console.log(question);
+       },
+       error => {
+         let err = JSON.parse(error);
+         this.toasterService.pop('error', 'Polls', err.result);
+         this.loading = false;
+       })
+  }
   questionsCount:number;
   questions = [];
   assignedQuestions = [];

@@ -16,77 +16,98 @@
               <table class="hciUsertable" *ngIf="userData.length!=0">
                  <tr>
                     <td>
-                       <label>Name:</label>  
-                       <md-form-field class="example-full-width">
-                          <input mdInput  
+                       <label> First Name:</label>  
+                       <mat-form-field class="example-full-width">
+                          <input matInput  
                           name="firstName"
                           [(ngModel)]="userData.firstName"
                           #firstName=ngModel   
-                          minlength="4" 
+                          minlength="" 
                           maxlength="10" 
                           required>
-                          <md-error *ngIf="firstName.hasError('minlength')">
+                          <mat-error *ngIf="firstName.hasError('minlength')">
                              First Name should be minimum 4 characters
-                          </md-error>
-                          <md-error *ngIf="firstName.hasError('maxlength')">
+                          </mat-error>
+                          <mat-error *ngIf="firstName.hasError('maxlength')">
                              First Name should be maximum 10 characters
-                          </md-error>
-                          <md-error *ngIf="firstName.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="firstName.hasError('required')">
                              First Name is <strong>required</strong>
-                          </md-error>
-                       </md-form-field>
+                          </mat-error>
+                       </mat-form-field>
                     </td>
                     <td>
                        <label>Email Id:</label>  
-                       <md-form-field class="example-full-width">
-                          <input mdInput 
+                       <mat-form-field class="example-full-width">
+                          <input matInput 
                           name="email"
                           #email=ngModel   
                           [(ngModel)]="userData.email" 
                           required> 
-                          <md-error *ngIf="email.hasError('pattern')">
+                          <mat-error *ngIf="email.hasError('pattern')">
                              Please enter a valid email address
-                          </md-error>
-                          <md-error *ngIf="email.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="email.hasError('required')">
                              Email is <strong>required</strong>
-                          </md-error>
-                       </md-form-field>
+                          </mat-error>
+                       </mat-form-field>
                     </td>
                     <td>
                        <label>Mobile No:</label>  
-                       <md-form-field class="example-full-width">
-                          <input mdInput  value=""
+                       <mat-form-field class="example-full-width">
+                          <input matInput  value=""
                           name="home_number"
                           #home_number=ngModel   
                           minlength="10" 
                           maxlength="13"
                           required
                           [(ngModel)]="userData.home_number">
-                          <md-error *ngIf="home_number.hasError('minlength')">
+                          <mat-error *ngIf="home_number.hasError('minlength')">
                              Mobile No. should be minimum 10 characters
-                          </md-error>
-                          <md-error *ngIf="home_number.hasError('maxlength')">
+                          </mat-error>
+                          <mat-error *ngIf="home_number.hasError('maxlength')">
                              Mobile No. should be maximum 13 characters
-                          </md-error>
-                          <md-error *ngIf="home_number.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="home_number.hasError('required')">
                              Mobile No. is <strong>required</strong>
-                          </md-error>
-                          <md-error *ngIf="home_number.hasError('pattern')">
+                          </mat-error>
+                          <mat-error *ngIf="home_number.hasError('pattern')">
                              Mobile No should be <strong>numbers </strong>
-                          </md-error>
-                       </md-form-field>
+                          </mat-error>
+                       </mat-form-field>
                     </td>
-                    <td>
+                    <!-- <td>
                        <label>Availability:</label> 
-                       <md-form-field class="example-full-width hidePicker">
-                          <input mdInput [matDatepicker]="picker" class="">
+                       <mat-form-field class="example-full-width hidePicker">
+                          <input matInput [matDatepicker]="picker" class="">
                           <mat-datepicker #picker></mat-datepicker>
-                       </md-form-field>
+                       </mat-form-field>
                        <a (click)="picker.open()" class="calIcon"><img src="../../../../../assets/images/cal.png"></a>
-                    </td>
+                    </td> -->
                  </tr>
                  <tr>
-                    <td>
+                        <td>
+                                <label> Last Name:</label>  
+                                <mat-form-field class="example-full-width">
+                                   <input matInput  
+                                   name="lastName"
+                                   [(ngModel)]="userData.lastName"
+                                   #lastName=ngModel   
+                                   minlength="" 
+                                   maxlength="10" 
+                                   required>
+                                   <mat-error *ngIf="lastName.hasError('minlength')">
+                                      Last Name should be minimum 4 characters
+                                   </mat-error>
+                                   <mat-error *ngIf="lastName.hasError('maxlength')">
+                                      Last Name should be maximum 10 characters
+                                   </mat-error>
+                                   <mat-error *ngIf="lastName.hasError('required')">
+                                      Last Name is <strong>required</strong>
+                                   </mat-error>
+                                </mat-form-field>
+                             </td>
+                    <!-- <td>
                        <label>User Type:</label>  
                        <select disabled class="example-full-width">
                           <option [selected]="userData.userType==0" value="1">Admin</option>
@@ -94,51 +115,51 @@
                           <option [selected]="userData.userType==2" value="2">Innovator</option>
                           <option [selected]="userData.userType==1" value="3">REP</option>
                        </select>
-                    </td>
+                    </td> -->
                     <td>
                        <label>Status:</label>  
-                       <md-form-field class="example-full-width">
-                          <input disabled mdInput value="Active" *ngIf="userData.active_status==1">  
-                          <input disabled mdInput value="Suspend" *ngIf="userData.active_status==0">    
-                       </md-form-field>
+                       <mat-form-field class="example-full-width">
+                          <input disabled matInput value="Active" *ngIf="userData.active_status==1">  
+                          <input disabled matInput value="Suspend" *ngIf="userData.active_status==0">    
+                       </mat-form-field>
                     </td>
                     <td>
                        <label>Tel No:</label>  
-                       <md-form-field class="example-full-width">
-                          <input mdInput value="{{userData.telephone}}">    
-                       </md-form-field>
+                       <mat-form-field class="example-full-width">
+                          <input matInput value="{{userData.telephone}}">    
+                       </mat-form-field>
                     </td>
                     <td>
                             <label style="    vertical-align: baseline;">Docs:</label>
                             <div class="docsImgg" *ngIf="userData.cv">
                                     <div class="" *ngIf="cvExtension=='pdf'">       
-                                       <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                                       <a matTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
                                        <img src="assets/images/pdf.png" >
                                       
                                        </a>
                                     </div>
                                     <div class="" *ngIf="cvExtension=='doc'">        
-                                       <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                                       <a matTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
                                        <img src="assets/images/word.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="cvExtension=='docx'">        
-                                       <a mdTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                                       <a matTooltip="CV" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.cv_path}}{{userData.cv}}">
                                        <img src="assets/images/word.png" >
                                       </a>
                                     </div>
                                     <div class="" *ngIf="cvExtension=='png'">        
-                                       <a mdTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                                       <a matTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
                                        <img src="assets/images/image_icon.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="cvExtension=='jpg'">        
-                                       <a mdTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
+                                       <a matTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">
                                        <img src="assets/images/image_icon.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="cvExtension=='jpeg'">        
-                                       <a mdTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">        
+                                       <a matTooltip="CV" target="_blank" href="{{APIURL}}{{userData.cv_path}}{{userData.cv}}">        
                                        <img src="assets/images/image_icon.png" >
                                       </a>
                                     </div>
@@ -146,32 +167,32 @@
                                  <div class="docsImgg" *ngIf="userData.biography">
                                     <!-- _______________________ -->
                                     <div class="" *ngIf="bioExtension=='pdf'">       
-                                       <a mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/pdf.png" >
                                       </a>
                                     </div>
                                     <div class="" *ngIf="bioExtension=='doc'">        
-                                       <a mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/word.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="bioExtension=='docx'">       
-                                       <a mdTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="https://docs.google.com/viewerng/viewer?url={{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/word.png" >
                                         </a>
                                     </div>
                                     <div class="" *ngIf="bioExtension=='png'">
-                                       <a mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/image_icon.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="bioExtension=='jpg'">
-                                       <a mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/image_icon.png" >
                                        </a>
                                     </div>
                                     <div class="" *ngIf="bioExtension=='jpeg'">
-                                       <a mdTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
+                                       <a matTooltip="Biography" target="_blank" href="{{APIURL}}{{userData.biography_path}}{{userData.biography}}">
                                        <img src="assets/images/image_icon.png" >
                                         </a>
                                     </div>
@@ -183,10 +204,10 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
+                        <!-- <td>
                            <label  class="syncLabl" >Sync:</label>
                            <div class="syncIcon"> <i class="fa fa-refresh" aria-hidden="true"></i></div>
-                        </td>
+                        </td> -->
                      </tr>
               </table>
            </div>
@@ -217,18 +238,21 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs tabs-left hciTab ">
                  <li class="active"><a href="#ManageBrands" data-toggle="tab">Manage Products</a></li>
-                 <li mdTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Contracts</a></li>
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Contracts</a></li>
                  <!-- <li><a href="#ManageContracts" data-toggle="tab">Manage Contracts</a></li>
                      <li><a href="#ManageTopics" data-toggle="tab" (click)="listTopics()"> Manage REP</a></li> -->
-                 <li><a href="#ManageRequests" data-toggle="tab" (click)="listRequest()">Manage Requests - Received</a></li>
-                 <li><a href="#ManageRequestsSend" data-toggle="tab" (click)="listRequestSend()">Manage Requests - Sent</a></li>
-                 <li mdTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Webinar-Attendee</a></li>
+                 <!-- <li><a href="#ManageRequests" data-toggle="tab" (click)="listRequest()">Manage Requests - Received</a></li>
+                 <li><a href="#ManageRequestsSend" data-toggle="tab" (click)="listRequestSend()">Manage Requests - Sent</a></li> -->
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Requests - Received</a></li>
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab" >Manage Requests - Sent</a></li>
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab">Manage Webinar-Attendee</a></li>
                  <!-- <li><a href="#ManageWebinar" data-toggle="tab">Manage Webinar-Attendee</a></li>
                      <li><a href="#ManagePayments" data-toggle="tab">Manage Payments</a></li> -->
-                 <li mdTooltip="Disabled for this User"><a href="#" data-toggle="tab"> Manage Sample</a></li>
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab"> Manage Sample</a></li>
                  <!-- <li><a href="#ManageSample" data-toggle="tab"> Manage Sample</a></li>-->
                  <li><a href="#ManageEvents" data-toggle="tab" (click)="listEventsData()"> Manage Events</a></li>
-                 <li><a href="#ViewUser" data-toggle="tab"> View User Stats</a></li>
+                 <!-- <li><a href="#ViewUser" data-toggle="tab"> View User Stats</a></li> -->
+                 <li matTooltip="Disabled for this User"><a href="#" data-toggle="tab"> View User Stats</a></li>
               </ul>
            </div>
            <div class="col-md-10 roles-view rightCon">
@@ -815,17 +839,17 @@
                                          <tr>
                                             <td class="newText">Topic:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="requestInit.topic.topic_title">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="requestInit.topic.topic_title">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
                                             <td class="newText">ID:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="requestInit.id">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="requestInit.id">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
@@ -1109,17 +1133,17 @@
                                          <tr>
                                             <td class="newText">Topic:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="requestInitSend.topic.topic_title">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="requestInitSend.topic.topic_title">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
                                             <td class="newText">ID:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="requestInitSend.id">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="requestInitSend.id">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
@@ -1333,9 +1357,9 @@
                              </div>
                              <div class=" col-md-6 padd0 payDiv">
                                 <div class="col-md-6 ">
-                                   <md-form-field class="example-full-width paySearch" >
-                                      <input mdInput placeholder="Search" value="">
-                                   </md-form-field>
+                                   <mat-form-field class="example-full-width paySearch" >
+                                      <input matInput placeholder="Search" value="">
+                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-6 padd0">
                                    <md-select placeholder="Sort By"  class="paySort">
@@ -1478,9 +1502,9 @@
                              </div>
                              <div class=" col-md-6 padd0 payDiv">
                                 <div class="col-md-6 ">
-                                   <md-form-field class="example-full-width paySearch" >
-                                      <input mdInput placeholder="Search" value="">
-                                   </md-form-field>
+                                   <mat-form-field class="example-full-width paySearch" >
+                                      <input matInput placeholder="Search" value="">
+                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-6 padd0">
                                    <md-select placeholder="Sort By"  class="paySort">
@@ -1696,17 +1720,17 @@
                                          <tr>
                                             <td class="newText">Topic:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="eventInit.topic.topic_title">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="eventInit.topic.topic_title">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
                                             <td class="newText">ID:</td>
                                             <td>
-                                               <md-form-field class="example-full-width">
-                                                  <input mdInput [value]="eventInit.id">
-                                               </md-form-field>
+                                               <mat-form-field class="example-full-width">
+                                                  <input matInput [value]="eventInit.id">
+                                               </mat-form-field>
                                             </td>
                                          </tr>
                                          <tr>
@@ -1904,9 +1928,9 @@
                     <div class="hciPopup">
                        <div class="newText">Name:</div>
                        <div>
-                          <md-form-field class="example-full-width">
-                             <input mdInput  value="">
-                          </md-form-field>
+                          <mat-form-field class="example-full-width">
+                             <input matInput  value="">
+                          </mat-form-field>
                        </div>
                        <div class="newText">
                           Contract:
@@ -1994,49 +2018,49 @@
                        <tr>
                           <td class="newText">Price:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Venue:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Reason:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Client Name:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Time:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Date:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                           </td>
                        </tr>
                     </table>
@@ -2249,19 +2273,19 @@
                        <tr>
                           <td class="newText">Date:</td>
                           <td>
-                             <md-form-field class="example-full-width hidePicker">
-                                <input mdInput [matDatepicker]="picker1" class="">
+                             <mat-form-field class="example-full-width hidePicker">
+                                <input matInput [matDatepicker]="picker1" class="">
                                 <mat-datepicker #picker1></mat-datepicker>
-                             </md-form-field>
+                             </mat-form-field>
                              <a (click)="picker1.open()" class="calIcon"><img src="../../../../../assets/images/cal.png"></a>
                           </td>
                        </tr>
                        <tr>
                           <td class="newText">Time:</td>
                           <td>
-                             <md-form-field class="example-full-width">
-                                <input mdInput  value="">
-                             </md-form-field>
+                             <mat-form-field class="example-full-width">
+                                <input matInput  value="">
+                             </mat-form-field>
                              <img src="../../../../../assets/images/clock.png">
                           </td>
                        </tr>
@@ -2269,9 +2293,9 @@
                           <td class="newText">Speaker:</td>
                           <td>
                              <div class="eventSpeaker">
-                                <md-form-field class="example-full-width">
-                                   <input mdInput  value="">
-                                </md-form-field>
+                                <mat-form-field class="example-full-width">
+                                   <input matInput  value="">
+                                </mat-form-field>
                                 <a href=""> <i class="fa fa-refresh refr" aria-hidden="true"></i></a>
                                 <a href="">  <i class="fa  fa-trash-o delet" aria-hidden="true"></i> </a> 
                              </div>

@@ -5,7 +5,7 @@
           <div class="pull-right">
               <a href="javascript:void(0);" class="confresh"><i class="fa fa-refresh"></i></a>
              <div class="addIcon">
-                <a href="javascript:void(0);" mdTooltip="Add Content" (click)=enableSection()>
+                <a href="javascript:void(0);" matTooltip="Add Content" (click)=enableSection()>
                  <i class="fa fa-plus"></i></a>
              </div>
             <div class="menuBar"></div>
@@ -29,9 +29,9 @@
           </div>
           <div class="col-md-3 padd0 ">
               <div class="pull-right">
-                  <p class="inIcon"><a href="javascript:void(0);" mdTooltip="Suspend Content"><img src="assets/images/pause.png"/> </a></p>  
-                  <p class="inIcon"> <a href="javascript:void(0);" mdTooltip="Delete Content"><img src="assets/images/delete.png"/> </a> </p>
-                  <p class="inIcon"><a mdTooltip="Filter"><img src="assets/images/reqarr2.png" class="">
+                  <p class="inIcon"><a href="javascript:void(0);" matTooltip="Suspend Content"><img src="assets/images/pause.png"/> </a></p>  
+                  <p class="inIcon"> <a href="javascript:void(0);" matTooltip="Delete Content"><img src="assets/images/delete.png"/> </a> </p>
+                  <p class="inIcon"><a matTooltip="Filter"><img src="assets/images/reqarr2.png" class="">
                   </a></p>
               </div>
               
@@ -101,7 +101,7 @@
                         <table width="100%" class="contTabl">
                           <tr><td width=" 25%"><label>Content Name:</label></td>
                             <td>
-                        <div class="md-form input-effect">   
+                        <div class="mat-form input-effect">   
                                 <input class="effect-17"  type="text" autocomplete="off" required id="orangeForm-name"  [(ngModel)]=topics.content_name #content_name=ngModel name="content_name">                       
                                 <span class="focus-border"></span>
                               </div>
@@ -164,11 +164,11 @@
                       <b *ngIf="topicListViewInit.active_status==0"  class="alert">- Suspend</b>           
                     </p>
                     <div class="controlBut pull-right">
-                        <p class="pauseIcon"><a mdTooltip="Edit Content" href="javascript:void(0);" (click)="enableEdit()"><img src="assets/images/cont-edit.png"/> </a></p> 
-                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==1"><a mdTooltip="Suspend Content" class="" (click) = suspendContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
-                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==0"><a mdTooltip="Active Content" class="" (click) = activeContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
+                        <p class="pauseIcon"><a matTooltip="Edit Content" href="javascript:void(0);" (click)="enableEdit()"><img src="assets/images/cont-edit.png"/> </a></p> 
+                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==1"><a matTooltip="Suspend Content" class="" (click) = suspendContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
+                        <p class="pauseIcon" *ngIf="topicListViewInit.active_status==0"><a matTooltip="Active Content" class="" (click) = activeContent(topicListViewInit.id)><img src="assets/images/pause.png"/> </a></p>  
                         <p class="delIcon">
-                            <a mdTooltip="Delete Content" class="" (click) = deleteTopic(topicListViewInit.id) >
+                            <a matTooltip="Delete Content" class="" (click) = deleteTopic(topicListViewInit.id) >
                                 <img src="assets/images/delete.png"/> 
                             </a>
                           </p>
@@ -250,24 +250,24 @@
                                   <table width="100%">
                                     <tr>
                                       <td class="c1Td"><label>Created on:</label></td>
-                                      <td class="c2Td"><md-form-field class="example-full-width">
-                                            <input mdInput placeholder="" [value]="topicListViewInit.createdAt | date:'dd MMM yyyy'" disabled>
-                                          </md-form-field>
+                                      <td class="c2Td"><mat-form-field class="example-full-width">
+                                            <input matInput placeholder="" [value]="topicListViewInit.createdAt | date:'dd MMM yyyy'" disabled>
+                                          </mat-form-field>
                                       </td>
                                     </tr>
                                     <tr>
                                         <td class="c1Td"><label>Updated on:</label></td>
-                                        <td class="c2Td"><md-form-field class="example-full-width">
-                                              <input mdInput placeholder="" [value]="topicListViewInit.updatedAt | date:'dd MMM yyyy'" disabled>
-                                            </md-form-field>
+                                        <td class="c2Td"><mat-form-field class="example-full-width">
+                                              <input matInput placeholder="" [value]="topicListViewInit.updatedAt | date:'dd MMM yyyy'" disabled>
+                                            </mat-form-field>
                                         </td>
                                       </tr>
                                       <tr>
                                           <td class="c1Td"><label>Source:</label></td>
                                           <td class="c2Td">
-                                            <md-form-field class="example-full-width">
-                                                <input mdInput placeholder="" [value]="topicListViewInit.site_url" disabled>
-                                              </md-form-field>
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="" [value]="topicListViewInit.site_url" disabled>
+                                              </mat-form-field>
                                           </td>
                                         </tr>
                                   </table>
@@ -276,23 +276,23 @@
                                     <table width="100%">
                                         <tr>
                                           <td class="c1Td"><label>Format:</label></td>
-                                          <td class="c2Td"><md-form-field *ngIf="topicListViewInit.file_name" class="example-full-width">
-                                                <input mdInput placeholder="" [value]="topicListViewInit.file_name | extension" disabled>
-                                              </md-form-field>
+                                          <td class="c2Td"><mat-form-field *ngIf="topicListViewInit.file_name" class="example-full-width">
+                                                <input matInput placeholder="" [value]="topicListViewInit.file_name | extension" disabled>
+                                              </mat-form-field>
                                           </td>
                                         </tr>
                                         <tr>
                                             <td class="c1Td"><label>Assigned to:</label></td>
-                                            <td class="c2Td"><md-form-field class="example-full-width">
-                                                  <input mdInput placeholder="" [value]="topicListViewInit.assiginedTopicCount" disabled>
-                                                </md-form-field>
+                                            <td class="c2Td"><mat-form-field class="example-full-width">
+                                                  <input matInput placeholder="" [value]="topicListViewInit.assiginedTopicCount" disabled>
+                                                </mat-form-field>
                                             </td>
                                           </tr>
                                           <tr>
                                               <td class="c1Td"><label>Used In:</label></td>
-                                              <td class="c2Td"><md-form-field class="example-full-width">
-                                                    <input mdInput placeholder="" [value]="topicListViewInit.usedMeetingCount" disabled>
-                                                  </md-form-field>
+                                              <td class="c2Td"><mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="" [value]="topicListViewInit.usedMeetingCount" disabled>
+                                                  </mat-form-field>
                                               </td>
                                             </tr>
                                             <tr>

@@ -47,17 +47,17 @@
                   <td>
                       <div class="controlBut">
                       <p class="pauseIcon">
-                        <a mdTooltip="Edit Category" href="javascript:void(0);" (click)="getOneRecord(items.id)" data-backdrop="static" data-toggle="modal" data-target="#editmyModalNorm">
+                        <a matTooltip="Edit Category" href="javascript:void(0);" (click)="getOneRecord(items.id)" data-backdrop="static" data-toggle="modal" data-target="#editmyModalNorm">
                           <img src="assets/images/cont-edit.png"/> 
                         </a>
                       </p> 
                       <p class="pauseIcon" *ngIf="items.active_status==1">
-                        <a mdTooltip="Suspend Category"  (click)="active(items.id,0)">
+                        <a matTooltip="Suspend Category"  (click)="active(items.id,0)">
                           <img src="assets/images/pause.png"/> 
                         </a>
                       </p>  
                       <p class="pauseIcon" *ngIf="items.active_status==0">
-                        <a mdTooltip="Active Category" (click)="active(items.id,1)">
+                        <a matTooltip="Active Category" (click)="active(items.id,1)">
                           <img src="assets/images/pause.png"/> 
                         </a>
                       </p>  
@@ -117,24 +117,24 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 
                   <tr>
                       <td class="newText">Category Name:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  
                             name="category_name"
                             [(ngModel)]="addCategory.category_name"
                             #category_name=ngModel   
                             minlength="4" 
                             maxlength="10" 
                             required>
-                          <md-error *ngIf="category_name.hasError('minlength')">
+                          <mat-error *ngIf="category_name.hasError('minlength')">
                               Category Name should be minimum 4 characters
-                          </md-error>
-                          <md-error *ngIf="category_name.hasError('maxlength')">
+                          </mat-error>
+                          <mat-error *ngIf="category_name.hasError('maxlength')">
                               Category Name should be maximum 10 characters
-                          </md-error>
-                          <md-error *ngIf="category_name.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="category_name.hasError('required')">
                               Category Name is <strong>required</strong>
-                          </md-error>
-                        </md-form-field>
+                          </mat-error>
+                        </mat-form-field>
                       </td>
                   </tr>
                   <tr>
@@ -189,24 +189,24 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                 
                   <tr>
                       <td class="newText">Category Name:</td>
-                      <td><md-form-field class="example-full-width">
-                          <input mdInput  
+                      <td><mat-form-field class="example-full-width">
+                          <input matInput  
                             name="category_name"
                             [(ngModel)]="editCat.category_name"
                             #category_name=ngModel   
                             minlength="4" 
                             maxlength="10" 
                             required>
-                          <md-error *ngIf="category_name.hasError('minlength')">
+                          <mat-error *ngIf="category_name.hasError('minlength')">
                               Category Name should be minimum 4 characters
-                          </md-error>
-                          <md-error *ngIf="category_name.hasError('maxlength')">
+                          </mat-error>
+                          <mat-error *ngIf="category_name.hasError('maxlength')">
                               Category Name should be maximum 10 characters
-                          </md-error>
-                          <md-error *ngIf="category_name.hasError('required')">
+                          </mat-error>
+                          <mat-error *ngIf="category_name.hasError('required')">
                               Category Name is <strong>required</strong>
-                          </md-error>
-                        </md-form-field>
+                          </mat-error>
+                        </mat-form-field>
                       </td>
                   </tr>
                   <tr>

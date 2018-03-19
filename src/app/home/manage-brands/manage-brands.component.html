@@ -2,7 +2,7 @@
     <div class="leftContent">
         <div class="roles col-md-12">
           <p class="pull-left">Company</p>
-          <a href="javascript:void(0);" class=" pull-right" mdTooltip="Add Clients" (click)=enableClients()><img src="assets/images/add_brands.png" class="img-responsive imgUser"></a>
+          <a href="javascript:void(0);" class=" pull-right" matTooltip="Add Clients" (click)=enableClients()><img src="assets/images/add_brands.png" class="img-responsive imgUser"></a>
         </div>
         <div class="dataList col-md-12" [hidden]="is_add">
             <div class="row">
@@ -13,7 +13,7 @@
                     <table width="100%" class="contTabl">
                             <tr><td width=" 25%"><label>Client Name:</label></td>
                             <td>
-                        <div class="md-form input-effect">   
+                        <div class="mat-form input-effect">   
                                 <input type="text" class="effect-17"
                                   autocomplete="off" 
                                   required 
@@ -91,12 +91,12 @@
                                               <p class="newRole" [ngClass]="{activeNew: items.id==activeID,activeSus: items.active_status==0}">                                         
                                                   <a href="javascript:void(0);" 
                                                   (click)=viewEditClients(items.id)
-                                                  mdTooltip="Edit Client"
+                                                  matTooltip="Edit Client"
                                                   data-toggle="modal" data-target="#myModal" data-backdrop="static"
                                                   class="pull-left brandEdit"></a>
-                                                  <a href="javascript:void(0);" mdTooltip="Suspend Client" *ngIf="items.active_status==1" (click)=suspendClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
-                                                  <a href="javascript:void(0);" mdTooltip="Active Client"  *ngIf="items.active_status==0" (click)=activeClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
-                                                  <a href="javascript:void(0);" mdTooltip="Delete Client" (click)=deleteClients(items.id) class="pull-right brandDel"></a>
+                                                  <a href="javascript:void(0);" matTooltip="Suspend Client" *ngIf="items.active_status==1" (click)=suspendClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                                  <a href="javascript:void(0);" matTooltip="Active Client"  *ngIf="items.active_status==0" (click)=activeClient(items.id)><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                                                  <a href="javascript:void(0);" matTooltip="Delete Client" (click)=deleteClients(items.id) class="pull-right brandDel"></a>
                                                  </p>
                                            </div>
                                           </div>
@@ -118,7 +118,7 @@
         <div class="dataList col-md-12">
         <div class="roles_IMG col-md-12 ">
             <p class="pull-left">Products</p>
-            <a (click)=addProd() href="javascript:void(0);" mdTooltip="Add Products"><img src="assets/images/add_products.png" class="img-responsive imgUser pull-right"></a>
+            <a (click)=addProd() href="javascript:void(0);" matTooltip="Add Products"><img src="assets/images/add_products.png" class="img-responsive imgUser pull-right"></a>
             
           </div>
           
@@ -156,7 +156,7 @@
                             <table width="100%" class="contTabl">
                                     <tr><td width=" 25%"><label>Product Name:</label></td>
                                     <td>
-                                <div class="md-form input-effect">   
+                                <div class="mat-form input-effect">   
                                         <input type="text"
                                          class="effect-17" 
                                          autocomplete="off" 
@@ -222,10 +222,10 @@
                     </p>
                     <div class="pull-right captionControls cusMg" >   
                             <p class="newRole">                                                                        
-                            <a href="javascript:void(0);" (click)=EnableUpdate() mdTooltip="Edit Product" class="pull-left brandEdit"></a>
-                            <a href="javascript:void(0);" *ngIf="productData.active_status==1" (click)=suspendUpdate(productData.id) mdTooltip="Suspend Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
-                            <a href="javascript:void(0);" *ngIf="productData.active_status==0" (click)=activeUpdate(productData.id) mdTooltip="Active Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
-                            <a href="javascript:void(0);" (click)=deleteProduct(productData.id) mdTooltip="Delete Product" class="pull-right brandDel"></a>
+                            <a href="javascript:void(0);" (click)=EnableUpdate() matTooltip="Edit Product" class="pull-left brandEdit"></a>
+                            <a href="javascript:void(0);" *ngIf="productData.active_status==1" (click)=suspendUpdate(productData.id) matTooltip="Suspend Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0);" *ngIf="productData.active_status==0" (click)=activeUpdate(productData.id) matTooltip="Active Product"><i class="fa fa-pause-circle-o" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0);" (click)=deleteProduct(productData.id) matTooltip="Delete Product" class="pull-right brandDel"></a>
                         </p>
                         </div>
                   </div>
@@ -301,7 +301,7 @@
                                                     
                                                     <li *ngFor="let imageProds of productDocs">
                                                             <span>
-                                                               <i class="icon-remove" *ngIf=is_editPro><a mdTooltip="Remove Docs" (click)="removeAtt(imageProds,imageProds.id)">X</a></i>
+                                                               <i class="icon-remove" *ngIf=is_editPro><a matTooltip="Remove Docs" (click)="removeAtt(imageProds,imageProds.id)">X</a></i>
                                                                 <img src="assets/images/pdf.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'pdf'">
                                                                 <img src="assets/images/word.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'docx'">
                                                                 <img src="assets/images/image_icon.png" class="attachListImg" *ngIf="(imageProds.original_file_name | extension) == 'png'">
@@ -366,12 +366,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" (click)="reload()">&times;</button>
-              <h4 class="modal-mdTooltip">Client</h4>
+              <h4 class="modal-matTooltip">Client</h4>
             </div>
             <div class="modal-body">
                 <div class="col-lg-8">
                     <form enctype="multipart/form-data" id="form2" (ngSubmit)="ecRole.form.valid && updateClientData(ecRole)" #ecRole="ngForm" novalidate>
-                        <div class="md-form">                          
+                        <div class="mat-form">                          
                         <input type="text" autocomplete="off" required id="orangeForm-name" placeholder="Brand Name" [(ngModel)]=editClientsData.brand_name #brand_name=ngModel name="brand_name">                       
                         <div *ngIf="brand_name.touched && brand_name.invalid" class="alert">Brand name is required</div>
                         </div>
